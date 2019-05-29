@@ -2,34 +2,28 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>DnDCS</title>
 </head>
 
 <body>
-    <h1>Hello World!</h1>
-    We are using node
-    <script>document.write(process.versions.node)</script>,
-    Chrome
-    <script>document.write(process.versions.chrome)</script>,
-    and Electron
-    <script>document.write(process.versions.electron)</script>.
     <p id="result"></p>
+    <a href="http://www.google.com">Test</a>
 </body>
 
 <script>
+    // Database call test
     const electron = require('electron');
 
     const ipc = electron.ipcRenderer;
-
+    
     document.addEventListener("DOMContentLoaded", () => {
         ipc.send("mainWindowLoaded");
 
         ipc.on("resultSent", (evt, result) => {
             let resultEl = document.getElementById("result");
-            console.log("result");
 
             for (var i = 0; i < result.length; ++i) {
-                resultEl.innerHTML += "<b>" + result[i].name.toString() + "</b>" +  ": " + result[i].desc.toString() + "<br/>";
+                resultEl.innerHTML += "<b>" + result[i].name.toString() + "</b>" +  ": " + result[i].desc.toString() + "<br/>" + "<br/>";
             }
         })
     });

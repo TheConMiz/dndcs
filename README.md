@@ -7,9 +7,28 @@ The aim is to have a character sheet solution that is not hampered by the tediou
 ## Back-End
 
 - **SQLite** for database of spells, and other character information
-  - Not working now, so put it in Google Sheets, and call from it
+  - ~~Not working now, so put it in Google Sheets, and call from it~~
+  - Works now, use **Electron Builder** to build...
+    - [x] Windows 10
+    - [ ] Mac OS
 
-SQLite is a **poor choice** for applications that require multiple users with special access permissions.
+## Front-End
+
+- React for the front-end implementation
+  - Material UI
+  - 
+
+***NOTE!*** SQLite is a **poor choice** for applications that require multiple users with special access permissions.
 
 - Single file, so does not have the ability to do stuff like this. 
-- May need full Client-Server setup for peripheral features (DM Account, Player Account, etc)
+- May need full Client-Server setup for peripheral features (DM Account, Player Account, etc.)
+
+
+
+## Minute Details
+
+- [ ] Enable right clicking
+
+## Theming
+
+- [ ] **Jesus Black** has to be a color choice

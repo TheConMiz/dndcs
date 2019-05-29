@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 
 let win;
 
@@ -44,6 +44,7 @@ function createWindow() {
     //TODO: Top menu bar visibility set to false when packaging
     win.setMenuBarVisibility(false);
 
+    // Database Test
     ipcMain.on("mainWindowLoaded", () => {
         let result = knex.select("*").from("Skills");
 
