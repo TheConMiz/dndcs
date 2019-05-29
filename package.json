@@ -1,0 +1,26 @@
+{
+  "name": "dndcs",
+  "version": "1.0.0",
+  "description": "A Character sheet solution for Dungeons & Dragons, built using Electron, React and SQLite3",
+  "main": "./src/electron-main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheConMiz/dndcs.git"
+  },
+  "keywords": [
+    "DnD"
+  ],
+  "author": "Vishal Venkatraman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheConMiz/dndcs/issues"
+  },
+  "homepage": "https://github.com/TheConMiz/dndcs#readme",
+  "devDependencies": {
+    "electron": "^5.0.2",
+    "electron-rebuild": "^1.8.5"
+  }
+}
