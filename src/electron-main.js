@@ -6,7 +6,7 @@ const electron = require('electron');
 
 let screenSize;
 
-//const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require('sqlite3').verbose();
 
 function createWindow() {
     //TODO: Variable screen size, so calibrate after getting comments
@@ -28,7 +28,7 @@ function createWindow() {
     //TODO: Top menu bar visibility set to false when packaging
     win.setMenuBarVisibility(false);
 
-    //databaseTest();
+    databaseTest();
 
     win.on("closed", () => {
         // Done to dereference the window object
@@ -36,17 +36,28 @@ function createWindow() {
     });
 }
 
-// function databaseTest() {
-//     let db = new sqlite3.Database("./../data/database/DnDQuick.db");
+function databaseTest() {
+    // Sets up connection to a database, and checks if there is an error
+    let db = new sqlite3.Database("./data/database/DnDQuick.db", sqlite3.OPEN_READONLY, (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Connected to the in-memory SQlite database.');
+    });
 
-//     db.serialize(function () {
-//         db.each("SELECT * from Conditions", (err, row) => {
-//             console.log(row.index);
-//         });
-//     });
+    db.serialize(function () {
+        db.each("SELECT * from Conditions", (err, row) => {
+            console.log(row);
+        });
+    });
 
-//     db.close();
-// }
+    db.close((err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log("Closed Database connection.")
+    });
+}
 
 // When everything has been initialised, create the required windows
 app.on("ready", createWindow);
