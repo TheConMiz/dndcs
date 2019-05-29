@@ -16,18 +16,16 @@ The aim is to have a character sheet solution that is not hampered by the tediou
 
 - React for the front-end implementation
   - Material UI
-  - 
 
 ***NOTE!*** SQLite is a **poor choice** for applications that require multiple users with special access permissions.
 
 - Single file, so does not have the ability to do stuff like this. 
 - May need full Client-Server setup for peripheral features (DM Account, Player Account, etc.)
 
-
-
 ## Minute Details
 
 - [ ] Enable right clicking
+- [ ] Disable opening links in App Window
 
 ## Theming
 

@@ -50,7 +50,7 @@ function createWindow() {
 
         result.then((rows) => {
             win.webContents.send("resultSent", rows);
-            console.log(rows);
+            //console.log(rows);
         });
     });
 
