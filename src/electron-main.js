@@ -38,7 +38,7 @@ function createWindow() {
 
 function databaseTest() {
     // Sets up connection to a database, and checks if there is an error
-    let db = new sqlite3.Database("./data/database/DnDQuick.db", sqlite3.OPEN_READONLY, (err) => {
+    let db = new sqlite3.Database("./data/database/DnDQuick.db", (err) => {
         if (err) {
             return console.error(err.message);
         }
