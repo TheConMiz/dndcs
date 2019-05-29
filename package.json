@@ -4,7 +4,8 @@
   "description": "A Character sheet solution for Dungeons & Dragons, built using Electron, React and SQLite3",
   "main": "./src/electron-main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "postinstall": "electron-rebuild.cmd"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "devDependencies": {
     "electron": "^5.0.2",
     "electron-rebuild": "^1.8.5"
+  },
+  "dependencies": {
+    "sqlite3": "^4.0.8"
   }
 }

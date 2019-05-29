@@ -6,6 +6,8 @@ const electron = require('electron');
 
 let screenSize;
 
+//const sqlite3 = require('sqlite3').verbose();
+
 function createWindow() {
     //TODO: Variable screen size, so calibrate after getting comments
     screenSize = electron.screen.getPrimaryDisplay().size;
@@ -26,11 +28,25 @@ function createWindow() {
     //TODO: Top menu bar visibility set to false when packaging
     win.setMenuBarVisibility(false);
 
+    //databaseTest();
+
     win.on("closed", () => {
         // Done to dereference the window object
         win = null;
     });
 }
+
+// function databaseTest() {
+//     let db = new sqlite3.Database("./../data/database/DnDQuick.db");
+
+//     db.serialize(function () {
+//         db.each("SELECT * from Conditions", (err, row) => {
+//             console.log(row.index);
+//         });
+//     });
+
+//     db.close();
+// }
 
 // When everything has been initialised, create the required windows
 app.on("ready", createWindow);
