@@ -5,7 +5,8 @@
   "main": "./src/electron-main.js",
   "scripts": {
     "start": "electron .",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "rebuild": "electron-builder install-app-deps"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
+    "knex": "^0.17.0",
     "sqlite3": "^4.0.8"
   }
 }

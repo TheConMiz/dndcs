@@ -13,6 +13,28 @@
     <script>document.write(process.versions.chrome)</script>,
     and Electron
     <script>document.write(process.versions.electron)</script>.
+    <p id="result"></p>
 </body>
+
+<script>
+    const electron = require('electron');
+
+    const ipc = electron.ipcRenderer;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        ipc.send("mainWindowLoaded");
+
+        ipc.on("resultSent", (evt, result) => {
+            let resultEl = document.getElementById("result");
+            console.log("result");
+
+            for (var i = 0; i < result.length; ++i) {
+                resultEl.innerHTML += "<b>" + result[i].name.toString() + "</b>" +  ": " + result[i].desc.toString() + "<br/>";
+            }
+        })
+    });
+
+
+</script>
 
 </html>
