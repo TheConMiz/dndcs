@@ -1,5 +1,9 @@
 const { app, BrowserWindow, ipcMain, shell } = require('electron');
 
+//TODO: Enable "development" line to have Dev tools open. Enable "production" when making the installer  
+process.env.NODE_ENV = 'development';
+//process.env.NODE_ENV = 'production';
+
 let win;
 
 const electron = require('electron');
@@ -38,9 +42,6 @@ function createWindow() {
         win.show();
     })
 
-    //TODO: Open Dev tools on load. Remove it when packaging
-    win.webContents.openDevTools();
-
     //TODO: Top menu bar visibility set to false when packaging
     win.setMenuBarVisibility(false);
 
@@ -53,6 +54,11 @@ function createWindow() {
             //console.log(rows);
         });
     });
+
+    // Open Dev tools on load
+    if (process.env.NODE_ENV !== 'production') {    
+        win.webContents.openDevTools();
+    }
 
     win.on("closed", () => {
         // Done to dereference the window object
