@@ -7,10 +7,7 @@
   "scripts": {
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
-    "rebuild": "electron-builder install-app-deps",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . dndcs --overwrite --platform=win32 --arch=x64 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"DnDCS\"",
-    "package-linux": "electron-packager . electron-tutorial-app --overwrite --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds"
+    "rebuild": "electron-builder install-app-deps"
   },
   "repository": {
     "type": "git",
@@ -26,14 +23,15 @@
   },
   "homepage": "https://github.com/TheConMiz/dndcs#readme",
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "electron": "^5.0.2",
-    "electron-builder": "^20.41.0",
-    "electron-packager": "^13.1.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "electron-builder": "^20.41.0"
   },
   "dependencies": {
+    "electron": "^5.0.2",
     "knex": "^0.17.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "sqlite3": "^4.0.8"
   }
 }
