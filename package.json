@@ -3,7 +3,7 @@
   "productName": "DnDCS",
   "version": "0.0.0",
   "description": "A Character sheet solution for Dungeons & Dragons, built using Electron, React and SQLite3",
-  "main": "./src/electron-main.js",
+  "main": "./app/src/main/electron-main.js",
   "scripts": {
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
