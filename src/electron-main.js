@@ -7,7 +7,7 @@ const electron = require('electron');
 let screenSize;
 
 let path = require("path");
-const dbPath = path.resolve(__dirname, './../data/database/DnDCS.db');
+const dbPath = path.resolve(__dirname, './../assets/data/database/DnDCS.db');
 
 let knex = require("knex")({
     client: "sqlite3",
@@ -31,7 +31,7 @@ function createWindow() {
     });
     // End of variable screen size
 
-    win.loadURL(`file://${__dirname}/index.html`);
+    //win.loadURL(`file://${__dirname}/index.html`);
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {
