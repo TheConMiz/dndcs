@@ -7,6 +7,8 @@ const electron = require('electron');
 let screenSize;
 
 let path = require("path");
+
+// Database Stuff
 const dbPath = path.resolve(__dirname, './data/database/DnDCS.db');
 
 let knex = require("knex")({
@@ -29,7 +31,6 @@ function createWindow() {
             nodeIntegration: true
         }
     });
-    // End of variable screen size
 
     win.loadURL(`file://${__dirname}/index.html`);
 
@@ -46,11 +47,10 @@ function createWindow() {
 
     // Database Test
     ipcMain.on("mainWindowLoaded", () => {
-        let result = knex.select("*").from("Skills");
+        let result = knex.select("*").from("Conditions");
 
         result.then((rows) => {
             win.webContents.send("resultSent", rows);
-            //console.log(rows);
         });
     });
 

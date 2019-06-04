@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let resultEl = document.getElementById("root");
 
         for (var i = 0; i < result.length; ++i) {
-            resultEl.innerHTML += "<b>" + result[i].name.toString() + "</b>" + ": " + result[i].desc.toString() + "<br/>" + "<br/>";
+            resultEl.innerHTML += "<b>" + result[i].name.toString() + "</b>" + ": " + result[i].desc1.toString() + "<br/>" + "<br/>";
         }
     })
 });

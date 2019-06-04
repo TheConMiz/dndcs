@@ -1,0 +1,11 @@
+{
+    "presets": [
+        "env",
+        "react",
+        [
+            "es2015",
+            {"modules": false}
+        ],
+        "es2016"
+    ],
+}

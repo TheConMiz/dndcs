@@ -19,13 +19,12 @@ The aim is to have a character sheet solution that is not hampered by the tediou
 
 ## Packaging
 
-- Electron Packager
-  - Cross-platform packaging
-  - Cannot make one executable
 - Electron Builder
   - Can make one executable
   - Not sure how to make cross-platform packages
   - Already using it to compile native **SQLite**
+
+
 
 ***NOTE!*** SQLite is a **poor choice** for applications that require multiple users with special access permissions.
 
