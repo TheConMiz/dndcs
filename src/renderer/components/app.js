@@ -2,11 +2,12 @@ import React from 'react';
 
 class App extends React.Component {
     constructor() {
-        super();
+        super(props);
     }
+
     render() {
         return (
-            <p>SDSSSDSDSDSDSDSDSDSDSDSDSDSD</p>
+            <div>Test</div>
         );
     }
 }

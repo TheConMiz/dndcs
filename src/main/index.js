@@ -11,7 +11,9 @@ let path = require("path");
 let url = require("url");
 
 // Database Stuff
-const dbPath = path.resolve(__dirname, './data/database/DnDCS.db');
+const dbPath = path.resolve(__dirname, './../common/data/database/DnDCS.db');
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 let knex = require("knex")({
     client: "sqlite3",
@@ -34,23 +36,30 @@ function createWindow() {
         }
     });
 
+    if (isDevelopment) {
+        win.webContents.openDevTools();
+    }
+
+    if (isDevelopment) {
+        win.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
+    }
+
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
-        protocol: "file:",
+        protocol: "file",
         slashes: true
     }));
 
-    // Development Mode Code --> Does not appear in the final product
-    if (process.env.NODE_ENV.trim() === "dev") {
-        // Open Dev tools on load
-        win.webContents.openDevTools();
-    }
+    // // Development Mode Code --> Does not appear in the final product
+    // if (process.env.NODE_ENV.trim() === "dev") {
+    //     // Open Dev tools on load
+    //     win.webContents.openDevTools();
+    // }
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {
         win.show();
     })
-
 
     //TODO: Top menu bar visibility set to false when packaging
     win.setMenuBarVisibility(false);

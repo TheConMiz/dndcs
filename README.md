@@ -4,6 +4,16 @@
 
 The aim is to have a character sheet solution that is not hampered by the tedious spellsheet-generation process encountered in standard PDF and JavaScript-based solutions.
 
+
+
+## ipcMain and ipcRenderer
+
+- Used for communication between Electron's main process (electron-main.js), and whatever React stuff is used.
+
+
+
+
+
 ## Back-End
 
 - **SQLite** for database of spells, and other character information
