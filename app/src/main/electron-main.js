@@ -8,6 +8,8 @@ let screenSize;
 
 let path = require("path");
 
+let url = require("url");
+
 // Database Stuff
 const dbPath = path.resolve(__dirname, './data/database/DnDCS.db');
 
@@ -32,15 +34,23 @@ function createWindow() {
         }
     });
 
-    win.loadURL(`file://${__dirname}/index.html`);
+    win.loadURL(url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: "file:",
+        slashes: true
+    }));
+
+    // Development Mode Code --> Does not appear in the final product
+    if (process.env.NODE_ENV.trim() === "dev") {
+        // Open Dev tools on load
+        win.webContents.openDevTools();
+    }
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {
         win.show();
     })
 
-    //TODO: Open Dev tools on load. Remove it when packaging
-    win.webContents.openDevTools();
 
     //TODO: Top menu bar visibility set to false when packaging
     win.setMenuBarVisibility(false);

@@ -9,6 +9,19 @@
 
 <body>
     <div id="root"></div>
+    <script>
+        {
+            if (process.env.NODE_ENV) {
+                const bundle = document.createElement('script');
+
+                const port = 3000;
+
+                bundle.src = 'https://localhost:' + port + './app.bundle.js'
+                document.body.appendChild(bundle);
+            }
+        }
+    
+    </script>
 
     <script src="databaseTest.js"></script>
 
