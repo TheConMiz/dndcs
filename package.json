@@ -5,13 +5,17 @@
   "description": "A Character sheet solution for Dungeons & Dragons, built using Electron, React and SQLite3",
   "main": "./src/main/index.js",
   "scripts": {
-    "start": "set NODE_ENV=dev && electron .",
     "postinstall": "electron-builder install-app-deps",
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
     "dist": "npm run compile && electron-builder"
   },
   "build": {
+    "appId": "com.electron.dndcs",
+    "productName": "DnDCS",
+    "files": [
+      
+    ],
     "win": {
       "target": "portable",
       "icon": "./static/icons/win/icon.ico",

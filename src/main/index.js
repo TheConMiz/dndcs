@@ -45,16 +45,10 @@ function createWindow() {
     }
 
     win.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
+        pathname: path.join(__dirname, './../../dist/renderer/index.html'),
         protocol: "file",
         slashes: true
     }));
-
-    // // Development Mode Code --> Does not appear in the final product
-    // if (process.env.NODE_ENV.trim() === "dev") {
-    //     // Open Dev tools on load
-    //     win.webContents.openDevTools();
-    // }
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {
