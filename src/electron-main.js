@@ -10,6 +10,8 @@ let path = require("path");
 
 let url = require("url");
 
+const isDev = require('electron-is-dev');
+
 // Database Stuff
 const dbPath = path.resolve(__dirname, './data/database/DnDCS.db');
 
@@ -38,8 +40,8 @@ function createWindow() {
 
     win.webContents.openDevTools();
 
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, './index.html'),
+    win.loadURL(isDev ? 'http://localhost:8080' : url.format({
+        pathname: path.join(__dirname, './../dist/index.html'),
         protocol: "file",
         slashes: true
     }));
