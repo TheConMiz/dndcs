@@ -19,7 +19,6 @@ The aim is to have a character sheet solution that is not hampered by the tediou
 
 - [ ] Test SQLite queries with React UI
 
-  
 
 ## Front-End
 

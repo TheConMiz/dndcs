@@ -11,7 +11,7 @@ let path = require("path");
 let url = require("url");
 
 // Database Stuff
-const dbPath = path.resolve(__dirname, './../common/data/database/DnDCS.db');
+const dbPath = path.resolve(__dirname, './data/database/DnDCS.db');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -36,16 +36,10 @@ function createWindow() {
         }
     });
 
-    if (isDevelopment) {
-        win.webContents.openDevTools();
-    }
-
-    if (isDevelopment) {
-        win.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
-    }
+    win.webContents.openDevTools();
 
     win.loadURL(url.format({
-        pathname: path.join(__dirname, './../../dist/renderer/index.html'),
+        pathname: path.join(__dirname, './index.html'),
         protocol: "file",
         slashes: true
     }));
