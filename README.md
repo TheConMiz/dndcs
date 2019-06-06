@@ -37,3 +37,4 @@ The aim is to have a character sheet solution that is not hampered by the tediou
 - Single file, so does not have the ability to do stuff like this. 
 - May need full Client-Server setup for peripheral features (DM Account, Player Account, etc.)
 
+https://medium.com/@kitze/%EF%B8%8F-from-react-to-an-electron-app-ready-for-production-a0468ecb1da3
