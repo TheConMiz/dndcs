@@ -13,15 +13,15 @@ let url = require("url");
 const isDev = require('electron-is-dev');
 
 // Database Stuff
-const dbPath = path.resolve(__dirname, './data/database/DnDCS.db');
+// const dbPath = path.resolve(__dirname, './data/database/DnDCS.db');
 
-let knex = require("knex")({
-    client: "sqlite3",
-    connection: {
-        filename: dbPath
-    },
-    useNullAsDefault: true
-});
+// let knex = require("knex")({
+//     client: "sqlite3",
+//     connection: {
+//         filename: dbPath
+//     },
+//     useNullAsDefault: true
+// });
 
 function createWindow() {
     //TODO: Variable screen size, so calibrate after getting comments
@@ -55,13 +55,13 @@ function createWindow() {
 
     // Database Test
     
-    ipcMain.on("mainWindowLoaded", () => {
-        let result = knex.select("*").from("Conditions");
+    // ipcMain.on("mainWindowLoaded", () => {
+    //     let result = knex.select("*").from("Conditions");
 
-        result.then((rows) => {
-            win.webContents.send("resultSent", rows);
-        });
-    });
+    //     result.then((rows) => {
+    //         win.webContents.send("resultSent", rows);
+    //     });
+    // });
 
     win.on("closed", () => {
         // Done to dereference the window object

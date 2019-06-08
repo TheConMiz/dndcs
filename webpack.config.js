@@ -23,6 +23,10 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
             }
         ]
     },
@@ -37,5 +41,9 @@ module.exports = {
             '.js',
             '.jsx'
         ]
+    },
+    node: {
+        __dirname: true,
+        __filename: false
     }
 }
