@@ -15,8 +15,6 @@ const isDev = require('electron-is-dev');
 // Database Stuff
 const dbPath = path.resolve(__dirname, './data/database/DnDCS.db');
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
-
 let knex = require("knex")({
     client: "sqlite3",
     connection: {
@@ -38,6 +36,7 @@ function createWindow() {
         }
     });
 
+    //TODO: Remove this when in production mode
     win.webContents.openDevTools();
 
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
@@ -55,6 +54,7 @@ function createWindow() {
     win.setMenuBarVisibility(false);
 
     // Database Test
+    
     ipcMain.on("mainWindowLoaded", () => {
         let result = knex.select("*").from("Conditions");
 

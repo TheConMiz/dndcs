@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require('webpack');
 
 const paths = {
     dist: path.resolve(__dirname, 'dist'),
@@ -29,7 +30,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             hash: true,
             template: path.join(paths.src, 'index.html')
-        })
+        }),
     ],
     resolve: {
         extensions: [
