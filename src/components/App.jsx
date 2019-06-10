@@ -73,9 +73,9 @@ class App extends React.Component {
                 
             <div>
                 <Progress percent={50} strokeColor="green" status="active" />
-                {/* <SideMenu/>
-                <Button onClick={() => { this.setState({ conditionsTest: !this.state.conditionsTest }); console.log(this.state.conditions[1]['name']) }}>KnexTest</Button> */}
-                <Table dataSource={dataSource} columns={columns} theme="dark" />;
+                <SideMenu/>
+                <Button onClick={() => { this.setState({ conditionsTest: !this.state.conditionsTest }); console.log(this.state.conditions[1]['name']) }}>KnexTest</Button>
+                <Table pagination={{ pageSize: 5 }}dataSource={dataSource} columns={columns} theme="dark" />;
             </div>
 
         );

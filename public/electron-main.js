@@ -40,7 +40,7 @@ function createWindow() {
     win.webContents.openDevTools();
 
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
-        pathname: path.join(__dirname, './../dist/index.html'),
+        pathname: path.join(__dirname, '../dist/index.html'),
         protocol: "file",
         slashes: true
     }));
@@ -48,7 +48,7 @@ function createWindow() {
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {
         win.show();
-    })
+    });
 
     //TODO: Top menu bar visibility set to false when packaging
     win.setMenuBarVisibility(false);
