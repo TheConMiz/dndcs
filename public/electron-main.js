@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, shell } = require('electron');
+const { app, BrowserWindow } = require('electron');
 
 let win;
 
@@ -36,14 +36,23 @@ function createWindow() {
         }
     });
 
-    //TODO: Remove this when in production mode
     win.webContents.openDevTools();
 
+    // if (isDev) {
+    //     win.webContents.openDevTools();
+    // }
+    
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
-        pathname: path.join(__dirname, '../dist/index.html'),
+        pathname: path.join(__dirname, 'index.html'),
         protocol: "file",
         slashes: true
     }));
+
+    if (isDev) {
+        console.log('Running in development');
+    } else {
+        console.log('Running in production');
+    }
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {

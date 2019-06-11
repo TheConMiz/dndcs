@@ -2,10 +2,20 @@ import React from 'react';
 import { Progress, Button, Table } from 'antd';
 import SideMenu from './SideMenu';
 
-const electron = window.require('electron');
-
+// Database Path variables
 const path = window.require('path');
-const dbPath = path.resolve(__dirname, './../data/database/DnDCS.db');
+let dbPath;
+const isDev = window.require('electron-is-dev');
+
+// Handle DEV/PROD database path discrepency
+if (isDev) {
+    console.log("DEV MODE");
+    dbPath = path.resolve('./public/data/database/DnDCS.db');
+}
+else {
+    console.log("PROD MODE");
+    dbPath = path.resolve('./../../public/data/database/DnDCS.db');
+}
 
 const knex = window.require('knex')({
     client: "sqlite3",
@@ -31,8 +41,9 @@ class App extends React.Component {
     }
 
     componentDidMount = () => {
-        // console.log(dbPath);
-        // console.log(__dirname);
+
+
+        console.log("Database Path: " + dbPath);
 
         let result = knex.select("*").from("Conditions");
 

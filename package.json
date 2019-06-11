@@ -7,27 +7,33 @@
   "scripts": {
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
-    "test-start": "webpack-dev-server",
-    "test-build": "webpack",
-    "dist": "electron-builder --dir"
+    "dev-start": "webpack && webpack-dev-server",
+    "test-build": "webpack && electron-builder --dir",
+    "dist": "electron-builder"
   },
   "build": {
     "appId": "com.electron.dndcs",
     "productName": "DnDCS",
     "asar": "false",
+    "directories": {
+      "app": "./"
+    },
     "files": [
+      "public/electron-main.js",
+      "public/data/**/*",
+      "!dist/win-unpacked/**/*",
       {
-        "from": "./public/electron-main.js"
-      },
-      "node_modules/**/*"
+        "from": "dist/",
+        "to": "public/",
+        "filter": [
+          "!dist/*.yaml"
+        ]
+      }
     ],
     "win": {
-      "target": "portable",
-      "icon": "public/icon.ico",
+      "target": "nsis",
+      "icon": "./public/icon.ico",
       "publisherName": "Vishal Venkatraman"
-    },
-    "directories": {
-      "buildResources": "assets"
     }
   },
   "repository": {
@@ -42,7 +48,6 @@
   "bugs": {
     "url": "https://github.com/TheConMiz/dndcs/issues"
   },
-  "homepage": "https://github.com/TheConMiz/dndcs#readme",
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
@@ -53,7 +58,6 @@
     "css-loader": "^2.1.1",
     "electron": "^5.0.2",
     "electron-builder": "^20.43.0",
-    "electron-is-dev": "^1.1.0",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.33.0",
@@ -64,6 +68,7 @@
     "@material-ui/core": "^4.0.2",
     "@material-ui/styles": "^4.0.2",
     "antd": "^3.19.2",
+    "electron-is-dev": "^1.1.0",
     "knex": "^0.17.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

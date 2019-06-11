@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const paths = {
     dist: path.resolve(__dirname, 'dist'),
     src: path.resolve(__dirname, 'src'),
-    components: path.resolve(__dirname, 'src/components')
+    public: path.resolve(__dirname, 'public')
 }
 
 module.exports = {
@@ -33,7 +33,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             hash: true,
-            template: path.join(paths.src, 'index.html')
+            template: path.join(paths.public, 'index.html')
         }),
     ],
     resolve: {
