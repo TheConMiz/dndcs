@@ -1,35 +1,23 @@
 import React from 'react';
-import { Menu, Icon, Button, Switch } from 'antd';
+import { Menu, Icon, Switch, Layout } from 'antd';
 const { SubMenu } = Menu;
-
 class SideMenu extends React.Component {
-    state = {
-        collapsed: true,
-    };
+    constructor(props) {
+        super(props);
 
-    toggleCollapsed = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
-    };
+        this.state = {
+        }
+    }
 
     render() {
         return (
-            <div style={{ width: 256 }}>
-                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-                    <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
-                </Button>
-                <Switch
-
-                    checkedChildren="Dark"
-                    unCheckedChildren="Light"
-                />
+            <div>
                 <Menu
                     defaultSelectedKeys={['1']}
                     defaultOpenKeys={['sub1']}
                     mode="inline"
-                    theme="light"
-                    collapsible 
+                    theme="dark"
+                    collapsible
                     collapsed={this.state.collapsed}
                 >
                     <Menu.Item key="1">
@@ -75,6 +63,13 @@ class SideMenu extends React.Component {
                         </SubMenu>
                     </SubMenu>
                 </Menu>
+
+                <div style={{ marginLeft: "50px" }}>
+                    <Switch
+                        checkedChildren="Light"
+                        unCheckedChildren="Dark"
+                    />
+                </div>
             </div>
         );
     }
