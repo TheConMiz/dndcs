@@ -9,7 +9,7 @@
     "postinstall": "electron-builder install-app-deps",
     "dev-start": "webpack && webpack-dev-server",
     "test-build": "webpack && electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "webpack && electron-builder"
   },
   "build": {
     "appId": "com.electron.dndcs",
@@ -31,10 +31,13 @@
       }
     ],
     "win": {
-      "target": "nsis",
+      "target": "nsis-web",
       "icon": "./public/icon.ico",
       "publisherName": "Vishal Venkatraman"
     }
+  },
+  "nsisWeb": {
+    
   },
   "repository": {
     "type": "git",
