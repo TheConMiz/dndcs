@@ -45,7 +45,8 @@ function createWindow() {
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: "file",
-        slashes: true
+        slashes: true,
+        hash: 'baz',
     }));
 
     if (isDev) {

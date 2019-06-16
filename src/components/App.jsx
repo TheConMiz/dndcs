@@ -1,11 +1,12 @@
 import React from 'react';
-import { Layout } from 'antd';
-
-const { Header, Footer, Sider, Content } = Layout;
-
+import { Layout, Input} from 'antd';
 import SideMenu from './SideMenu';
-import SpellTable from './SpellTable';
+import CharPage from './CharPage';
 import StatCards from './StatCards';
+import { Switch, Route } from 'react-router-dom';
+
+const Search = Input.Search;
+const { Header, Footer, Sider, Content } = Layout;
 
 // Database Path variables
 const path = window.require('path');
@@ -28,16 +29,30 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            light: false
+            light: false,
+            collapsed: false
         }
     }
 
+    onCollapse = () => {
+        this.setState({ collapsed: !this.state.collapsed });
+    }
+
     render() {
-        return (     
-            <Layout>
-                <Sider collapsible theme={this.state.light ? "light" : "dark"}>
+        return (
+            <Layout style={{ minHeight: '100vh' }}>
+                <Sider theme="dark" collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+                    <div className="logo" style={{height: '30px', margin: '15px', background: '#4d7'}}/>
                     <SideMenu />
                 </Sider>
+                <Content>
+                    <Switch>
+                        <Route exact path="/char" render={() => {
+                            <StatCards dbPath={dbPath} />
+                        }} />
+                    </Switch>
+                    
+                </Content>
             </Layout>
         );
     }

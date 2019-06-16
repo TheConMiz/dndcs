@@ -3,10 +3,8 @@ import React from 'react';
 import { Card, InputNumber } from 'antd';
 
 const gridStyle = {
-    width: "25%",
-    marginTop: 16,
-    marginLeft: 16,
-    textAlign: 'center',
+    width: "33.3%",
+    textAlign: 'center'
 };
 
 class StatCards extends React.Component {
@@ -31,64 +29,24 @@ class StatCards extends React.Component {
 
         let result = knex.select(["name", "index"]).from("AbilityScores").orderBy("index", 'asc');
 
-        result.then((rows) => {            
-            // for (let i = 0; i < rows.length; ++i){
-            //     console.log(rows[i]["name"]);
-            // }
+        result.then((rows) => {
+            console.log(rows);
             this.setState({ statNames: rows });
-            this.setState({dataLoaded: true})
-            // console.log(this.state.statNames);
+            this.setState({ dataLoaded: true });
+
         });
     }
     
 
     render() { 
         return (
-            <div>
-                <Card
-                    hoverable
-                    style={gridStyle}
-                    title={this.state.dataLoaded ? this.state.statNames[0]["name"].toString() : ""}
-                >
-                    <InputNumber max={20} min={0} defaultValue={0} size="large" />
-                </Card>
-                <Card
-                    hoverable
-                    style={gridStyle}
-                    title={this.state.dataLoaded ? this.state.statNames[1]["name"].toString() : ""}
-                >
-                    <InputNumber max={20} min={0} defaultValue={0} size="large"/>
-                </Card>
-                <Card
-                    hoverable
-                    style={gridStyle}
-                    title={this.state.dataLoaded ? this.state.statNames[2]["name"].toString() : ""}
-                >
-                    <InputNumber max={20} min={0} defaultValue={0} size="large"/>
-                </Card>
-                <Card
-                    hoverable
-                    style={gridStyle}
-                    title={this.state.dataLoaded ? this.state.statNames[3]["name"].toString() : ""}
-                >
-                    <InputNumber max={20} min={0} defaultValue={0} size="large"/>
-                </Card>
-                <Card
-                    hoverable
-                    style={gridStyle}
-                    title={this.state.dataLoaded ? this.state.statNames[4]["name"].toString() : ""}
-                >
-                    <InputNumber max={20} min={0} defaultValue={0} size="large"/>
-                </Card>
-                <Card
-                    hoverable
-                    style={gridStyle}
-                    title={this.state.dataLoaded ? this.state.statNames[5]["name"].toString() : ""}
-                >
-                    <InputNumber max={20} min={0} defaultValue={0} size="large"/>
-                </Card>
-            </div>
-            
+            <Card
+                hoverable
+                style={gridStyle}
+                title={this.state.dataLoaded ? this.state.statNames[0]["name"].toString() : ""}
+            >
+                <InputNumber max={20} min={0} defaultValue={0} size="large" style={{width: '60px', height: '60px', textAlign: 'center'}}/>
+            </Card>
         );
     }
 }

@@ -45,5 +45,8 @@ module.exports = {
     node: {
         __dirname: true,
         __filename: false
+    },
+    devServer: {
+        historyApiFallback: true,
     }
 }
