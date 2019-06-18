@@ -1,9 +1,11 @@
 import React from 'react';
-import { Layout, Input} from 'antd';
+import { Layout, Input, Progress, Row, Col} from 'antd';
 import SideMenu from './SideMenu';
 import CharPage from './CharPage';
 import StatCards from './StatCards';
-import { Switch, Route } from 'react-router-dom';
+import SkillTable from './SkillTable';
+
+
 
 const Search = Input.Search;
 const { Header, Footer, Sider, Content } = Layout;
@@ -46,11 +48,17 @@ class App extends React.Component {
                     <SideMenu />
                 </Sider>
                 <Content>
-                    <Switch>
-                        <Route exact path="/char" render={() => {
-                            <StatCards dbPath={dbPath} />
-                        }} />
-                    </Switch>
+                    <div>
+                        <Progress percent={99} status="active" showInfo={false} strokeColor="orange" strokeLinecap="square" strokeWidth={5}/>
+                    </div>
+
+                    <SkillTable dbPath={dbPath} />
+                    <StatCards dbPath={dbPath}/>
+                    
+
+                    
+                    
+                    
                     
                 </Content>
             </Layout>

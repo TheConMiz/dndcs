@@ -3,8 +3,8 @@ import React from 'react';
 import { Card, InputNumber } from 'antd';
 
 const gridStyle = {
-    width: "33.3%",
-    textAlign: 'center'
+    textAlign: 'center',
+    borderRadius: '5px'
 };
 
 class StatCards extends React.Component {
@@ -42,8 +42,9 @@ class StatCards extends React.Component {
         return (
             <Card
                 hoverable
-                style={gridStyle}
+
                 title={this.state.dataLoaded ? this.state.statNames[0]["name"].toString() : ""}
+                bodyStyling={{padding: 0}}
             >
                 <InputNumber max={20} min={0} defaultValue={0} size="large" style={{width: '60px', height: '60px', textAlign: 'center'}}/>
             </Card>
