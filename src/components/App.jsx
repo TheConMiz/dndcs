@@ -1,11 +1,12 @@
 import React from 'react';
-import { Layout, Input, Progress, Row, Col} from 'antd';
+import { Layout, Input} from 'antd';
 import SideMenu from './SideMenu';
-import CharPage from './CharPage';
 import StatCards from './StatCards';
 import SkillTable from './SkillTable';
+import {Route, Switch} from 'react-router-dom';
 
-
+//TODO: FILE READING
+const fs = window.require('fs');
 
 const Search = Input.Search;
 const { Header, Footer, Sider, Content } = Layout;
@@ -42,25 +43,32 @@ class App extends React.Component {
 
     render() {
         return (
-            <Layout style={{ minHeight: '100vh' }}>
+            <Layout style={{ height: '100vh' }}>
                 <Sider theme="dark" collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
                     <div className="logo" style={{height: '30px', margin: '15px', background: '#4d7'}}/>
                     <SideMenu />
                 </Sider>
+                    {/* <div style={{top: '0'}}>
+                        <Progress percent={100} status="active" showInfo={false} strokeColor="orange" strokeLinecap="square" strokeWidth={5} />
+                    </div> */}
+                {/* <Switch>
+                    <Route exact path='/char' component={SkillTable}/>
+                </Switch>     */}
+               
+                
                 <Content>
-                    <div>
-                        <Progress percent={99} status="active" showInfo={false} strokeColor="orange" strokeLinecap="square" strokeWidth={5}/>
-                    </div>
+                    <Switch>
+                        <Route exact path='/char' render={() => 
+                            <div>
+                                
+                                <SkillTable dbPath={dbPath} />
+                                <StatCards dbPath={dbPath} />
+                            </div>
+                        } />
+                    </Switch>
 
-                    <SkillTable dbPath={dbPath} />
-                    <StatCards dbPath={dbPath}/>
-                    
-
-                    
-                    
-                    
-                    
                 </Content>
+
             </Layout>
         );
     }

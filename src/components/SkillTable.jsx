@@ -93,9 +93,6 @@ class SkillTable extends React.Component {
                 dataSource={this.state.skills}
                 pagination={false}
             >
-                <Tooltip title="Test">
-                    <span>TESTING</span>
-                </Tooltip>
             </Table>
         );
     }

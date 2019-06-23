@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { Card, InputNumber } from 'antd';
+import { Card, InputNumber, Typography } from 'antd';
 
 const gridStyle = {
     textAlign: 'center',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    width: '500px',
+    height: '450px'
 };
 
 class StatCards extends React.Component {
@@ -42,11 +44,12 @@ class StatCards extends React.Component {
         return (
             <Card
                 hoverable
-
-                title={this.state.dataLoaded ? this.state.statNames[0]["name"].toString() : ""}
-                bodyStyling={{padding: 0}}
+                style={{padding: 0, width: '100px', height:'75px', textAlign: 'center', borderRadius: '5px'}}
             >
-                <InputNumber max={20} min={0} defaultValue={0} size="large" style={{width: '60px', height: '60px', textAlign: 'center'}}/>
+                <Typography>
+                    {this.state.dataLoaded ? this.state.statNames[0]["name"].toString() : ""}
+                </Typography>
+                <InputNumber max={20} min={0} defaultValue={0} style={{width: '40px', height: '30px'}}/>
             </Card>
         );
     }

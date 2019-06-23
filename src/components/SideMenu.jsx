@@ -14,19 +14,35 @@ class SideMenu extends React.Component {
     render() {
         return (
             <Menu theme="dark" mode="inline">
+
                 <Menu.Item key="1">
                     <Link to="/char">
                         <Icon type="user" />
                         <span>Character</span>
                     </Link>
                 </Menu.Item>
+
                 <Menu.Item key="2">
-                    <Icon type="user" />
-                    <span>Battle Station</span>
+                    <Link to="/battle">
+                        <Icon type="user" />
+                        <span>Battle Station</span>
+                    </Link>
                 </Menu.Item>
+
                 <Menu.Item key="3">
-                    <Icon type="user" />
-                    <span>Equipment</span>
+                    <Link to="/equipment">
+                        <Icon type="user" />
+                        <span>Equipment</span>
+                    </Link>
+                </Menu.Item>
+                
+                <Menu.Item key="4">
+                    <Icon type="save" />
+                    <span>Save</span>
+                </Menu.Item>
+                <Menu.Item key="5">
+                    <Icon type="info-circle" />
+                    <span>About</span>
                 </Menu.Item>
             </Menu>
         );
