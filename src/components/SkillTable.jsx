@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table, Checkbox, Tooltip } from 'antd';
-import { promisify } from 'bluebird';
 
 const columns = [
     {

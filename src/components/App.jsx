@@ -5,6 +5,10 @@ import StatCards from './StatCards';
 import SkillTable from './SkillTable';
 import {Route, Switch} from 'react-router-dom';
 
+
+import '@blueprintjs/core/lib/css/blueprint.css';
+import CharPage from './CharPage';
+
 //TODO: FILE READING
 const fs = window.require('fs');
 
@@ -47,22 +51,17 @@ class App extends React.Component {
                 <Sider theme="dark" collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
                     <div className="logo" style={{height: '30px', margin: '15px', background: '#4d7'}}/>
                     <SideMenu />
-                </Sider>
-                    {/* <div style={{top: '0'}}>
-                        <Progress percent={100} status="active" showInfo={false} strokeColor="orange" strokeLinecap="square" strokeWidth={5} />
-                    </div> */}
-                {/* <Switch>
-                    <Route exact path='/char' component={SkillTable}/>
-                </Switch>     */}
-               
-                
+                </Sider>               
+
                 <Content>
                     <Switch>
                         <Route exact path='/char' render={() => 
                             <div>
-                                
-                                <SkillTable dbPath={dbPath} />
-                                <StatCards dbPath={dbPath} />
+                                <div className="bp3-dark">
+                                    <CharPage dbPath={dbPath}/>
+                                </div>
+                                {/* <SkillTable dbPath={dbPath} />
+                                <StatCards dbPath={dbPath} /> */}
                             </div>
                         } />
                     </Switch>

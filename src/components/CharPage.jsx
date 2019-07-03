@@ -1,9 +1,9 @@
 import React from 'react';
-
+import ProfileCard from './ProfileCard';
 class CharPage extends React.Component {
     
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             
@@ -12,7 +12,7 @@ class CharPage extends React.Component {
     
     render() {
         return (
-            <h1>sdaaaaaaaaaaaaaaaaaaaa</h1>
+            <ProfileCard dbPath={this.props.dbPath}/>
         );
     }
 }
