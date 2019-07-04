@@ -1,9 +1,6 @@
 import React from 'react';
-import { Button, Popover, Menu, InputGroup, MenuDivider, MenuItem, Spinner} from '@blueprintjs/core';
-import { Select } from '@blueprintjs/select';
-
-//TODO: UNIQUE ID FOR EACH RACE
-
+import { Button, Popover, Menu, InputGroup, MenuDivider, MenuItem, Spinner, Icon } from '@blueprintjs/core';
+import Fuse from 'fuse.js';
 
 class RaceMenu extends React.Component {
     constructor(props) {
@@ -12,7 +9,8 @@ class RaceMenu extends React.Component {
         this.state = {
             races: [],
             currentRace: "",
-            filterValue: ""
+            filterValue: "",
+            filteredRaces: [],
         }
     }
 
@@ -37,79 +35,87 @@ class RaceMenu extends React.Component {
     selectRace = raceChoice => {
         //console.log(raceChoice);
         this.setState({ currentRace: raceChoice.innerText });
-        console.log(this.state.currentRace);
+        //console.log(this.state.currentRace);
     }
 
-    renderRaces = (item) => {
-        //console.log(item);
-        const { name } = item;
-        return (
-            <MenuItem
-                text={name}
-                onClick={() => {
-                    this.selectRace(event.target);
-                }}
-            />
-        );
+    editFilter = item => {
+        this.setState({ filterValue: item });
+        this.searchRaces(this.state.filterValue);
+        //console.log(this.state.filterValue);
     }
 
+    searchRaces = (searchValue) => {
+        // Fuzzy Search Setup
+        let options = {
+            keys: ['name']
+        };
 
+        const fuse = new Fuse(this.state.races, options);
+        let temp = fuse.search(searchValue)
+
+        this.setState({ filteredRaces: temp});
+        
+        //console.log(this.state.filteredRaces);
+    }
+
+    renderRaces = raceList => {
+        raceList.map(
+            item => {
+                const { name } = item;
+                return (
+                    <MenuItem
+                        text={name}
+                        onClick={() => {
+                            this.selectRace(event.target);
+                        }}
+                    />
+                );
+            }
+        )
+    }
 
     render() {
-        // const raceItems = this.state.races.map(
-        //     item => {
-        //         const { name } = item;
-        //         return (
-        //             <MenuItem
-        //                 text={name}
-        //                 onClick={() => {
-        //                     this.selectRace(event.target);
-        //                 }}
-        //             />
-        //         );
-        //     }
-        // );
 
-        // const raceMenu = (
-        //     <Menu>
-        //         <InputGroup
-        //             leftIcon="filter"
-        //             placeholder="Filter races..."
-        //             rightElement={this.state.filterValue === "" ? undefined : <Spinner size={Icon.SIZE_STANDARD} />}
-        //             onChange={(event) => {
-        //                 console.log(event);
-        //             }}
-        //         />
-        //         <MenuDivider title="Player's Handbook"/>
-        //             {raceItems}
-        //         <MenuDivider title="Some Other Source" />
-        //     </Menu>            
-        // )
+        const startRaces = this.state.races.map(
+            item => {
+                const { name } = item;
+                return (
+                    <MenuItem
+                        text={name}
+                        onClick={() => {
+                            this.selectRace(event.target);
+                        }}
+                    />
+                );
+            }
+        );
 
-        //TODO: FIX MENU SEARCH BOX VISUALS, ADD SEARCHING
+        const raceMenu = (
+            <Menu>
+                <InputGroup
+                    value={this.state.filterValue === "" ? "" : this.state.filterValue}
+                    leftIcon="filter"
+                    placeholder="Filter races..."
+                    onChange={(event) => {
+                        // console.log(event.target.value);
+                        this.editFilter(event.target.value);
+                    }}
+                />
+                <MenuDivider title="Player's Handbook"/>
+                    {startRaces}
+                <MenuDivider title="Some Other Source" />
+            </Menu>            
+        )
+
         return (
             <div>
-                <Select
-                    inputProps={{ value: this.state.races[0], onChange: this.selectRace }}
-                    items={this.state.races}
-                    filterable={true}
-                    itemRenderer={this.renderRaces}
-                    onItemSelect={this.selectRace}
-                    noResults={<MenuItem disabled text="No Results..."/>}
-                >
+                <Popover content={raceMenu}>
                     <Button
                         rightIcon="caret-down"
                         text={this.state.currentRace === "" ? "Race" : this.state.currentRace}
                         fill={true}
                     />
-                </Select>
-                {/* <Popover content={raceMenu}>
-                    <Button
-                        rightIcon="caret-down"
-                        text={this.state.currentRace === "" ? "Race" : this.state.currentRace}
-                        fill={true}
-                    />
-                </Popover> */}
+                </Popover>
             </div>
         );
     }
