@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Popover, Menu, InputGroup, MenuDivider, MenuItem, Spinner, Icon } from '@blueprintjs/core';
-import Fuse from 'fuse.js';
+import { Button, MenuItem, Spinner, Icon } from '@blueprintjs/core';
 
 import { Select } from '@blueprintjs/select';
-import { race } from 'bluebird';
 
 // TODO: REPLACE MenuItem onClick with Select's onItemSelect
+// TODO: Submenus for subraces
+// TODO: Fix Filter Bar outlook
 
 class RaceMenu extends React.Component {
     constructor(props) {
@@ -82,8 +82,7 @@ class RaceMenu extends React.Component {
     raceRender = raceItem => {
         const {name} = raceItem
         
-        return (
-            
+        return (  
             <MenuItem
                 text={name}
                 onClick={(event) => {
@@ -136,12 +135,11 @@ class RaceMenu extends React.Component {
                     noResults={<MenuItem disabled={true} text="No results..." />}
                     itemPredicate={this.filterRace}
                     itemsEqual={this.compareRace}
-                    activeItem={this.state.currentRace === "" ? null : this.state.currentRace}
+                    // activeItem={this.state.currentRace === "" ? null : this.state.currentRace}
                 >
                     <Button
                         rightIcon="caret-down"
                         text={this.state.currentRace === "" ? "Race" : this.state.currentRace}
-                        fill={true}
                     />
                 </Select>
             </div>
