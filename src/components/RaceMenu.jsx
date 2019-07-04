@@ -2,6 +2,11 @@ import React from 'react';
 import { Button, Popover, Menu, InputGroup, MenuDivider, MenuItem, Spinner, Icon } from '@blueprintjs/core';
 import Fuse from 'fuse.js';
 
+import { Select } from '@blueprintjs/select';
+import { race } from 'bluebird';
+
+// TODO: REPLACE MenuItem onClick with Select's onItemSelect
+
 class RaceMenu extends React.Component {
     constructor(props) {
         super(props);
@@ -10,7 +15,7 @@ class RaceMenu extends React.Component {
             races: [],
             currentRace: "",
             filterValue: "",
-            filteredRaces: [],
+
         }
     }
 
@@ -33,89 +38,112 @@ class RaceMenu extends React.Component {
     }
 
     selectRace = raceChoice => {
-        //console.log(raceChoice);
+        console.log(raceChoice);
         this.setState({ currentRace: raceChoice.innerText });
-        //console.log(this.state.currentRace);
+        console.log(this.state.currentRace);
     }
 
-    editFilter = item => {
-        this.setState({ filterValue: item });
-        this.searchRaces(this.state.filterValue);
-        //console.log(this.state.filterValue);
-    }
+    // editFilter = item => {
+    //     this.setState({ filterValue: item });
+    //     this.searchRaces(this.state.filterValue);
+    //     //console.log(this.state.filterValue);
+    // }
 
-    searchRaces = (searchValue) => {
-        // Fuzzy Search Setup
-        let options = {
-            keys: ['name']
-        };
+    // searchRaces = (searchValue) => {
+    //     // Fuzzy Search Setup
+    //     let options = {
+    //         keys: ['name']
+    //     };
 
-        const fuse = new Fuse(this.state.races, options);
-        let temp = fuse.search(searchValue)
+    //     const fuse = new Fuse(this.state.races, options);
+    //     let temp = fuse.search(searchValue)
 
-        this.setState({ filteredRaces: temp});
+    //     this.setState({ filteredRaces: temp});
         
-        //console.log(this.state.filteredRaces);
+    //     //console.log(this.state.filteredRaces);
+    // }
+
+    // renderRaces = raceList => {
+    //     raceList.map(
+    //         item => {
+    //             const { name } = item;
+    //             return (
+    //                 <MenuItem
+    //                     text={name}
+    //                     onClick={() => {
+    //                         this.selectRace(event.target);
+    //                     }}
+    //                 />
+    //             );
+    //         }
+    //     )
+    // }
+
+    raceRender = raceItem => {
+        const {name} = raceItem
+        
+        return (
+            
+            <MenuItem
+                text={name}
+                onClick={(event) => {
+                    this.selectRace(event);
+                }}
+            />
+        );
     }
 
-    renderRaces = raceList => {
-        raceList.map(
-            item => {
-                const { name } = item;
-                return (
-                    <MenuItem
-                        text={name}
-                        onClick={() => {
-                            this.selectRace(event.target);
-                        }}
-                    />
-                );
-            }
-        )
+    filterRace = (query, race) => {
+        return race.name.toLowerCase().indexOf(query.toLowerCase()) >= 0;
+    }
+
+    compareRace = (race1, race2) => {
+
+        console.log("race 1 : ");
+        console.log(race1);
+        console.log("race 2 : ");
+        console.log(race2);
+
+        //return name.toLowerCase() === race2.toLowerCase();
+        
+        //return race1.toLowerCase() === race2;
     }
 
     render() {
-
-        const startRaces = this.state.races.map(
-            item => {
-                const { name } = item;
-                return (
-                    <MenuItem
-                        text={name}
-                        onClick={() => {
-                            this.selectRace(event.target);
-                        }}
-                    />
-                );
-            }
-        );
-
-        const raceMenu = (
-            <Menu>
-                <InputGroup
-                    value={this.state.filterValue === "" ? "" : this.state.filterValue}
-                    leftIcon="filter"
-                    placeholder="Filter races..."
-                    onChange={(event) => {
-                        // console.log(event.target.value);
-                        this.editFilter(event.target.value);
-                    }}
-                />
-                <MenuDivider title="Player's Handbook"/>
-                    {startRaces}
-                <MenuDivider title="Some Other Source" />
-            </Menu>            
-        )
+        // const raceMenu = (
+        //     <Menu>
+        //         <InputGroup
+        //             value={this.state.filterValue === "" ? "" : this.state.filterValue}
+        //             leftIcon="filter"
+        //             placeholder="Filter races..."
+        //             onChange={(event) => {
+        //                 // console.log(event.target.value);
+        //                 this.editFilter(event.target.value);
+        //             }}
+        //         />
+        //         <MenuDivider title="Player's Handbook"/>
+        //             {startRaces}
+        //         <MenuDivider title="Some Other Source" />
+        //     </Menu>            
+        // )
 
         return (
             <div>
-                <Popover content={raceMenu}>
+                <Select
+                    resetOnClose={true}
+                    items={this.state.races}
+                    itemRenderer={this.raceRender}
+                    noResults={<MenuItem disabled={true} text="No results..." />}
+                    itemPredicate={this.filterRace}
+                    itemsEqual={this.compareRace}
+                    activeItem={this.state.currentRace === "" ? null : this.state.currentRace}
+                >
                     <Button
                         rightIcon="caret-down"
                         text={this.state.currentRace === "" ? "Race" : this.state.currentRace}
                         fill={true}
                     />
-                </Popover>
+                </Select>
             </div>
         );
     }
