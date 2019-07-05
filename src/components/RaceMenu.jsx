@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, MenuItem, Spinner, Icon } from '@blueprintjs/core';
 
 import { Select } from '@blueprintjs/select';
+// TODO: On arrow click menu moves ==> due to gridbox?
 
-// TODO: REPLACE MenuItem onClick with Select's onItemSelect
 // TODO: Submenus for subraces
 // TODO: Fix Filter Bar outlook
 
@@ -13,9 +13,7 @@ class RaceMenu extends React.Component {
 
         this.state = {
             races: [],
-            currentRace: "",
-            filterValue: "",
-
+            currentRace: ""
         }
     }
 
@@ -37,57 +35,16 @@ class RaceMenu extends React.Component {
         });
     }
 
-    selectRace = raceChoice => {
-        console.log(raceChoice);
-        this.setState({ currentRace: raceChoice.innerText });
-        console.log(this.state.currentRace);
-    }
-
-    // editFilter = item => {
-    //     this.setState({ filterValue: item });
-    //     this.searchRaces(this.state.filterValue);
-    //     //console.log(this.state.filterValue);
-    // }
-
-    // searchRaces = (searchValue) => {
-    //     // Fuzzy Search Setup
-    //     let options = {
-    //         keys: ['name']
-    //     };
-
-    //     const fuse = new Fuse(this.state.races, options);
-    //     let temp = fuse.search(searchValue)
-
-    //     this.setState({ filteredRaces: temp});
+    renderRace = (raceItem, { handleClick, modifiers }) => {
+        const { name } = raceItem;
         
-    //     //console.log(this.state.filteredRaces);
-    // }
-
-    // renderRaces = raceList => {
-    //     raceList.map(
-    //         item => {
-    //             const { name } = item;
-    //             return (
-    //                 <MenuItem
-    //                     text={name}
-    //                     onClick={() => {
-    //                         this.selectRace(event.target);
-    //                     }}
-    //                 />
-    //             );
-    //         }
-    //     )
-    // }
-
-    raceRender = raceItem => {
-        const {name} = raceItem
-        
+        //TODO: Subrace sub-menus
         return (  
             <MenuItem
                 text={name}
-                onClick={(event) => {
-                    this.selectRace(event);
-                }}
+                onClick={handleClick}
+                active={modifiers.active}
+                fill={true}
             />
         );
     }
@@ -96,50 +53,68 @@ class RaceMenu extends React.Component {
         return race.name.toLowerCase().indexOf(query.toLowerCase()) >= 0;
     }
 
+    setCurrentRace = selectedRace => {
+        // console.log(selectedRace);
+        // console.log(JSON.stringify(selectedRace));
+        const parsedRace = JSON.stringify(selectedRace);
+        this.setState({ currentRace: parsedRace });
+
+        // console.log(JSON.parse(test));
+        // console.log(this.state.currentRace);
+    }
+
     compareRace = (race1, race2) => {
 
-        console.log("race 1 : ");
-        console.log(race1);
-        console.log("race 2 : ");
-        console.log(race2);
+        // console.log("race 1 : ");
+        // console.log(race1);
+        // console.log("race 2 : ");
+        // console.log(race2);
 
-        //return name.toLowerCase() === race2.toLowerCase();
+        // console.log(race1.name.toLowerCase());
+        // console.log(race2.name.toLowerCase());
+
+        return race1.name.toLowerCase() === race2.name.toLowerCase();
+    }
+
+    keyboardChangeRace = (newRace) => {
+        // TODO: Active item is automatically set to whatever is first on the list. this is bad.
+
+        // TODO: While scrolling, leave previously chosen item as is until it is selected
         
-        //return race1.toLowerCase() === race2;
+        
+        // console.log(newRace);
+        // console.log(test);
+        
+        if (newRace !== null) {
+            const parsedRace = JSON.stringify(newRace);
+            this.setState({ currentRace: parsedRace });
+        }
+
+        else if (newRace === null) {
+            console.log(this.state.currentRace);
+            this.setState({ currentRace: "" });
+        }
     }
 
     render() {
-        // const raceMenu = (
-        //     <Menu>
-        //         <InputGroup
-        //             value={this.state.filterValue === "" ? "" : this.state.filterValue}
-        //             leftIcon="filter"
-        //             placeholder="Filter races..."
-        //             onChange={(event) => {
-        //                 // console.log(event.target.value);
-        //                 this.editFilter(event.target.value);
-        //             }}
-        //         />
-        //         <MenuDivider title="Player's Handbook"/>
-        //             {startRaces}
-        //         <MenuDivider title="Some Other Source" />
-        //     </Menu>            
-        // )
-
         return (
             <div>
                 <Select
-                    resetOnClose={true}
+                    resetOnQuery={true}
+                    scrollToActiveItem={true}
                     items={this.state.races}
-                    itemRenderer={this.raceRender}
+                    itemRenderer={this.renderRace}
                     noResults={<MenuItem disabled={true} text="No results..." />}
                     itemPredicate={this.filterRace}
                     itemsEqual={this.compareRace}
-                    // activeItem={this.state.currentRace === "" ? null : this.state.currentRace}
+                    onItemSelect={this.setCurrentRace}
+                    activeItem={this.state.currentRace === "" ? null : JSON.parse(this.state.currentRace)}
+                    onActiveItemChange={this.keyboardChangeRace}
                 >
                     <Button
                         rightIcon="caret-down"
-                        text={this.state.currentRace === "" ? "Race" : this.state.currentRace}
+                        text={this.state.currentRace === "" ? "Race" : JSON.parse(this.state.currentRace).name}
+                        placeholder="Race"
                     />
                 </Select>
             </div>
