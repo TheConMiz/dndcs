@@ -64,12 +64,6 @@ class RaceMenu extends React.Component {
     }
 
     compareRace = (race1, race2) => {
-
-        // console.log("race 1 : ");
-        // console.log(race1);
-        // console.log("race 2 : ");
-        // console.log(race2);
-
         // console.log(race1.name.toLowerCase());
         // console.log(race2.name.toLowerCase());
 
@@ -77,13 +71,10 @@ class RaceMenu extends React.Component {
     }
 
     keyboardChangeRace = (newRace) => {
+        // TODO: Missing Arrow Controls
         // TODO: Active item is automatically set to whatever is first on the list. this is bad.
 
         // TODO: While scrolling, leave previously chosen item as is until it is selected
-        
-        
-        // console.log(newRace);
-        // console.log(test);
         
         if (newRace !== null) {
             const parsedRace = JSON.stringify(newRace);
@@ -91,7 +82,7 @@ class RaceMenu extends React.Component {
         }
 
         else if (newRace === null) {
-            console.log(this.state.currentRace);
+            //console.log(this.state.currentRace);
             this.setState({ currentRace: "" });
         }
     }
@@ -100,6 +91,7 @@ class RaceMenu extends React.Component {
         return (
             <div>
                 <Select
+                    resetOnClose={true}
                     resetOnQuery={true}
                     scrollToActiveItem={true}
                     items={this.state.races}
@@ -109,7 +101,8 @@ class RaceMenu extends React.Component {
                     itemsEqual={this.compareRace}
                     onItemSelect={this.setCurrentRace}
                     activeItem={this.state.currentRace === "" ? null : JSON.parse(this.state.currentRace)}
-                    onActiveItemChange={this.keyboardChangeRace}
+                    // onActiveItemChange={this.keyboardChangeRace}
+                    
                 >
                     <Button
                         rightIcon="caret-down"
