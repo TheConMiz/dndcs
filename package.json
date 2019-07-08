@@ -2,7 +2,6 @@
   "name": "dndcs",
   "productName": "DnDCS",
   "version": "0.0.0",
-  "homepage": "./",
   "description": "A Character sheet solution for Dungeons & Dragons, built using Electron, React and SQLite3",
   "main": "./public/electron-main.js",
   "scripts": {
@@ -20,8 +19,8 @@
       "app": "./"
     },
     "files": [
-      "public/electron-main.js",
-      "public/data/**/*",
+      "./public/electron-main.js",
+      "./public/data/**/*",
       "!dist/win-unpacked/**/*",
       {
         "from": "dist/",
@@ -32,12 +31,15 @@
       }
     ],
     "win": {
-      "target": "nsis-web",
+      "target": "nsis",
       "icon": "./public/icon.ico",
       "publisherName": "Vishal Venkatraman"
     }
   },
-  "nsisWeb": {},
+  "nsis": {
+    "oneClick": "false",
+    "allowToChangeInstallationDirectory": "true"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheConMiz/dndcs.git"
@@ -51,36 +53,32 @@
     "url": "https://github.com/TheConMiz/dndcs/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.12.0",
     "css-loader": "^3.0.0",
-    "electron": "^5.0.4",
-    "electron-builder": "^20.43.0",
+    "electron": "^5.0.6",
+    "electron-builder": "^20.44.4",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.34.0",
-    "webpack-cli": "^3.3.4",
-    "webpack-dev-server": "^3.7.1"
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
     "@blueprintjs/core": "^3.17.1",
     "@blueprintjs/select": "^3.9.0",
-    "@material-ui/core": "^4.1.1",
-    "@material-ui/styles": "^4.1.1",
-    "antd": "^3.19.4",
+    "@material-ui/core": "^4.2.0",
     "electron-is-dev": "^1.1.0",
     "fuse.js": "^3.4.5",
-    "knex": "^0.17.6",
+    "knex": "^0.18.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "redux": "^4.0.1",
     "sqlite3": "^4.0.9"
   }
 }

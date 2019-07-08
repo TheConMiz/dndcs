@@ -36,11 +36,9 @@ function createWindow() {
         }
     });
 
-    win.webContents.openDevTools();
-
-    // if (isDev) {
-    //     win.webContents.openDevTools();
-    // }
+    if (isDev) {
+        win.webContents.openDevTools();
+    }
     
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
         pathname: path.join(__dirname, 'index.html'),
@@ -49,11 +47,11 @@ function createWindow() {
         hash: 'baz',
     }));
 
-    if (isDev) {
-        console.log('Running in development');
-    } else {
-        console.log('Running in production');
-    }
+    // if (isDev) {
+    //     console.log('Running in development');
+    // } else {
+    //     console.log('Running in production');
+    // }
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {
@@ -62,16 +60,6 @@ function createWindow() {
 
     //TODO: Top menu bar visibility set to false when packaging
     win.setMenuBarVisibility(false);
-
-    // Database Test
-    
-    // ipcMain.on("mainWindowLoaded", () => {
-    //     let result = knex.select("*").from("Conditions");
-
-    //     result.then((rows) => {
-    //         win.webContents.send("resultSent", rows);
-    //     });
-    // });
 
     win.on("closed", () => {
         // Done to dereference the window object
