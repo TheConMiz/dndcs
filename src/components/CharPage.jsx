@@ -8,11 +8,12 @@ class CharPage extends React.Component {
         this.state = {
             
         }
+        
     }
-    
+
     render() {
         return (
-            <ProfileCard dbPath={this.props.dbPath}/>
+            <ProfileCard/>
         );
     }
 }

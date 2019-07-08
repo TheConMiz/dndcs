@@ -5,17 +5,14 @@ import Grid from '@material-ui/core/Grid';
 import RaceMenu from './RaceMenu';
 import SelectionMenu from './SelectionMenu';
 
+
+
 class ProfileCard extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            list: ["TEst", "Test2"]
         }
-    }
-
-    componentDidMount = () => {
-        
     }
 
     render() {
@@ -45,10 +42,9 @@ class ProfileCard extends React.Component {
                             <Grid item>
                                 <SelectionMenu
                                     mode="Race"
-                                    dbPath={this.props['dbPath']}
                                 />
                             </Grid>
-                            
+
                         </Grid>                                    
                     </Grid>
                 </Card>

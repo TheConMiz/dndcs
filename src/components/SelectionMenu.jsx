@@ -16,17 +16,9 @@ class SelectionMenu extends React.Component {
             itemsList: [],
             currentSelection: ""
         }
-        // Set mode state
-        this.state.mode = props.mode;
     }
 
     componentDidMount = () => {
-
-        // Obtain table name based on mode
-        // let tableName = "";
-        // this.state.mode === "Race" ? tableName = "Races" :
-        //     this.state.mode === "Subrace" ? tableName = "Subraces" :
-        //         this.state.mode === "Background" ? tableName = "Backgrounds" : tableName = "";
         
         // Establish connection with database
         const knex = window.require('knex')({

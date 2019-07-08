@@ -21,24 +21,24 @@ else {
     dbPath = path.resolve('./../../public/data/database/DnDCS.db');
 }
 
+const DBContext = React.createContext(dbPath);
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            light: false,
-            collapsed: false
         }
-    }
-
-    onCollapse = () => {
-        this.setState({ collapsed: !this.state.collapsed });
     }
 
     render() {
         return (
+
             <div className="bp3-dark">
-                <CharPage dbPath={dbPath} />
+                <DBContext.Provider value={this.dbPath}>
+                    <CharPage/>
+                </DBContext.Provider>   
             </div>
+
+            
         );
     }
 }
