@@ -9,7 +9,6 @@ import { Select } from '@blueprintjs/select';
 class SelectionMenu extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             mode: "Race",
             tableName: "",
@@ -18,13 +17,12 @@ class SelectionMenu extends React.Component {
         }
     }
 
-    componentDidMount = () => {
-        
+    connectToDB = () => {
         // Establish connection with database
         const knex = window.require('knex')({
             client: "sqlite3",
             connection: {
-                filename: this.props['dbPath']
+                filename: this.props.dbPath
             },
             useNullAsDefault: true,
             debug: true
@@ -37,9 +35,7 @@ class SelectionMenu extends React.Component {
     }
 
     renderItems = (item, { handleClick, modifiers }) => {
-        //console.log(item);
         const { name } = item;
-        //console.log(name);
         return (
             <MenuItem
                 text={name}
@@ -57,7 +53,6 @@ class SelectionMenu extends React.Component {
     setCurrentItem = selectedItem => {
         const parsedItem = JSON.stringify(selectedItem);
         this.setState({ currentSelection: parsedItem });
-        //console.log(this.state.currentSelection);
     }
 
     compareItems = (item1, item2) => {
@@ -81,33 +76,33 @@ class SelectionMenu extends React.Component {
     // }
 
     render() {
+        
         return (
-            <div>
-                <Select
-                    resetOnClose={true}
-                    resetOnQuery={true}
-                    scrollToActiveItem={true}
-                    items={this.state.itemsList}
-                    // itemListRenderer={this.renderMenu}
-                    itemRenderer={this.renderItems}
-                    noResults={<MenuItem disabled={true} text="No results..." />}
-                    itemPredicate={this.filterItem}
-                    itemsEqual={this.compareItems}
-                    onItemSelect={this.setCurrentItem}
-                    activeItem={this.state.currentSelection === "" ? null : JSON.parse(this.state.currentSelection)}
-                    // onActiveItemChange={this.keyboardChangeRace}
+
+            <Select
+                resetOnClose={true}
+                resetOnQuery={true}
+                scrollToActiveItem={true}
+                items={this.state.itemsList}
+                // itemListRenderer={this.renderMenu}
+                itemRenderer={this.renderItems}
+                noResults={<MenuItem disabled={true} text="No results..." />}
+                itemPredicate={this.filterItem}
+                itemsEqual={this.compareItems}
+                onItemSelect={this.setCurrentItem}
+                activeItem={this.state.currentSelection === "" ? null : JSON.parse(this.state.currentSelection)}
+                // onActiveItemChange={this.keyboardChangeRace}
+            >
+                <Button
+                    rightIcon="caret-down"
+                    autoFocus={false}
+                    fill={true}
+                    style={{ width: '150px' }}
+                    alignText='left'
                 >
-                    <Button
-                        rightIcon="caret-down"
-                        autoFocus={false}
-                        fill={true}
-                        style={{ width: '150px' }}
-                        alignText='left'
-                    >
-                        {this.state.currentSelection === "" ? this.state.mode : JSON.parse(this.state.currentSelection).name}
-                    </Button>
-                </Select>
-            </div>
+                    {this.state.currentSelection === "" ? this.state.mode : JSON.parse(this.state.currentSelection).name}
+                </Button>
+            </Select>
         );
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileCard from './ProfileCard';
+
 class CharPage extends React.Component {
     
     constructor(props) {
