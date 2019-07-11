@@ -4,8 +4,8 @@ import '@blueprintjs/core/lib/css/blueprint.css';
 import CharPage from './CharPage';
 
 class App extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
         };
     }
@@ -13,7 +13,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="bp3-dark">
-                <CharPage />
+                <CharPage dbPath={this.props.dbPath} />
             </div>
         );
     }

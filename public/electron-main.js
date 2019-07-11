@@ -14,17 +14,6 @@ const isDev = require('electron-is-dev');
 
 const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 
-// Database Stuff
-// const dbPath = path.resolve(__dirname, './data/database/DnDCS.db');
-
-// let knex = require("knex")({
-//     client: "sqlite3",
-//     connection: {
-//         filename: dbPath
-//     },
-//     useNullAsDefault: true
-// });
-
 function createWindow() {
     //TODO: Variable screen size, so calibrate after getting comments
     screenSize = electron.screen.getPrimaryDisplay().size;
@@ -40,11 +29,10 @@ function createWindow() {
 
     if (isDev) {
         win.webContents.openDevTools();
-
  
-    installExtension(REDUX_DEVTOOLS)
-    .then((name) => console.log(`Added Extension:  ${name}`))
-    .catch((err) => console.log('An error occurred: ', err));
+        installExtension(REDUX_DEVTOOLS)
+        .then((name) => console.log(`Added Extension:  ${name}`))
+        .catch((err) => console.log('An error occurred: ', err));
     }
     
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
@@ -53,12 +41,6 @@ function createWindow() {
         slashes: true,
         hash: 'baz',
     }));
-
-    // if (isDev) {
-    //     console.log('Running in development');
-    // } else {
-    //     console.log('Running in production');
-    // }
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import App from './components/App';
 
 import { HashRouter } from 'react-router-dom';
@@ -13,23 +13,43 @@ const path = window.require('path');
 let dbPath;
 const isDev = window.require('electron-is-dev');
 
-//TODO:Handle DEV/PROD database path discrepency
 if (isDev) {
     console.log("DEV MODE");
     dbPath = path.resolve('./public/data/database/DnDCS.db');
+    console.log(dbPath);
 }
 
-//TODO: Fix path to allow for installed instance
 else {
     console.log("PROD MODE");
-    dbPath = path.resolve('./../../public/data/database/DnDCS.db');
+    dbPath = path.resolve('./resources/app/public/data/database/DnDCS.db');
+    console.log(dbPath);
 }
 
-// const store = createStore();
+function reducer(state, action) {
+    switch (action.type) {
+        case "getDBPath":
+            return action.payload.dbPath;
+    }
+}
 
-ReactDOM.render(
+const action = {
+    type: "getDBPath",
+    payload: {
+        dbPath: dbPath
+    }
+}
+
+const store = createStore(reducer);
+
+store.dispatch(action);
+
+console.log(store.getState());
+
+render(
+    <Provider store={store}>
         <HashRouter>
-            <App/>
+            <App dbPath={dbPath}/>
         </HashRouter>
+    </Provider>
     , document.getElementById('root')
 );

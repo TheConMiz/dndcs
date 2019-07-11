@@ -2,9 +2,11 @@
 
 import React from 'react';
 
-import { Button, MenuItem} from '@blueprintjs/core';
+import { Button, MenuItem, Menu} from '@blueprintjs/core';
 
 import { Select } from '@blueprintjs/select';
+
+import Fuse from 'fuse.js';
 
 class SelectionMenu extends React.Component {
     constructor(props) {
@@ -13,11 +15,14 @@ class SelectionMenu extends React.Component {
             mode: "Race",
             tableName: "",
             itemsList: [],
-            currentSelection: ""
+            subItemsList: [],
+            currentSelection: "",
+            currentSubSelection: ""
         }
+
     }
 
-    connectToDB = () => {
+    componentDidMount = () => {
         // Establish connection with database
         const knex = window.require('knex')({
             client: "sqlite3",
@@ -28,21 +33,41 @@ class SelectionMenu extends React.Component {
             debug: true
         });
 
-        let result = knex.select(["name", "index"]).from("Races").orderBy("name", 'asc');
-        result.then((rows) => {
+        let dbQuery = knex.select(["name", "index", "raceID"]).from("Subraces").orderBy("name", 'asc');
+        dbQuery.then((rows) => {
+            this.setState({ subItemsList: rows });
+        });
+
+        dbQuery = knex.select(["name", "index"]).from("Races").orderBy("name", 'asc');
+        dbQuery.then((rows) => {
             this.setState({ itemsList: rows });
         });
     }
 
     renderItems = (item, { handleClick, modifiers }) => {
         const { name } = item;
+        let options = {
+            keys: ["raceID"]
+        }
+        
+        let fuse = new Fuse(this.state.subItemsList, options);
+
+        let results = fuse.search(item.index.toString());
+
         return (
             <MenuItem
                 text={name}
                 onClick={handleClick}
                 active={modifiers.active}
                 fill={true}
-            />
+            >
+                {results.length === 0 ? null : results.map(item => (
+                    <MenuItem
+                        text={item.name}
+                        onClick={handleClick}
+                        fill={true}
+                    />))}
+            </MenuItem>
         );
     }
 
@@ -52,7 +77,7 @@ class SelectionMenu extends React.Component {
 
     setCurrentItem = selectedItem => {
         const parsedItem = JSON.stringify(selectedItem);
-        this.setState({ currentSelection: parsedItem });
+        this.setState({ currentSelection: parsedItem, mainItemSelected: true });
     }
 
     compareItems = (item1, item2) => {
@@ -75,6 +100,7 @@ class SelectionMenu extends React.Component {
     //     }
     // }
 
+
     render() {
         
         return (
@@ -84,20 +110,18 @@ class SelectionMenu extends React.Component {
                 resetOnQuery={true}
                 scrollToActiveItem={true}
                 items={this.state.itemsList}
-                // itemListRenderer={this.renderMenu}
                 itemRenderer={this.renderItems}
                 noResults={<MenuItem disabled={true} text="No results..." />}
                 itemPredicate={this.filterItem}
                 itemsEqual={this.compareItems}
                 onItemSelect={this.setCurrentItem}
                 activeItem={this.state.currentSelection === "" ? null : JSON.parse(this.state.currentSelection)}
-                // onActiveItemChange={this.keyboardChangeRace}
             >
                 <Button
                     rightIcon="caret-down"
                     autoFocus={false}
                     fill={true}
-                    style={{ width: '150px' }}
+                    style={{ width: '130px' }}
                     alignText='left'
                 >
                     {this.state.currentSelection === "" ? this.state.mode : JSON.parse(this.state.currentSelection).name}

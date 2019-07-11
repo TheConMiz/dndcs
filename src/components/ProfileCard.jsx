@@ -22,7 +22,7 @@ class ProfileCard extends React.Component {
                 elevation={Elevation.ZERO}
                 style={{ width: '25em', height: "9em" }}
             >
-                <SelectionMenu/>
+                <SelectionMenu dbPath={this.props.dbPath}/>
             </Card>
             
         );
