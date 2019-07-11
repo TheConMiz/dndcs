@@ -17,6 +17,7 @@ class SelectionMenu extends React.Component {
         super(props);
         this.state = {
             mode: "Race",
+            tableName: "",
             itemsList: [],
             subItemsList: [],
             currentSelection: {
@@ -24,19 +25,7 @@ class SelectionMenu extends React.Component {
                 subItem: ""
             },
             fuseOptions: {
-                shouldSort: true,
-                tokenize: true,
-                matchAllTokens: true,
-                findAllMatches: true,
-                includeScore: true,
-                threshold: 0.2,
-                location: 0,
-                distance: 30,
-                maxPatternLength: 30,
-                minMatchCharLength: 1,
-                keys: [
-                    "title"
-                ]
+                keys: ["name"]
             }
         }
 
@@ -52,6 +41,8 @@ class SelectionMenu extends React.Component {
             useNullAsDefault: true,
             debug: true
         });
+
+        
 
         let dbQuery = knex.select(["name", "index", "raceID"]).from("Subraces").orderBy("name", 'asc');
         dbQuery.then((rows) => {
