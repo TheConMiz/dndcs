@@ -2,44 +2,23 @@
 
 import React from 'react';
 
-import { Button, MenuItem, Menu, Popover, InputGroup} from '@blueprintjs/core';
+import { Button, MenuItem, Menu } from '@blueprintjs/core';
 
 import { Select } from '@blueprintjs/select';
 
 import Fuse from 'fuse.js';
-
-// TODO: Remake Button with Sub-races
-// TODO: Better Fuse Search Controls
-
 
 class SelectionMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             mode: "Race",
+            tableName: "",
             itemsList: [],
             subItemsList: [],
-            currentSelection: {
-                item: "",
-                subItem: ""
-            },
-            fuseOptions: {
-                shouldSort: true,
-                tokenize: true,
-                matchAllTokens: true,
-                findAllMatches: true,
-                includeScore: true,
-                threshold: 0.2,
-                location: 0,
-                distance: 30,
-                maxPatternLength: 30,
-                minMatchCharLength: 1,
-                keys: [
-                    "title"
-                ]
-            }
+            currentSelection: "",
+            currentSubSelection: ""
         }
-
     }
 
     componentDidMount = () => {
@@ -66,8 +45,12 @@ class SelectionMenu extends React.Component {
 
     renderItems = (item, { handleClick, modifiers }) => {
         const { name } = item;
-        
-        let fuse = new Fuse(this.state.subItemsList, this.state.fuseOptions);
+        let options = {
+            keys: ["raceID"]
+        }
+
+        let fuse = new Fuse(this.state.subItemsList, options);
+
         let results = fuse.search(item.index.toString());
 
         return (
@@ -80,23 +63,28 @@ class SelectionMenu extends React.Component {
                 {results.length === 0 ? null : results.map(item => (
                     <MenuItem
                         text={item.name}
-                        onClick={handleClick}
+                        key={item.index}
+                        onClick={() => {
+                            const temp = this.state.subItemsList.filter(items => {
+                                return items.name === event.target.innerHTML
+                            })
+                            
+                            const result = temp[0];
+                            this.setState({ currentSubSelection: JSON.stringify(result) });
+                        }}
                         fill={true}
                     />))}
             </MenuItem>
         );
     }
 
-    // TODO: Edit to include Sub-menu
     filterItem = (query, item) => {
         return item.name.toLowerCase().indexOf(query.toLowerCase()) >= 0;
     }
 
-    // TODO: EDIT to include sub-menu
     setCurrentItem = selectedItem => {
-        console.log(selectedItem);
         const parsedItem = JSON.stringify(selectedItem);
-        this.setState({ currentSelection: parsedItem });
+        this.setState({ currentSelection: parsedItem, mainItemSelected: true });
     }
 
     compareItems = (item1, item2) => {
@@ -104,11 +92,11 @@ class SelectionMenu extends React.Component {
     }
 
     // keyboardChangeItem = (newItem) => {
-        // TODO: Missing Arrow Controls
-        // TODO: Active item is automatically set to whatever is first on the list. this is bad.
-        // TODO: While scrolling, leave previously chosen item as is until it is selected
-        // TODO: On arrow click menu moves ==> due to gridbox?
-        
+    // TODO: Missing Arrow Controls
+    // TODO: Active item is automatically set to whatever is first on the list. this is bad.
+    // TODO: While scrolling, leave previously chosen item as is until it is selected
+    // TODO: On arrow click menu moves ==> due to gridbox?
+
     //     if (newItem !== null) {
     //         const parsedItem = JSON.stringify(newItem);
     //         this.setState({ currentSelection: parsedItem });
@@ -119,52 +107,38 @@ class SelectionMenu extends React.Component {
     //     }
     // }
 
-    testText = (event) => {
-        //console.log(event.target.value);
-        let fuse = new Fuse(this.state.itemsList, this.state.fuseOptions);
-        console.log(this.state.itemsList);
-        let results = fuse.search(event.target.value.toString());
-
-        console.log(results);
-    }
 
     render() {
-        
-        return (
-            <Popover content={<Menu><InputGroup onChange={this.testText}/><MenuItem text="sd"/></Menu>}>
-                <Button
 
+        return (
+
+            <Select
+                resetOnClose={true}
+                resetOnQuery={true}
+                scrollToActiveItem={true}
+                items={this.state.itemsList}
+                itemRenderer={this.renderItems}
+                noResults={<MenuItem disabled={true} text="No results..." />}
+                itemPredicate={this.filterItem}
+                itemsEqual={this.compareItems}
+                onItemSelect={this.setCurrentItem}
+                activeItem={this.state.currentSelection === "" ? null : JSON.parse(this.state.currentSelection)}
+            >
+                <Button
+                    rightIcon="caret-down"
+                    autoFocus={false}
+                    fill={true}
+                    style={{ width: '130px' }}
+                    alignText='left'
                 >
-                    Race
+                    {() => {
+                        //TODO: Fix Selection
+                        if (this.state.currentSelection === "") {
+                            return this.state.mode
+                        }
+                    }}
                 </Button>
-            </Popover>
-            // <Select
-            //     resetOnClose={true}
-            //     resetOnQuery={true}
-            //     scrollToActiveItem={true}
-            //     items={this.state.itemsList}
-            //     itemRenderer={this.renderItems}
-            //     noResults={<MenuItem disabled={true} text="No results..." />}
-            //     itemPredicate={this.filterItem}
-            //     itemsEqual={this.compareItems}
-            //     onItemSelect={this.setCurrentItem}
-            //     // activeItem={
-            //     //     this.state.currentSelection.item === "" ? null :
-                        
-            //     //         JSON.parse(this.state.currentSelection)
-            //     // }
-            // >
-            //     <Button
-            //         rightIcon="caret-down"
-            //         autoFocus={false}
-            //         fill={true}
-            //         style={{ width: '130px' }}
-            //         alignText='left'
-            //     >
-            //         Race
-            //         {/* {this.state.currentSelection === "" ? this.state.mode : JSON.parse(this.state.currentSelection).name} */}
-            //     </Button>
-            // </Select>
+            </Select>
         );
     }
 }
