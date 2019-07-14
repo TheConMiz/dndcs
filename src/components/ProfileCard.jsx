@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Elevation} from '@blueprintjs/core';
+import { Card, Elevation, InputGroup,  } from '@blueprintjs/core';
 
 import SelectionMenu from './SelectionMenu';
 
@@ -8,11 +8,9 @@ class ProfileCard extends React.Component {
         super(props);
 
         this.state = {
+            playerName: "",
+            charName: ""
         }
-    }
-
-    componentDidMount = () => {
-
     }
 
     render() {
@@ -21,6 +19,22 @@ class ProfileCard extends React.Component {
                 interactive={false}
                 elevation={Elevation.ZERO}
             >
+                <InputGroup
+                    intent={this.state.charName === "" ? "warning" : "success"}
+                    placeholder="Character Name"
+                    leftIcon="person"
+                    onChange={() => {
+                        this.setState({ charName: event.target.value });
+                    }}
+                />
+                <InputGroup
+                    intent={this.state.playerName === "" ? "warning" : "success"}
+                    placeholder="Player Name"
+                    leftIcon="person"
+                    onChange={() => {
+                        this.setState({ playerName: event.target.value });
+                    }}
+                />
                 <SelectionMenu dbPath={this.props.dbPath} />
             </Card>            
         );
