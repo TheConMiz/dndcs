@@ -20,11 +20,9 @@ class ProfileCard extends React.Component {
             <Card
                 interactive={false}
                 elevation={Elevation.ZERO}
-                style={{ width: '25em', height: "9em" }}
             >
-                <SelectionMenu dbPath={this.props.dbPath}/>
-            </Card>
-            
+                <SelectionMenu dbPath={this.props.dbPath} />
+            </Card>            
         );
     }
 }

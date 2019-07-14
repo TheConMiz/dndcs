@@ -1,0 +1,5 @@
+.selectionMenu {
+    height: 300px;
+    width: 250px;
+    overflow: auto;
+}

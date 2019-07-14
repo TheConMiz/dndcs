@@ -2,22 +2,20 @@
 
 import React from 'react';
 
-import { Button, MenuItem, Menu } from '@blueprintjs/core';
+import { Button, MenuItem, Menu} from '@blueprintjs/core';
 
 import { Select } from '@blueprintjs/select';
+import { POSITION_BOTTOM } from '@blueprintjs/core/lib/esm/common/classes';
 
-import Fuse from 'fuse.js';
+import './css/selectionMenu.css';
 
 class SelectionMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            mode: "Race",
-            tableName: "",
             itemsList: [],
-            subItemsList: [],
             currentSelection: "",
-            currentSubSelection: ""
+            buttonName: ""
         }
     }
 
@@ -32,86 +30,84 @@ class SelectionMenu extends React.Component {
             debug: true
         });
 
-        let dbQuery = knex.select(["name", "index", "raceID"]).from("Subraces").orderBy("name", 'asc');
-        dbQuery.then((rows) => {
-            this.setState({ subItemsList: rows });
-        });
-
-        dbQuery = knex.select(["name", "index"]).from("Races").orderBy("name", 'asc');
+        let dbQuery = knex({
+            sr: 'Subraces'
+        })
+            .select({
+                subraceName: 'sr.name',
+                subraceID: 'sr.index',
+                raceName: 'r.name',
+                raceID: 'r.index'
+            })
+            
+            .leftJoin({ r: 'Races' }, "r.index", "sr.raceID")
+            .union(knex.select([0, 0, "name", "index"]).from("Races"))
+            .orderBy("r.name", "asc");
+        
         dbQuery.then((rows) => {
             this.setState({ itemsList: rows });
         });
     }
 
     renderItems = (item, { handleClick, modifiers }) => {
-        const { name } = item;
-        let options = {
-            keys: ["raceID"]
-        }
-
-        let fuse = new Fuse(this.state.subItemsList, options);
-
-        let results = fuse.search(item.index.toString());
-
         return (
             <MenuItem
-                text={name}
+                text={
+                    item.subraceID === 0 ? item.raceName : item.raceName + ", " + item.subraceName
+                }
                 onClick={handleClick}
                 active={modifiers.active}
                 fill={true}
-            >
-                {results.length === 0 ? null : results.map(item => (
-                    <MenuItem
-                        text={item.name}
-                        key={item.index}
-                        onClick={() => {
-                            const temp = this.state.subItemsList.filter(items => {
-                                return items.name === event.target.innerHTML
-                            })
-                            
-                            const result = temp[0];
-                            this.setState({ currentSubSelection: JSON.stringify(result) });
-                        }}
-                        fill={true}
-                    />))}
-            </MenuItem>
+            />            
         );
     }
 
     filterItem = (query, item) => {
-        return item.name.toLowerCase().indexOf(query.toLowerCase()) >= 0;
+        return (
+            item.raceName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
+            item.subraceName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0
+        );
     }
 
     setCurrentItem = selectedItem => {
+        let tempString = "";
+        if (selectedItem.subraceID === 0) {
+            tempString = selectedItem.raceName;
+        }
+        else {
+            tempString = selectedItem.raceName + ", " + selectedItem.subraceName;
+        }
+
         const parsedItem = JSON.stringify(selectedItem);
-        this.setState({ currentSelection: parsedItem, mainItemSelected: true });
+        this.setState({
+            currentSelection: parsedItem,
+            buttonName: tempString
+        });
     }
 
     compareItems = (item1, item2) => {
-        return item1.name.toLowerCase() === item2.name.toLowerCase();
+        return item1.raceName.toString().toLowerCase() === item2.raceName.toString().toLowerCase() && item1.subraceName.toString().toLowerCase() === item2.subraceName.toString().toLowerCase()
     }
 
-    // keyboardChangeItem = (newItem) => {
+    keyboardControls = (newItem) => {
     // TODO: Missing Arrow Controls
     // TODO: Active item is automatically set to whatever is first on the list. this is bad.
     // TODO: While scrolling, leave previously chosen item as is until it is selected
-    // TODO: On arrow click menu moves ==> due to gridbox?
+        //console.log(newItem);
+        
+        // if (newItem !== null) {
+        //     const parsedItem = JSON.stringify(newItem);
+        //     this.setState({ currentSelection: parsedItem });
+        //     console.log(this.state.currentSelection)
+        // }
 
-    //     if (newItem !== null) {
-    //         const parsedItem = JSON.stringify(newItem);
-    //         this.setState({ currentSelection: parsedItem });
-    //     }
-
-    //     else if (newItem === null) {
-    //         this.setState({ currentSelection: "" });
-    //     }
-    // }
-
+        // else {
+        //     return
+        // }
+    }
 
     render() {
-
         return (
-
             <Select
                 resetOnClose={true}
                 resetOnQuery={true}
@@ -123,20 +119,20 @@ class SelectionMenu extends React.Component {
                 itemsEqual={this.compareItems}
                 onItemSelect={this.setCurrentItem}
                 activeItem={this.state.currentSelection === "" ? null : JSON.parse(this.state.currentSelection)}
+                onQueryChange={this.keyboardControls}
+                popoverProps={{ inheritDarkTheme: false, popoverClassName: "selectionMenu" }}
+                // onActiveItemChange={this.keyboardControls}
             >
                 <Button
                     rightIcon="caret-down"
                     autoFocus={false}
                     fill={true}
-                    style={{ width: '130px' }}
+                    style={{ width: '175px' }}
                     alignText='left'
                 >
-                    {() => {
-                        //TODO: Fix Selection
-                        if (this.state.currentSelection === "") {
-                            return this.state.mode
-                        }
-                    }}
+                    {
+                        this.state.buttonName === "" ? "Race" : this.state.buttonName
+                    }
                 </Button>
             </Select>
         );

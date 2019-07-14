@@ -21,35 +21,35 @@ if (isDev) {
 
 else {
     console.log("PROD MODE");
-    dbPath = path.resolve('./resources/app/public/data/database/DnDCS.db');
+    dbPath = path.resolve('./resources/app.asar.unpacked/public/data/database/DnDCS.db');
     console.log(dbPath);
 }
 
-function reducer(state, action) {
-    switch (action.type) {
-        case "getDBPath":
-            return action.payload.dbPath;
-    }
-}
+// function reducer(state, action) {
+//     switch (action.type) {
+//         case "getDBPath":
+//             return action.payload.dbPath;
+//     }
+// }
 
-const action = {
-    type: "getDBPath",
-    payload: {
-        dbPath: dbPath
-    }
-}
+// const action = {
+//     type: "getDBPath",
+//     payload: {
+//         dbPath: dbPath
+//     }
+// }
 
-const store = createStore(reducer);
+// const store = createStore(reducer);
 
-store.dispatch(action);
+// store.dispatch(action);
 
-console.log(store.getState());
+// console.log(store.getState());
 
 render(
-    <Provider store={store}>
+
         <HashRouter>
-            <App dbPath={dbPath}/>
+        <App dbPath={dbPath}/>
         </HashRouter>
-    </Provider>
+    
     , document.getElementById('root')
 );
