@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Elevation, InputGroup,  } from '@blueprintjs/core';
 
 import SelectionMenu from './SelectionMenu';
+import MainStats from './MainStats';
 
 class ProfileCard extends React.Component {
     constructor(props) {
@@ -36,7 +37,10 @@ class ProfileCard extends React.Component {
                             this.setState({ playerName: event.target.value });
                         }}
                     />
-                    <SelectionMenu dbPath={this.props.dbPath} />
+                    <SelectionMenu dbPath={this.props.dbPath} mode="Race"/>
+                    <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
+                    
+                    <MainStats dbPath={this.props.dbPath}/>
                 </div>
             </Card>            
         );

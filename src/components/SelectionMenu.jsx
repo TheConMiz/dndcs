@@ -13,6 +13,7 @@ class SelectionMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            mode: this.props.mode,
             itemsList: [],
             currentSelection: "",
             buttonName: ""
@@ -30,63 +31,129 @@ class SelectionMenu extends React.Component {
             debug: true
         });
 
-        let dbQuery = knex({
-            sr: 'Subraces'
-        })
-            .select({
-                subraceName: 'sr.name',
-                subraceID: 'sr.index',
-                raceName: 'r.name',
-                raceID: 'r.index'
-            })
-            
-            .leftJoin({ r: 'Races' }, "r.index", "sr.raceID")
-            .union(knex.select([0, 0, "name", "index"]).from("Races"))
-            .orderBy("r.name", "asc");
-        
-        dbQuery.then((rows) => {
+        let dbQuery;
+
+        if (this.state.mode === "Race") {
+            dbQuery =
+                knex({
+                    sr: 'Subraces'
+                })
+                .select({
+                    subraceName: 'sr.name',
+                    subraceID: 'sr.index',
+                    raceName: 'r.name',
+                    raceID: 'r.index'
+                })
+
+                .leftJoin({ r: 'Races' }, "r.index", "sr.raceID")
+                .union(knex.select([0, 0, "name", "index"]).from("Races"))
+                .orderBy("r.name", "asc");
+
+            dbQuery.then((rows) => {
+                this.setState({ itemsList: rows });
+            });
+        }
+
+        if (this.state.mode === "Background") {
+            dbQuery =
+                knex({
+                    bg: 'Backgrounds'
+                })
+                    .select({
+                        backgroundName: 'bg.name',
+                        backgroundID: 'bg.index',
+                    })
+                    .orderBy('bg.name', 'asc');
+
+            dbQuery.then((rows) => {
             this.setState({ itemsList: rows });
         });
+        }
     }
 
     renderItems = (item, { handleClick, modifiers }) => {
-        return (
-            <MenuItem
-                text={
-                    item.subraceID === 0 ? item.raceName : item.raceName + ", " + item.subraceName
-                }
-                onClick={handleClick}
-                active={modifiers.active}
-                fill={true}
-            />            
-        );
+        if (this.state.mode === "Race") {
+            return (
+                <MenuItem
+                    text={
+                        item.subraceID === 0 ? item.raceName : item.raceName + ", " + item.subraceName
+                    }
+                    onClick={handleClick}
+                    active={modifiers.active}
+                    fill={true}
+                />
+            );   
+        }
+
+        if (this.state.mode === "Background") {
+            return (
+                <MenuItem
+                    text={
+                        item.backgroundName
+                    }
+                    onClick={handleClick}
+                    active={modifiers.active}
+                    fill={true}
+                />
+            );
+        }
+
     }
 
     filterItem = (query, item) => {
-        return (
-            item.raceName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
-            item.subraceName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0
-        );
+        if (this.state.mode === "Race") {
+            return (
+                item.raceName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
+                item.subraceName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0
+            ); 
+        }
+
+        if (this.state.mode === "Background") {
+            return (
+                item.backgroundName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0
+            );
+        }
     }
 
     setCurrentItem = selectedItem => {
         let tempString = "";
-        if (selectedItem.subraceID === 0) {
-            tempString = selectedItem.raceName;
-        }
-        else {
-            tempString = selectedItem.raceName + ", " + selectedItem.subraceName;
-        }
 
-        const parsedItem = JSON.stringify(selectedItem);
-        this.setState({
-            currentSelection: parsedItem,
-            buttonName: tempString
-        });
+        if (this.state.mode === "Race") {
+            if (selectedItem.subraceID === 0) {
+                tempString = selectedItem.raceName;
+            }
+            else {
+                tempString = selectedItem.raceName + ", " + selectedItem.subraceName;
+            }
+
+            const parsedItem = JSON.stringify(selectedItem);
+            this.setState({
+                currentSelection: parsedItem,
+                buttonName: tempString
+            });
+        }
+        
+        if (this.state.mode === "Background") {
+            tempString = selectedItem.backgroundName;
+
+            const parsedItem = JSON.stringify(selectedItem);
+            this.setState({
+                currentSelection: parsedItem,
+                buttonName: tempString
+            });
+        }
     }
 
     compareItems = (item1, item2) => {
-        return item1.raceName.toString().toLowerCase() === item2.raceName.toString().toLowerCase() && item1.subraceName.toString().toLowerCase() === item2.subraceName.toString().toLowerCase()
+        // TODO: improve search to handle more cases ==> blue dragonborn has no results, when it should have 1
+        if (this.state.mode === "Race") {
+            return item1.raceName.toString().toLowerCase() === item2.raceName.toString().toLowerCase() && item1.subraceName.toString().toLowerCase() === item2.subraceName.toString().toLowerCase()
+        }
+
+        if (this.state.mode === "Background") {
+            return item1.backgroundName.toString().toLowerCase() === item2.backgroundName.toString().toLowerCase()
+        }
+        
     }
 
     keyboardControls = (newItem) => {
@@ -131,7 +198,7 @@ class SelectionMenu extends React.Component {
                     alignText='left'
                 >
                     {
-                        this.state.buttonName === "" ? "Race" : this.state.buttonName
+                        this.state.buttonName === "" ? this.state.mode : this.state.buttonName
                     }
                 </Button>
             </Select>
