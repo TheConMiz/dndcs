@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Elevation, InputGroup,  } from '@blueprintjs/core';
+import { Card, Elevation, InputGroup, Divider } from '@blueprintjs/core';
 
 import SelectionMenu from './SelectionMenu';
 import MainStats from './MainStats';
@@ -19,28 +19,52 @@ class ProfileCard extends React.Component {
             <Card
                 interactive={false}
                 elevation={Elevation.ZERO}
+                style={{width: '700px'}}
             >
-                <div>
-                    <InputGroup
-                        intent={this.state.charName === "" ? "warning" : "success"}
-                        placeholder="Character Name"
-                        leftIcon="person"
-                        onChange={() => {
-                            this.setState({ charName: event.target.value });
-                        }}
-                    />
-                    <InputGroup
-                        intent={this.state.playerName === "" ? "warning" : "success"}
-                        placeholder="Player Name"
-                        leftIcon="person"
-                        onChange={() => {
-                            this.setState({ playerName: event.target.value });
-                        }}
-                    />
-                    <SelectionMenu dbPath={this.props.dbPath} mode="Race"/>
-                    <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
-                    
-                    <MainStats dbPath={this.props.dbPath}/>
+                <div style={{ display: 'grid' }}>
+                    <div style={{display: 'flex'}}>
+                        
+
+                        <div>
+                            <Card
+                                elevation={Elevation.FOUR}
+                                interactive={true}
+                                style={{width: '300px', height: '240px'}}
+                            />
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                            <InputGroup
+                                intent={this.state.charName === "" ? "warning" : "success"}
+                                placeholder="Character Name"
+                                leftIcon="person"
+                                onChange={() => {
+                                    this.setState({ charName: event.target.value });
+                                }}
+                                style={{ width: '175px' }}
+                            />
+                            <InputGroup
+                                intent={this.state.playerName === "" ? "warning" : "success"}
+                                placeholder="Player Name"
+                                leftIcon="person"
+                                onChange={() => {
+                                    this.setState({ playerName: event.target.value });
+                                }}
+                                style={{ width: '175px' }}
+                            />
+                            <SelectionMenu dbPath={this.props.dbPath} mode="Race" />
+                            <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
+                        </div>
+                    </div>
+                    <div>
+                        <Card
+                            elevation={Elevation.FOUR}
+                            interactive={true}
+                            style={{ height: '50px' }}
+                        >
+                            <Divider/>
+                        </Card>
+                    </div>
                 </div>
             </Card>            
         );

@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileCard from './ProfileCard';
+import MainStats from './MainStats';
 
 class CharPage extends React.Component {
     
@@ -14,7 +15,11 @@ class CharPage extends React.Component {
 
     render() {
         return (
-            <ProfileCard dbPath={this.props.dbPath}/>
+            <div>
+                <ProfileCard dbPath={this.props.dbPath} />
+                <MainStats dbPath={this.props.dbPath} />
+            </div>
+            
         );
     }
 }

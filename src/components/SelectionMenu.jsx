@@ -145,6 +145,7 @@ class SelectionMenu extends React.Component {
     }
 
     compareItems = (item1, item2) => {
+        // console.log(item1, item2);
         // TODO: improve search to handle more cases ==> blue dragonborn has no results, when it should have 1
         if (this.state.mode === "Race") {
             return item1.raceName.toString().toLowerCase() === item2.raceName.toString().toLowerCase() && item1.subraceName.toString().toLowerCase() === item2.subraceName.toString().toLowerCase()

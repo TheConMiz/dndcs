@@ -42,36 +42,39 @@ class MainStats extends React.Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    {this.state.abilityScores.length === 0 ? '' : (this.state.abilityScores.map(item => {
-                        return (
-                            <Tooltip
-                                content={item.aSDesc}
+            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '700px'}}>
+                {this.state.abilityScores.length === 0 ? '' : (this.state.abilityScores.map(item => {
+                    return (
+                        
+                        <Tooltip
+                            content={item.aSDesc}
+                            inheritDarkTheme={false}
+                            intent="success"                        
+                        >
+                            <Card
+                                interactive={true}
+                                elevation={Elevation.FOUR}
+                                style={{width: '100px', height: '120px'}}
                             >
-                                <Card
-                                    interactive={true}
-                                    elevation={Elevation.TWO}
-                                >
-                                    <div>
-                                        <h3 className="bp3-heading">
-                                            {item.aSAbbr}
-                                        </h3>
+                                <div>
+                                    <h3 className="bp3-heading">
+                                        {item.aSAbbr}
+                                    </h3>
 
-                                        <h5 className="bp3-heading">
-                                            10
-                                        </h5>
-                                        <Divider />
-                                        <h5 className="bp3-heading">
-                                            +1
-                                        </h5>
-                                    </div>
-                                    
-                                </Card>  
-                            </Tooltip> 
-                        );
-                    }))}
-                </div>
+                                    <h5 className="bp3-heading">
+                                        10
+                                    </h5>
+                                    <Divider />
+                                    <h5 className="bp3-heading">
+                                        +1
+                                    </h5>
+                                </div>
+                            </Card>
+                        </Tooltip>
+                        
+                        
+                    );
+                }))}
             </div>
         );
     }
