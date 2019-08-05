@@ -2,6 +2,7 @@ import React from 'react';
 
 import '@blueprintjs/core/lib/css/blueprint.css';
 import CharPage from './CharPage';
+import SideBar from './SideBar';
 
 class App extends React.Component {
     constructor(props) {
@@ -13,7 +14,11 @@ class App extends React.Component {
     render() {
         return (
             <div className="bp3-dark">
-                <CharPage dbPath={this.props.dbPath} />
+                <div style={{margin: '100px'}}>
+                    <CharPage dbPath={this.props.dbPath} />
+                </div>
+                
+                <SideBar/>
             </div>
         );
     }

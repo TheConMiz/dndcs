@@ -4,6 +4,8 @@ import { Card, Elevation, InputGroup, Divider } from '@blueprintjs/core';
 import SelectionMenu from './SelectionMenu';
 import MainStats from './MainStats';
 
+import { Image } from 'semantic-ui-react';
+
 class ProfileCard extends React.Component {
     constructor(props) {
         super(props);
@@ -30,7 +32,9 @@ class ProfileCard extends React.Component {
                                 elevation={Elevation.FOUR}
                                 interactive={true}
                                 style={{width: '300px', height: '240px'}}
-                            />
+                            >
+                                <Image fluid rounded/>
+                            </Card>
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
