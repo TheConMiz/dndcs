@@ -17,7 +17,7 @@ class CharPage extends React.Component {
         return (
             <div>
                 <ProfileCard dbPath={this.props.dbPath} />
-                <MainStats dbPath={this.props.dbPath} />
+                {/* <MainStats dbPath={this.props.dbPath} /> */}
             </div>
             
         );

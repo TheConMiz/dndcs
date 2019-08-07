@@ -2,7 +2,9 @@ import React from 'react';
 
 import '@blueprintjs/core/lib/css/blueprint.css';
 import CharPage from './CharPage';
-import SideBar from './SideBar';
+
+import { Pane } from 'evergreen-ui';
+import SelectionMenu from './SelectionMenu';
 
 class App extends React.Component {
     constructor(props) {
@@ -13,13 +15,10 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="bp3-dark">
-                <div style={{margin: '100px'}}>
-                    <CharPage dbPath={this.props.dbPath} />
-                </div>
-                
-                <SideBar/>
+            <div>
+                <CharPage dbPath={this.props.dbPath} />
             </div>
+                                  
         );
     }
 }

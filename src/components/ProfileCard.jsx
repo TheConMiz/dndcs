@@ -1,77 +1,67 @@
 import React from 'react';
-import { Card, Elevation, InputGroup, Divider } from '@blueprintjs/core';
+import { Pane, Card, Avatar, TextInputField } from 'evergreen-ui';
 
 import SelectionMenu from './SelectionMenu';
-import MainStats from './MainStats';
-
-import { Image } from 'semantic-ui-react';
+import ClassSelectionMenu from './ClassSelectionMenu';
 
 class ProfileCard extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            playerName: "",
-            charName: ""
+
         }
     }
 
     render() {
         return (
             <Card
-                interactive={false}
-                elevation={Elevation.ZERO}
-                style={{width: '700px'}}
+                height={500}
+                width={500}
+                background="tint1"
+                elevation={1}
+                display="flex"
+                alignItems="center"
+                justifyContent="space-evenly"
+                flexDirection="row"
             >
-                <div style={{ display: 'grid' }}>
-                    <div style={{display: 'flex'}}>
+                <Card
+                    display="flex"
+                    height="70%"
+                    width="50%"
+                    alignItems="center"
+                    justifyContent="space-evenly"
+                    flexDirection="column"
+                >
+                    <Avatar hashValue="id_124" name="Vishal Venkat" size={160} />
+                    <ClassSelectionMenu/>
+                    
+                </Card>
+                
+                <Card
+                    display="flex"
+                    height="70%"
+                    width="50%"
+                    alignItems="flex-start"
+                    justifyContent="space-between"
+                    flexDirection="column"
+                >
+                    <TextInputField
+                        isInvalid={true}
+                        placeholder="Character Name"
                         
+                    />
+                    <TextInputField
+                        isInvalid={true}
+                        placeholder="Player Name"
+                    />
+                    <SelectionMenu dbPath={this.props.dbPath} mode="Race" />
+                    <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
+                </Card>
 
-                        <div>
-                            <Card
-                                elevation={Elevation.FOUR}
-                                interactive={true}
-                                style={{width: '300px', height: '240px'}}
-                            >
-                                <Image fluid rounded/>
-                            </Card>
-                        </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                            <InputGroup
-                                intent={this.state.charName === "" ? "warning" : "success"}
-                                placeholder="Character Name"
-                                leftIcon="person"
-                                onChange={() => {
-                                    this.setState({ charName: event.target.value });
-                                }}
-                                style={{ width: '175px' }}
-                            />
-                            <InputGroup
-                                intent={this.state.playerName === "" ? "warning" : "success"}
-                                placeholder="Player Name"
-                                leftIcon="person"
-                                onChange={() => {
-                                    this.setState({ playerName: event.target.value });
-                                }}
-                                style={{ width: '175px' }}
-                            />
-                            <SelectionMenu dbPath={this.props.dbPath} mode="Race" />
-                            <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
-                        </div>
-                    </div>
-                    <div>
-                        <Card
-                            elevation={Elevation.FOUR}
-                            interactive={true}
-                            style={{ height: '50px' }}
-                        >
-                            <Divider/>
-                        </Card>
-                    </div>
-                </div>
-            </Card>            
-        );
+                
+                
+            </Card>
+        )
     }
 }
 

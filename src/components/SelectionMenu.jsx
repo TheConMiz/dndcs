@@ -2,12 +2,7 @@
 
 import React from 'react';
 
-import { Button, MenuItem, Menu} from '@blueprintjs/core';
-
-import { Select } from '@blueprintjs/select';
-import { POSITION_BOTTOM } from '@blueprintjs/core/lib/esm/common/classes';
-
-import './css/selectionMenu.css';
+import { SelectMenu,  Card, Pane, Text, IconButton, Button } from 'evergreen-ui';
 
 class SelectionMenu extends React.Component {
     constructor(props) {
@@ -15,8 +10,7 @@ class SelectionMenu extends React.Component {
         this.state = {
             mode: this.props.mode,
             itemsList: [],
-            currentSelection: "",
-            buttonName: ""
+            selected: null
         }
     }
 
@@ -50,6 +44,7 @@ class SelectionMenu extends React.Component {
                 .orderBy("r.name", "asc");
 
             dbQuery.then((rows) => {
+                console.log(rows);
                 this.setState({ itemsList: rows });
             });
         }
@@ -71,138 +66,75 @@ class SelectionMenu extends React.Component {
         }
     }
 
-    renderItems = (item, { handleClick, modifiers }) => {
-        if (this.state.mode === "Race") {
-            return (
-                <MenuItem
-                    text={
-                        item.subraceID === 0 ? item.raceName : item.raceName + ", " + item.subraceName
-                    }
-                    onClick={handleClick}
-                    active={modifiers.active}
-                    fill={true}
-                />
-            );   
-        }
-
-        if (this.state.mode === "Background") {
-            return (
-                <MenuItem
-                    text={
-                        item.backgroundName
-                    }
-                    onClick={handleClick}
-                    active={modifiers.active}
-                    fill={true}
-                />
-            );
-        }
-
-    }
-
-    filterItem = (query, item) => {
-        if (this.state.mode === "Race") {
-            return (
-                item.raceName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
-                item.subraceName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0
-            ); 
-        }
-
-        if (this.state.mode === "Background") {
-            return (
-                item.backgroundName.toString().toLowerCase().indexOf(query.toLowerCase()) >= 0
-            );
-        }
-    }
-
-    setCurrentItem = selectedItem => {
-        let tempString = "";
-
-        if (this.state.mode === "Race") {
-            if (selectedItem.subraceID === 0) {
-                tempString = selectedItem.raceName;
-            }
-            else {
-                tempString = selectedItem.raceName + ", " + selectedItem.subraceName;
-            }
-
-            const parsedItem = JSON.stringify(selectedItem);
-            this.setState({
-                currentSelection: parsedItem,
-                buttonName: tempString
-            });
-        }
-        
-        if (this.state.mode === "Background") {
-            tempString = selectedItem.backgroundName;
-
-            const parsedItem = JSON.stringify(selectedItem);
-            this.setState({
-                currentSelection: parsedItem,
-                buttonName: tempString
-            });
-        }
-    }
-
-    compareItems = (item1, item2) => {
-        // console.log(item1, item2);
-        // TODO: improve search to handle more cases ==> blue dragonborn has no results, when it should have 1
-        if (this.state.mode === "Race") {
-            return item1.raceName.toString().toLowerCase() === item2.raceName.toString().toLowerCase() && item1.subraceName.toString().toLowerCase() === item2.subraceName.toString().toLowerCase()
-        }
-
-        if (this.state.mode === "Background") {
-            return item1.backgroundName.toString().toLowerCase() === item2.backgroundName.toString().toLowerCase()
-        }
-        
-    }
-
-    keyboardControls = (newItem) => {
-    // TODO: Missing Arrow Controls
-    // TODO: Active item is automatically set to whatever is first on the list. this is bad.
-    // TODO: While scrolling, leave previously chosen item as is until it is selected
-        //console.log(newItem);
-        
-        // if (newItem !== null) {
-        //     const parsedItem = JSON.stringify(newItem);
-        //     this.setState({ currentSelection: parsedItem });
-        //     console.log(this.state.currentSelection)
-        // }
-
-        // else {
-        //     return
-        // }
+    clearData = () => {
+        this.setState({ selected: null });
     }
 
     render() {
-        return (
-            <Select
-                resetOnClose={true}
-                resetOnQuery={true}
-                scrollToActiveItem={true}
-                items={this.state.itemsList}
-                itemRenderer={this.renderItems}
-                noResults={<MenuItem disabled={true} text="No results..." />}
-                itemPredicate={this.filterItem}
-                itemsEqual={this.compareItems}
-                onItemSelect={this.setCurrentItem}
-                activeItem={this.state.currentSelection === "" ? null : JSON.parse(this.state.currentSelection)}
-                onQueryChange={this.keyboardControls}
-                popoverProps={{ inheritDarkTheme: false, popoverClassName: "selectionMenu" }}
-                // onActiveItemChange={this.keyboardControls}
+        return (      
+            <Pane
+                display="flex"
+                border="muted"
             >
-                <Button
-                    rightIcon="caret-down"
-                    autoFocus={false}
-                    fill={true}
-                    style={{ width: '175px' }}
-                    alignText='left'
-                >
-                    {
-                        this.state.buttonName === "" ? this.state.mode : this.state.buttonName
+                <SelectMenu
+                    title={"Select a " + this.state.mode}
+                    options={
+                        this.state.mode === "Race" ? 
+                        this.state.itemsList.map(label => ({
+                            label: label.subraceID === 0 ? label.raceName : label.raceName + ", " + label.subraceName, value: label
+                        }))
+                            :
+                        this.state.itemsList.map(label => ({
+                            label: label.backgroundName, value: label
+                        }))
                     }
-                </Button>
-            </Select>
+
+                    selected={this.state.selected}
+
+                    onSelect={item => {
+                        this.setState({ selected: item.value });
+                        //console.log(this.state.selected);
+                    }}
+
+                    emptyView={(
+                        <Card
+                            height="100%"
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                            background="tint2"
+                        >
+                            <Text
+                                size={300}
+                            >
+                                No Results
+                        </Text>
+                        </Card>
+                    )}
+
+                    closeOnSelect={true}
+                >
+                    <Button
+                        style={{ width: '150px' }}
+                        appearance="primary"
+                    >
+                        {
+                            this.state.mode === "Race" ? (
+                                this.state.selected === null ? "Race" : this.state.selected.subraceID === 0 ? this.state.selected.raceName : this.state.selected.raceName + ", " + this.state.selected.subraceName
+                            ) : 
+                            
+                            (this.state.selected === null ? "Background" : this.state.selected.backgroundName)
+                        }
+                    </Button>
+                </SelectMenu>
+                <IconButton
+                    appearance="minimal"
+                    icon="trash"
+                    intent="danger"
+                    onClick={this.clearData}
+                    disabled={this.state.selected === null ? true: false}
+                />  
+            </Pane>
         );
     }
 }
