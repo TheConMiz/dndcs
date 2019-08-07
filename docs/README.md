@@ -2,9 +2,34 @@
 
 ## Table of Contents
 
-1. **Development Logs**
-2. **Database Schema**
+1. **Versions**
+2. **Development Logs**
+3. **Database Schema**
 3. **To-Do's**
+
+## 0.1 - Proof-of-Concept
+
+### DEADLINE: ***30/08/2019***
+
+- Profile Card
+  - Race Menu
+  - Background Menu
+  - Character Name
+  - Player Name
+  - Player Avatar
+  - Class Picker
+  - Level Counter
+- Ability Score Cards
+  - Pop-over descriptions
+  - *Intent* based on Class prerequisites
+  - On-click Dialog for Modification
+- Skill Proficiency Table
+
+## 0.15 - Redux-Enabled
+
+- Load from / Save to JSON
+  - Player Attributes
+  - Application Preferences
 
 ## 5E-SRD
 
@@ -53,13 +78,13 @@ A list of things to do to establish a basic database.
   - [ ] Need to make them concise
 - [ ] Higher Level Effects
 - [ ] Range
-- [ ] Components (V, S, M)
+- [x] Components (V, S, M)
 - [ ] Materials
-- [ ] Ritual
+- [x] Ritual
 - [ ] Duration
-- [ ] Concentration
+- [x] Concentration
 - [ ] Casting Time
-- [ ] Level
-- [ ] School
+- [x] Level
+- [x] School
 - [ ] Classes
 - [ ] Subclasses

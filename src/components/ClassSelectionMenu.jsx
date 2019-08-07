@@ -27,7 +27,21 @@ class ClassSelectionMenu extends React.Component {
                         elevation={1}
                         width="100%"
                     >
-                        SD
+                        <SelectMenu>
+                            <Button>
+                                Class Selection
+                            </Button>
+                        </SelectMenu>
+                        <SelectMenu>
+                            <Button>
+                                Sub-Class Selection
+                            </Button>
+                        </SelectMenu>
+                        <IconButton
+                            appearance="minimal"
+                            icon="trash"
+                            intent="danger"
+                        />  
                     </Card>
                 </Dialog>
                 <Button
