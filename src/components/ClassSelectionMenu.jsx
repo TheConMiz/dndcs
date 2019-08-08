@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dialog, Pane, Button, Table, SelectMenu, IconButton, Card } from 'evergreen-ui';
+import { Dialog, Pane, Button, Table, SelectMenu, IconButton, Card, TextInput } from 'evergreen-ui';
 
 class ClassSelectionMenu extends React.Component {
     constructor() {
@@ -22,32 +22,35 @@ class ClassSelectionMenu extends React.Component {
                     preventBodyScrolling={true}
                     isShown={this.state.open}
                     title="Select Class(es)"
+                    hasFooter={false}
                 >
-                    <Card
-                        elevation={1}
+                    
+                    <Pane
+                        height={30}
                         width="100%"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="space-evenly"
                     >
                         <SelectMenu>
-                            <Button>
-                                Class Selection
-                            </Button>
+                            <Button>Class</Button>
                         </SelectMenu>
                         <SelectMenu>
-                            <Button>
-                                Sub-Class Selection
-                            </Button>
+                            <Button>Sub-Class</Button>
                         </SelectMenu>
-                        <IconButton
-                            appearance="minimal"
-                            icon="trash"
-                            intent="danger"
-                        />  
-                    </Card>
+                        <TextInput
+                            name="classLevel"
+                            placeholder="Level..."
+                        />
+                        <IconButton appearance="minimal" icon="trash" intent="danger" iconSize={18} />
+                    </Pane>
+
+
                 </Dialog>
                 <Button
                     onClick={this.toggleDialog}
                 >
-                    Classes
+                    Add Classes
                 </Button>
             </Pane>
         );
