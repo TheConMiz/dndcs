@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Card, Elevation, Tooltip, Divider } from '@blueprintjs/core';
+import { Divider } from '@blueprintjs/core';
+
+import { Checkbox, Text, Pane, Card, Tooltip } from 'evergreen-ui';
 
 class MainStats extends React.Component {
     constructor(props) {
@@ -25,57 +27,118 @@ class MainStats extends React.Component {
             knex({
                 aScore: 'AbilityScores'
             })
-            
-            .select({
-                aSName: 'aScore.name',
-                aSAbbr: 'aScore.abbr',
-                aSID: 'aScore.index',
-                aSDesc: 'aScore.desc'
-            })
-            .orderBy("aScore.index", 'asc');
-                
+
+                .select({
+                    aSName: 'aScore.name',
+                    aSAbbr: 'aScore.abbr',
+                    aSID: 'aScore.index',
+                    aSDesc: 'aScore.desc'
+                })
+                .orderBy("aScore.index", 'asc');
+
         dbQuery.then((rows) => {
             this.setState({ abilityScores: rows });
-            //console.log(this.state.abilityScores);
         });
     }
 
     render() {
         return (
-            <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '700px'}}>
-                {this.state.abilityScores.length === 0 ? '' : (this.state.abilityScores.map(item => {
-                    return (
-                        
-                        <Tooltip
-                            content={item.aSDesc}
-                            inheritDarkTheme={false}
-                            intent="success"                        
-                        >
-                            <Card
-                                interactive={true}
-                                elevation={Elevation.FOUR}
-                                style={{width: '100px', height: '120px'}}
-                            >
-                                <div>
-                                    <h3 className="bp3-heading">
-                                        {item.aSAbbr}
-                                    </h3>
+            <Card
+                background="tint1"
+                padding={12}
+                display="flex"
+                alignItems="center"
+                justifyContent="space-evenly"
+                flexDirection="column"
+                height={300}
+                width={500}
+                elevation={1}
+            >
+                <Pane
+                    flexDirection="row"
+                    display="flex"
+                    width="100%"
+                    alignItems="center"
+                    justifyContent="space-evenly"
+                >
 
-                                    <h5 className="bp3-heading">
-                                        10
-                                    </h5>
-                                    <Divider />
-                                    <h5 className="bp3-heading">
-                                        +1
-                                    </h5>
-                                </div>
-                            </Card>
-                        </Tooltip>
-                        
-                        
-                    );
-                }))}
-            </div>
+                    {this.state.abilityScores.length === 0 ? '' : (this.state.abilityScores.map((item, index) => {
+                        if (index < Math.floor(this.state.abilityScores.length / 2)) {
+                            return (
+                                <Tooltip
+                                    content={item.aSDesc}
+                                >
+                                    <Pane
+                                        background="redTint"
+                                        padding={8}
+                                        alignItems="center"
+                                        justifyContent="center"
+                                        hoverElevation={2}
+                                        width={120}
+                                        height={120}
+                                    >
+                                        <Text>
+                                            {item.aSAbbr}
+                                        </Text>
+
+                                        <Text>
+                                            10
+                                        </Text>
+
+                                        <Divider />
+
+                                        <Text>
+                                            +1
+                                        </Text>
+                                    </Pane>
+                                </Tooltip>
+                            );
+                        }
+                    }))}
+                </Pane>
+
+                <Pane
+                    flexDirection="row"
+                    display="flex"
+                    width="100%"
+                    alignItems="center"
+                    justifyContent="space-evenly"
+                >
+                    {this.state.abilityScores.length === 0 ? '' : (this.state.abilityScores.map((item, index) => {
+                        if (index >= Math.floor(this.state.abilityScores.length / 2)) {
+                            return (
+                                <Tooltip
+                                    content={item.aSDesc}
+                                >
+                                    <Pane
+                                        background="redTint"
+                                        padding={8}
+                                        alignItems="center"
+                                        justifyContent="center"
+                                        hoverElevation={2}
+                                        width={120}
+                                        height={120}
+                                    >
+                                        <Text>
+                                            {item.aSAbbr}
+                                        </Text>
+
+                                        <Text>
+                                            10
+                                        </Text>
+
+                                        <Divider />
+
+                                        <Text>
+                                            +1
+                                        </Text>
+                                    </Pane>
+                                </Tooltip>
+                            );
+                        }
+                    }))}
+                </Pane>
+            </Card>
         );
     }
 }
