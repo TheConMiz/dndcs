@@ -25,12 +25,12 @@ else {
     console.log(dbPath);
 }
 
-// function reducer(state, action) {
-//     switch (action.type) {
-//         case "getDBPath":
-//             return action.payload.dbPath;
-//     }
-// }
+function reducer(state, action) {
+    switch (action.type) {
+        case "getDBPath":
+            return action.payload.dbPath;
+    }
+}
 
 // const action = {
 //     type: "getDBPath",
@@ -39,7 +39,7 @@ else {
 //     }
 // }
 
-// const store = createStore(reducer);
+const store = createStore(reducer);
 
 // store.dispatch(action);
 

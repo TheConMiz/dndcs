@@ -3,9 +3,6 @@ import React from 'react';
 import '@blueprintjs/core/lib/css/blueprint.css';
 import CharPage from './CharPage';
 
-import { Pane } from 'evergreen-ui';
-import SelectionMenu from './SelectionMenu';
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -17,8 +14,7 @@ class App extends React.Component {
         return (
             <div>
                 <CharPage dbPath={this.props.dbPath} />
-            </div>
-                                  
+            </div>               
         );
     }
 }

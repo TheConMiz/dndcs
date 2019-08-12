@@ -44,7 +44,6 @@ class SelectionMenu extends React.Component {
                 .orderBy("r.name", "asc");
 
             dbQuery.then((rows) => {
-                console.log(rows);
                 this.setState({ itemsList: rows });
             });
         }
@@ -93,7 +92,6 @@ class SelectionMenu extends React.Component {
 
                     onSelect={item => {
                         this.setState({ selected: item.value });
-                        //console.log(this.state.selected);
                     }}
 
                     emptyView={(

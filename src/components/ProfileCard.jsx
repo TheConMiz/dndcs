@@ -1,8 +1,9 @@
 import React from 'react';
 import { Pane, Card, Avatar, TextInputField } from 'evergreen-ui';
 
-import SelectionMenu from './SelectionMenu';
-import ClassSelectionMenu from './ClassSelectionMenu';
+import SelectionMenu from './ProfileCard/SelectionMenu';
+import ClassSelectionMenu from './ProfileCard/ClassSelectionMenu';
+import NameField from './ProfileCard/NameField';
 
 class ProfileCard extends React.Component {
     constructor(props) {
@@ -32,8 +33,8 @@ class ProfileCard extends React.Component {
                     justifyContent="space-evenly"
                     flexDirection="column"
                 >
-                    <Avatar hashValue="id_124" name="Vishal Venkat" size={160} />
-                    <ClassSelectionMenu/>
+                    <Avatar name="Ankat" size={160} />
+                    <ClassSelectionMenu dbPath={this.props.dbPath}/>
                     
                 </Card>
                 
@@ -45,15 +46,9 @@ class ProfileCard extends React.Component {
                     justifyContent="space-between"
                     flexDirection="column"
                 >
-                    <TextInputField
-                        isInvalid={true}
-                        placeholder="Character Name"
-                        
-                    />
-                    <TextInputField
-                        isInvalid={true}
-                        placeholder="Player Name"
-                    />
+                    <NameField mode="Character"/>
+                    <NameField mode="Player"/>
+                    
                     <SelectionMenu dbPath={this.props.dbPath} mode="Race" />
                     <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
                 </Card>
