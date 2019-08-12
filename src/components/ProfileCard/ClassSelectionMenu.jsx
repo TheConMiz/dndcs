@@ -11,8 +11,8 @@ export default class ClassSelectionMenu extends React.Component {
         super();
 
         /*
-        *   selectedClasses.classValue stores the SelectMenu component that is chosen
-        *   selectedClasses.subClassValue stores the SelectMenu component that is chosen
+        * selectedClasses.classValue stores the SelectMenu component that is chosen
+        * selectedClasses.subClassValue stores the SelectMenu component that is chosen
         */
         this.state = {
             open: false,
