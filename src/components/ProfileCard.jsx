@@ -3,6 +3,7 @@ import { Pane, Card, Avatar, TextInputField } from 'evergreen-ui';
 
 import SelectionMenu from './ProfileCard/SelectionMenu';
 import ClassSelectionMenu from './ProfileCard/ClassSelectionMenu';
+import ClassDisplay from './ProfileCard/ClassDisplay';
 import NameField from './ProfileCard/NameField';
 
 class ProfileCard extends React.Component {
@@ -25,18 +26,19 @@ class ProfileCard extends React.Component {
                 justifyContent="space-evenly"
                 flexDirection="row"
             >
-                <Card
+                <Pane
                     display="flex"
                     height="70%"
                     width="50%"
                     alignItems="center"
-                    justifyContent="space-evenly"
+                    justifyContent="space-between"
                     flexDirection="column"
                 >
-                    <Avatar name="Ankat" size={160} />
-                    <ClassSelectionMenu dbPath={this.props.dbPath}/>
+                    <Avatar name="" size={160} />
+                    <ClassSelectionMenu dbPath={this.props.dbPath} />
+                    <ClassDisplay/>
                     
-                </Card>
+                </Pane>
                 
                 <Card
                     display="flex"
