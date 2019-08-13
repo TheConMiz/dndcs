@@ -4,9 +4,12 @@ import App from './components/App';
 
 import { HashRouter } from 'react-router-dom';
 
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 import { Provider } from 'react-redux';
+
+import characterReducer from './reducers/characterReducer';
+import appReducer from './reducers/appReducer';
 
 // Database Path variables
 const path = window.require('path');
@@ -16,40 +19,66 @@ const isDev = window.require('electron-is-dev');
 if (isDev) {
     console.log("DEV MODE");
     dbPath = path.resolve('./public/data/database/DnDCS.db');
-    console.log(dbPath);
+    // console.log(dbPath);
 }
 
 else {
     console.log("PROD MODE");
     dbPath = path.resolve('./resources/app.asar.unpacked/public/data/database/DnDCS.db');
-    console.log(dbPath);
+    // console.log(dbPath);
 }
 
-function reducer(state, action) {
-    switch (action.type) {
-        case "getDBPath":
-            return action.payload.dbPath;
+/**
+ * React Redux Segment
+ */
+
+
+
+
+const allReducers = combineReducers({
+    character: characterReducer,
+    app: appReducer
+})
+
+const store = createStore(
+    allReducers,
+    
+    {
+        character: [
+            {characterName: ""},
+            {playerName: ""}
+        ],
+        app: [
+            {dbPath: dbPath}
+        ]
+    },
+
+    window.devToolsExtension && window.devToolsExtension()
+);
+
+const charNameAction = {
+    type: "updateCharName",
+    payload: {
+        characterName: "Test Testerton"
     }
-}
+};
 
-// const action = {
-//     type: "getDBPath",
-//     payload: {
-//         dbPath: dbPath
-//     }
-// }
+store.dispatch(charNameAction);
 
-const store = createStore(reducer);
+console.log(store.getState());
 
-// store.dispatch(action);
+/**
+ * End of React Redux Segment
+ */
 
-// console.log(store.getState());
 
 render(
-
+    <Provider store={store}>
         <HashRouter>
-        <App dbPath={dbPath}/>
+            <App dbPath={dbPath}/>
         </HashRouter>
+    </Provider>
+        
     
     , document.getElementById('root')
 );
