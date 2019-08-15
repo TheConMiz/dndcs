@@ -45,15 +45,17 @@ const store = createStore(
     
     {
         character: [
-            {characterName: ""},
-            {playerName: ""}
+            { characterName: ""},
+            { playerName: "" },
+            { classes: []}
         ],
         app: [
             {dbPath: dbPath}
         ]
     },
 
-    window.devToolsExtension && window.devToolsExtension()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.devToolsExtension()
+
 );
 
 const charNameAction = {
@@ -63,7 +65,7 @@ const charNameAction = {
     }
 };
 
-store.dispatch(charNameAction);
+//store.dispatch(charNameAction);
 
 console.log(store.getState());
 

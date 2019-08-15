@@ -26,7 +26,7 @@ export default class ClassDisplay extends React.Component {
                     </Table.TextHeaderCell>
                 
                 </Table.Head>
-                <Table.Body height={72}>
+                <Table.Body height={100}>
                     <Table.Row isSelectable>
                         <Table.TextCell>
                             Barbarian, Berserker

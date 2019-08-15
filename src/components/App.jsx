@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import '@blueprintjs/core/lib/css/blueprint.css';
 import CharPage from './CharPage';
 import MainStats from './MainStats';
@@ -22,6 +24,8 @@ class App extends React.Component {
     }
 
     render() {
+
+        console.log(this.props);
         return (
             <div>
                 <CharPage dbPath={this.props.dbPath} />
@@ -31,4 +35,12 @@ class App extends React.Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return state;
+};
+
+const mapActionsToProps = {
+
+};
+
+export default connect(mapStateToProps, mapActionsToProps) (App);
