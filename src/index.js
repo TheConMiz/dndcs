@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 
 import characterReducer from './reducers/characterReducer';
 import appReducer from './reducers/appReducer';
+import userReducer from './reducers/userReducer';
 
 // Database Path variables
 const path = window.require('path');
@@ -32,42 +33,37 @@ else {
  * React Redux Segment
  */
 
-
-
-
 const allReducers = combineReducers({
     character: characterReducer,
-    app: appReducer
+    app: appReducer,
+    user: userReducer
 })
 
 const store = createStore(
     allReducers,
     
     {
-        character: [
-            { characterName: ""},
-            { playerName: "" },
-            { classes: []}
-        ],
-        app: [
-            {dbPath: dbPath}
-        ]
+        character: {
+            name: "",
+            race: {},
+            classes: [],
+            background: {},
+            xp: 0,
+            abilityScores: {},
+            equipment: [],
+            feats: [],
+        },
+        app: {
+            dbPath: dbPath
+        },
+        user: {
+            name: ""
+        }
     },
 
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.devToolsExtension()
 
 );
-
-const charNameAction = {
-    type: "updateCharName",
-    payload: {
-        characterName: "Test Testerton"
-    }
-};
-
-//store.dispatch(charNameAction);
-
-console.log(store.getState());
 
 /**
  * End of React Redux Segment
@@ -79,8 +75,7 @@ render(
         <HashRouter>
             <App dbPath={dbPath}/>
         </HashRouter>
-    </Provider>
-        
+    </Provider> 
     
     , document.getElementById('root')
 );

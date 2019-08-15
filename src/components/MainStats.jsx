@@ -72,8 +72,9 @@ class MainStats extends React.Component {
                                         background="redTint"
                                         padding={8}
                                         alignItems="center"
+                                        flexDirection="column"
                                         justifyContent="center"
-                                        hoverElevation={2}
+                                        hoverElevation={1}
                                         width={120}
                                         height={120}
                                     >

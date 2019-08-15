@@ -2,6 +2,8 @@ import React from 'react';
 
 import { TextInputField } from 'evergreen-ui';
 
+import { connect } from 'react-redux';
+
 class NameField extends React.Component {
     constructor() {
         super();
@@ -25,4 +27,4 @@ class NameField extends React.Component {
     }
 
 }
-export default NameField;
+export default connect()(NameField);
