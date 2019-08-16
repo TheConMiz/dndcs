@@ -43,9 +43,7 @@ class App extends React.Component {
                         alignItems="center"
                         justifyContent="space-evenly"
                     >
-
                         <CharPage dbPath={this.props.dbPath} />
-                        <MainStats dbPath={this.props.dbPath} />
                     </Pane>    
                 </Layout.Content>
             </Layout>  

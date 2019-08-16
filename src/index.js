@@ -60,9 +60,8 @@ const store = createStore(
             name: ""
         }
     },
-
+    
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.devToolsExtension()
-
 );
 
 /**

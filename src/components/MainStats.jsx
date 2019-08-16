@@ -2,14 +2,16 @@ import React from 'react';
 
 import { Divider } from '@blueprintjs/core';
 
-import { Checkbox, Text, Pane, Card, Tooltip, Position } from 'evergreen-ui';
+import { Heading, Text, Pane, Card, Tooltip, Position, Strong, Table, Checkbox } from 'evergreen-ui';
 
 class MainStats extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            abilityScores: []
+            abilityScores: [],
+            skills: [],
+            intent: "none"
         }
     }
 
@@ -39,107 +41,72 @@ class MainStats extends React.Component {
         dbQuery.then((rows) => {
             this.setState({ abilityScores: rows });
         });
+
+        dbQuery =
+            knex({
+                skills: "Skills"
+            })
+        
+                .select({
+                    skillName: 'skills.name',
+                    skillID: 'skills.index',
+                    skillDesc: 'skills.desc',
+                    skillAScoreID: 'skills.abilityScoreID'
+                })
+                .orderBy("skills.name", "asc");
+        
+        dbQuery.then((rows) => {
+            this.setState({ skills: rows });
+        });
     }
 
     render() {
         return (
             <Card
                 background="tint1"
-                padding={12}
-                display="flex"
-                alignItems="center"
-                justifyContent="space-evenly"
-                flexDirection="column"
-                height={300}
-                width={500}
+                height={500}
+                width={440}
                 elevation={1}
+                
             >
                 <Pane
-                    flexDirection="row"
-                    display="flex"
-                    width="100%"
-                    alignItems="center"
-                    justifyContent="space-evenly"
+                    width={260}
+                    height={500}
                 >
+                    <Table>
+                        <Table.Head style={{ textAlign: "center" }} >
 
-                    {this.state.abilityScores.length === 0 ? '' : (this.state.abilityScores.map((item, index) => {
-                        if (index < Math.floor(this.state.abilityScores.length / 2)) {
-                            return (
-                                <Tooltip
-                                    content={item.aSDesc}
-                                    position={Position.TOP}
-                                >
-                                    <Pane
-                                        background="redTint"
-                                        padding={8}
-                                        alignItems="center"
-                                        flexDirection="column"
-                                        justifyContent="center"
-                                        hoverElevation={1}
-                                        width={120}
-                                        height={120}
-                                    >
-                                        <Text>
-                                            {item.aSAbbr}
-                                        </Text>
+                            <Table.TextHeaderCell flexBasis={10}>
+                                Skills
+                            </Table.TextHeaderCell>
+                            <Table.TextHeaderCell>
+                                Mod.
+                            </Table.TextHeaderCell>
+                        </Table.Head>
 
-                                        <Text>
-                                            10
-                                        </Text>
+                        <Table.Body height={444}>
+                            {this.state.skills.length === 0 ? "" : this.state.skills.map((item, index) => {
+                                // console.log(item);
+                                return (
+                                    <Tooltip content={item.skillDesc}>
+                                        <Table.Row isSelectable height={32} intent={this.state.intent} onSelect={() => {
+                                            this.setState({ intent: "success" })
+                                        }}>
+                                            <Table.TextCell flexBasis={10}>
+                                                {item.skillName}
+                                            </Table.TextCell>
 
-                                        <Divider />
 
-                                        <Text>
-                                            +1
-                                        </Text>
-                                    </Pane>
-                                </Tooltip>
-                            );
-                        }
-                    }))}
-                </Pane>
+                                            <Table.TextCell style={{ textAlign: "center" }} >
+                                                0
+                                        </Table.TextCell>
+                                        </Table.Row>
+                                    </Tooltip>        
+                                )
+                            })}
 
-                <Pane
-                    flexDirection="row"
-                    display="flex"
-                    width="100%"
-                    alignItems="center"
-                    justifyContent="space-evenly"
-                >
-                    {this.state.abilityScores.length === 0 ? '' : (this.state.abilityScores.map((item, index) => {
-                        if (index >= Math.floor(this.state.abilityScores.length / 2)) {
-                            return (
-                                <Tooltip
-                                    content={item.aSDesc}
-                                    position={Position.BOTTOM}
-                                >
-                                    <Pane
-                                        background="redTint"
-                                        padding={8}
-                                        alignItems="center"
-                                        justifyContent="center"
-                                        hoverElevation={2}
-                                        width={120}
-                                        height={120}
-                                    >
-                                        <Text>
-                                            {item.aSAbbr}
-                                        </Text>
-
-                                        <Text>
-                                            10
-                                        </Text>
-
-                                        <Divider />
-
-                                        <Text>
-                                            +1
-                                        </Text>
-                                    </Pane>
-                                </Tooltip>
-                            );
-                        }
-                    }))}
+                        </Table.Body>
+                    </Table>
                 </Pane>
             </Card>
         );

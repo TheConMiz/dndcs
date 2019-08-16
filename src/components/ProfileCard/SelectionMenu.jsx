@@ -1,8 +1,8 @@
-// TODO: Fix Filter Bar outlook
-
 import React from 'react';
 
-import { SelectMenu,  Card, Pane, Text, IconButton, Button } from 'evergreen-ui';
+import { SelectMenu, Card, Pane, Text, IconButton, Button } from 'evergreen-ui';
+
+import { connect } from 'react-redux';
 
 class SelectionMenu extends React.Component {
     constructor(props) {
@@ -132,9 +132,12 @@ class SelectionMenu extends React.Component {
                     onClick={this.clearData}
                     disabled={this.state.selected === null ? true: false}
                 />  
+                <Button onClick={() => {
+                    console.log(this.props);
+                }}/>
             </Pane>
         );
     }
 }
 
-export default SelectionMenu;
+export default connect()(SelectionMenu);
