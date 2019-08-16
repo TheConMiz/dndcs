@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Divider } from '@blueprintjs/core';
 
-import { Checkbox, Text, Pane, Card, Tooltip } from 'evergreen-ui';
+import { Checkbox, Text, Pane, Card, Tooltip, Position } from 'evergreen-ui';
 
 class MainStats extends React.Component {
     constructor(props) {
@@ -67,6 +67,7 @@ class MainStats extends React.Component {
                             return (
                                 <Tooltip
                                     content={item.aSDesc}
+                                    position={Position.TOP}
                                 >
                                     <Pane
                                         background="redTint"
@@ -110,6 +111,7 @@ class MainStats extends React.Component {
                             return (
                                 <Tooltip
                                     content={item.aSDesc}
+                                    position={Position.BOTTOM}
                                 >
                                     <Pane
                                         background="redTint"

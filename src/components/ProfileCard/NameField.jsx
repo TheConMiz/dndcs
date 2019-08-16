@@ -18,7 +18,7 @@ class NameField extends React.Component {
                 <TextInputField
                     description={this.props.mode + " Name"}
                     isInvalid={this.state.name === "" ? true : false}
-                    
+                    width={180}
                     value={this.state.name}
                     onChange={event =>{this.setState({name: event.target.value})}}
                 />

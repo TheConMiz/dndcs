@@ -7,8 +7,8 @@ import { NumericInput } from '@blueprintjs/core';
 import update from 'immutability-helper';
 
 export default class ClassSelectionMenu extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         /*
         * selectedClasses.classValue stores the SelectMenu component that is chosen

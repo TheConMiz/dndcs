@@ -114,7 +114,7 @@ class SelectionMenu extends React.Component {
                 >
                     <Button
                         style={{ width: '150px' }}
-                        appearance="primary"
+                        appearance={this.state.selected === null ? "none" : "primary"}
                     >
                         {
                             this.state.mode === "Race" ? (

@@ -22,41 +22,56 @@ class ProfileCard extends React.Component {
                 background="tint1"
                 elevation={1}
                 display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
                 alignItems="center"
-                justifyContent="space-evenly"
-                flexDirection="row"
             >
                 <Pane
                     display="flex"
-                    height="70%"
-                    width="50%"
                     alignItems="center"
                     justifyContent="space-between"
-                    flexDirection="column"
+                    flexDirection="row"
+                    height={280}
+                    width={500}
                 >
-                    <Avatar name="" size={160} />
-                    <ClassSelectionMenu dbPath={this.props.dbPath} />
-                    <ClassDisplay/>
-                    
-                </Pane>
-                
-                <Card
-                    display="flex"
-                    height="70%"
-                    width="50%"
-                    alignItems="flex-start"
-                    justifyContent="space-between"
-                    flexDirection="column"
-                >
-                    <NameField mode="Character"/>
-                    <NameField mode="Player"/>
-                    
-                    <SelectionMenu dbPath={this.props.dbPath} mode="Race" />
-                    <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
-                </Card>
+                    <Pane
+                        display="flex"
+                        width="50%"
+                        height="100%"
+                        alignItems="center"
+                        justifyContent="space-around"
+                        flexDirection="column"
+                    >
+                        <Avatar name="" size={160} />
+                        <ClassSelectionMenu dbPath={this.props.dbPath} />
+                    </Pane>
 
-                
-                
+                    <Pane
+                        display="flex"
+                        height="100%"
+                        width="50%"
+                        alignItems="center"
+                        justifyContent="space-around"
+                        flexDirection="column"
+                    >
+                        <NameField mode="Character" />
+                        <NameField mode="Player" />
+
+                        <SelectionMenu dbPath={this.props.dbPath} mode="Race" />
+                        <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
+                    </Pane>
+
+                </Pane>
+
+                <Pane width={500} height={20} />
+
+                <Pane
+                    width={500}
+                    height={200}
+                >
+                    <ClassDisplay />
+                </Pane>
+
             </Card>
         )
     }
