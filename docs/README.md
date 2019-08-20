@@ -5,7 +5,7 @@
 1. **Versions**
 2. **Development Logs**
 3. **Database Schema**
-3. **To-Do's**
+4. **To-Do's**
 
 ## 0.1 - Proof-of-Concept
 
@@ -88,3 +88,8 @@ A list of things to do to establish a basic database.
 - [x] School
 - [ ] Classes
 - [ ] Subclasses
+
+### To-Do's
+
+- [ ] Dependencies Update
+- [ ] DraftJS for note-taking
