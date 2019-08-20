@@ -2,14 +2,14 @@
 
 ## Table of Contents
 
-1. **Versions**
+1. [**Versions**](#versions)
 2. **Development Logs**
 3. **Database Schema**
-4. **To-Do's**
+4. [**To-Do's**](#to-dos)
 
-## 0.1 - Proof-of-Concept
+## Versions
 
-### DEADLINE: ***30/08/2019***
+### 0.1 - Proof-of-Concept
 
 - Profile Card
   - Race Menu
@@ -24,12 +24,6 @@
   - *Intent* based on Class prerequisites
   - On-click Dialog for Modification
 - Skill Proficiency Table
-
-## 0.15 - Redux-Enabled
-
-- Load from / Save to JSON
-  - Player Attributes
-  - Application Preferences
 
 ## 5E-SRD
 
