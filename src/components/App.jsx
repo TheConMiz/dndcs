@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
+import { Grid } from '@material-ui/core';
 
-import { updateCharName } from './../actions/characterActions';
+import CharPage from './CharPage';
 
-import { Grid, LinearProgress, Avatar } from '@material-ui/core';
 
-import TopBar from './TopBar';
+import '@blueprintjs/core/lib/css/blueprint.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -18,19 +17,11 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <TopBar />
-            </div>
+            <Grid>
+                <CharPage dbPath={this.props.dbPath}/>
+            </Grid>
         );
     }
 }
 
-const mapStateToProps = state => {
-    return state;
-};
-
-const mapActionsToProps = {
-    onUpdateCharName: updateCharName
-};
-
-export default connect(mapStateToProps, mapActionsToProps) (App);
+export default App;

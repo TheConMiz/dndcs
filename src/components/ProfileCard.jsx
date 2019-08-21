@@ -1,79 +1,63 @@
 import React from 'react';
 import { Pane, Card, Avatar, TextInputField } from 'evergreen-ui';
 
+import { Paper, Grid } from '@material-ui/core';
+
+import { makeStyles } from '@material-ui/core/styles';
+
 import SelectionMenu from './ProfileCard/SelectionMenu';
-import ClassSelectionMenu from './ProfileCard/ClassSelectionMenu';
-import ClassDisplay from './ProfileCard/ClassDisplay';
 import NameField from './ProfileCard/NameField';
 
 class ProfileCard extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
 
         }
     }
 
+    // useStyles = makeStyles(theme => ({
+    //     card: {
+    //         padding: theme.spacing(3, 2),
+    //     },
+    // }));
+
     render() {
         return (
-            <Card
-                height={500}
-                width={500}
-                background="tint1"
+            <Paper
                 elevation={1}
-                display="flex"
-                flexDirection="column"
-                justifyContent="space-between"
-                alignItems="center"
             >
-                <Pane
-                    display="flex"
+                <Grid
+                    container
+                    direction="column"
+                    justify="space-between"
                     alignItems="center"
-                    justifyContent="space-between"
-                    flexDirection="row"
-                    height={280}
-                    width={500}
                 >
-                    <Pane
-                        display="flex"
-                        width="50%"
-                        height="100%"
+                    <Grid
+                        container
+                        item
                         alignItems="center"
-                        justifyContent="space-around"
-                        flexDirection="column"
+                        justify="space-between"
+                        direction="row"
                     >
-                        <Avatar name="" size={160} />
-                        <ClassSelectionMenu dbPath={this.props.dbPath} />
-                    </Pane>
+                        <Grid>
+                            <Avatar name="" size={160} />
+                            <SelectionMenu dbPath={this.props.dbPath} mode="Race" />
+                        </Grid>
 
-                    <Pane
-                        display="flex"
-                        height="100%"
-                        width="50%"
-                        alignItems="center"
-                        justifyContent="space-around"
-                        flexDirection="column"
-                    >
-                        <NameField mode="Character" />
-                        <NameField mode="Player" />
+                        <Grid>
+                            
+                            <NameField mode="Character" />
+                            <NameField mode="Player" />
+                           
+                            <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
+                        </Grid>
 
-                        <SelectionMenu dbPath={this.props.dbPath} mode="Race" />
-                        <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
-                    </Pane>
-
-                </Pane>
-
-                <Pane width={500} height={20} />
-
-                <Pane
-                    width={500}
-                    height={200}
-                >
-                    <ClassDisplay />
-                </Pane>
-
-            </Card>
-        )
+                    </Grid>
+                </Grid>
+            </Paper>
+        );
     }
 }
 

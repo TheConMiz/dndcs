@@ -131,10 +131,7 @@ class SelectionMenu extends React.Component {
                     intent="danger"
                     onClick={this.clearData}
                     disabled={this.state.selected === null ? true: false}
-                />  
-                <Button onClick={() => {
-                    console.log(this.props);
-                }}/>
+                />
             </Pane>
         );
     }

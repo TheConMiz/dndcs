@@ -3,6 +3,7 @@ import React from 'react';
 import { AppBar, Toolbar, IconButton, Icon, Tabs, Tab } from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
+import SideMenu from './SideMenu';
 
 class TopBar extends React.Component {
     constructor(props) {
@@ -14,28 +15,38 @@ class TopBar extends React.Component {
 
     render() {
         return (
-            <AppBar>
-                <Toolbar>
-                    <IconButton disableFocusRipple color="secondary">
-                        <MenuIcon />
+            // <AppBar>
+            //     <Toolbar>
+            //         <IconButton disableFocusRipple color="secondary">
+            //             <MenuIcon />
                         
-                    </IconButton>
-                    <Tabs>
-                        <Tab
-                            label="Character"
-                            disableFocusRipple
-                        />
-                        <Tab
-                            label="Equipment"
-                            disableFocusRipple
-                        />
-                        <Tab
-                            label="Test 3"
-                            disableFocusRipple
-                        />
-                    </Tabs>
-                </Toolbar>
-            </AppBar>
+            //         </IconButton>
+            //         <Tabs>
+            //             <Tab
+            //                 label="Character"
+            //                 disableFocusRipple
+            //             />
+            //             <Tab
+            //                 label="Equipment"
+            //                 disableFocusRipple
+            //             />
+            //             <Tab
+            //                 label="Spells"
+            //                 disableFocusRipple
+            //             />
+            //             <Tab
+            //                 label="Companions"
+            //                 disableFocusRipple
+            //             />
+            //             <Tab
+            //                 label="Spells"
+            //                 disableFocusRipple
+            //             />
+            //         </Tabs>
+            //     </Toolbar>
+                
+            // </AppBar>
+            <SideMenu />
         );
     }
 }

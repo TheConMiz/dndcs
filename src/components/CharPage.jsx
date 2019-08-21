@@ -3,6 +3,7 @@ import ProfileCard from './ProfileCard';
 import MainStats from './MainStats';
 
 import { Pane } from 'evergreen-ui';
+import ClassSelectionMenu from './ProfileCard/ClassSelectionMenu';
 
 class CharPage extends React.Component {
     
@@ -26,7 +27,7 @@ class CharPage extends React.Component {
                 height="100%"
             >
                 <ProfileCard dbPath={this.props.dbPath} />
-                <MainStats dbPath={this.props.dbPath} />
+                <ClassSelectionMenu dbPath={this.props.dbPath} />
             </Pane>
                 
             
