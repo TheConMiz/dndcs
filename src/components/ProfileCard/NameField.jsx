@@ -4,6 +4,16 @@ import { TextInputField } from 'evergreen-ui';
 
 import { connect } from 'react-redux';
 
+import { updateCharName } from './../../actions/characterActions';
+
+const mapStateToProps = state => {
+    // console.log(state);
+
+    const { character } = state;
+
+    console.log(character);
+}
+
 class NameField extends React.Component {
     constructor() {
         super();
@@ -27,4 +37,5 @@ class NameField extends React.Component {
     }
 
 }
-export default connect()(NameField);
+
+export default connect(mapStateToProps)(NameField);

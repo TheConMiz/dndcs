@@ -4,6 +4,16 @@ import { SelectMenu, Card, Pane, Text, IconButton, Button } from 'evergreen-ui';
 
 import { connect } from 'react-redux';
 
+const mapStateToProps = state => {
+    
+    const dbPath = state.app.dbPath;
+    return {dbPath};
+}
+
+// const mapDispatchToProps = dispatch => {
+//     console.log(dispatch);
+// }
+
 class SelectionMenu extends React.Component {
     constructor(props) {
         super(props);
@@ -125,6 +135,7 @@ class SelectionMenu extends React.Component {
                         }
                     </Button>
                 </SelectMenu>
+
                 <IconButton
                     appearance="minimal"
                     icon="trash"
@@ -137,4 +148,4 @@ class SelectionMenu extends React.Component {
     }
 }
 
-export default connect()(SelectionMenu);
+export default connect(mapStateToProps)(SelectionMenu);

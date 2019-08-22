@@ -14,6 +14,7 @@ export default class ClassSelectionMenu extends React.Component {
         * selectedClasses.classValue stores the SelectMenu component that is chosen
         * selectedClasses.subClassValue stores the SelectMenu component that is chosen
         */
+        
         this.state = {
             open: false,
             
@@ -77,9 +78,6 @@ export default class ClassSelectionMenu extends React.Component {
         dbQuery.then((rows) => {
             this.setState({ subclassList: rows });
         });
-
-        //console.log(this.state.subclassList);
-
     }
 
     /**

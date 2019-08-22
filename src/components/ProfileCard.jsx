@@ -43,7 +43,7 @@ class ProfileCard extends React.Component {
                     >
                         <Grid>
                             <Avatar name="" size={160} />
-                            <SelectionMenu dbPath={this.props.dbPath} mode="Race" />
+                            <SelectionMenu mode="Race" />
                         </Grid>
 
                         <Grid>
@@ -51,7 +51,7 @@ class ProfileCard extends React.Component {
                             <NameField mode="Character" />
                             <NameField mode="Player" />
                            
-                            <SelectionMenu dbPath={this.props.dbPath} mode="Background" />
+                            <SelectionMenu mode="Background" />
                         </Grid>
 
                     </Grid>

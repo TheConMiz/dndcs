@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Table, IconButton } from 'evergreen-ui';
 
-export default class ClassDisplay extends React.Component {
+export default class ClassTable extends React.Component {
     constructor() {
         super();
 

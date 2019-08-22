@@ -41,7 +41,7 @@ const allReducers = combineReducers({
 
 const store = createStore(
     allReducers,
-    
+
     {
         character: {
             name: "",
@@ -49,9 +49,11 @@ const store = createStore(
             classes: [],
             background: {},
             xp: 0,
+            maxHP: 0,
+            currentHP: 0,
             abilityScores: {},
             equipment: [],
-            feats: [],
+            feats: []
         },
         app: {
             dbPath: dbPath
@@ -67,7 +69,6 @@ const store = createStore(
 /**
  * End of React Redux Segment
  */
-
 
 render(
     <Provider store={store}>

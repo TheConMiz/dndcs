@@ -1,4 +1,4 @@
-export const UPDATE_CHAR_NAME = "characters:updateCharName";
+export const UPDATE_CHAR_NAME = "UPDATE_CHAR_NAME";
 
 export function updateCharName(newCharName) {
     return {
