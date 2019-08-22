@@ -5,21 +5,8 @@ import { TextInputField, Button } from 'evergreen-ui';
 import { connect } from 'react-redux';
 
 import { updateCharName } from './../../actions/characterActions';
+
 import { updateUserName } from './../../actions/userActions';
-
-const mapStateToProps = (state, ownProps) => {
-    
-    if (ownProps.mode === "Character") {
-        const name = state.character.name;
-        return { name };
-    }
-
-    else if (ownProps.mode === "Player") {
-        const name = state.user.name;
-        return { name };
-    }
-    
-}
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
@@ -66,4 +53,4 @@ class NameField extends React.Component {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NameField);
+export default connect(null, mapDispatchToProps)(NameField);

@@ -45,9 +45,9 @@ const store = createStore(
     {
         character: {
             name: "",
-            race: {},
+            race: null,
             classes: [],
-            background: {},
+            background: null,
             xp: 0,
             maxHP: 0,
             currentHP: 0,

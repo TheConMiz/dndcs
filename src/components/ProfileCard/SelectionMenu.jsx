@@ -4,12 +4,31 @@ import { SelectMenu, Card, Pane, Text, IconButton, Button } from 'evergreen-ui';
 
 import { connect } from 'react-redux';
 
-import { updateCharName } from './../../actions/characterActions';
+import { updateCharRace, updateCharBackground } from './../../actions/characterActions';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     
     const dbPath = state.app.dbPath;
-    return {dbPath};
+    return { dbPath };
+    
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    if (ownProps.mode === "Race") {
+        return {
+            changeRace: (newRace) => {
+                dispatch(updateCharRace(newRace));
+            }
+        }
+    }
+
+    else if (ownProps.mode === "Background") {
+        return {
+            changeBackground: (newBackground) => {
+                dispatch(updateCharBackground(newBackground));
+            }
+        }
+    }
 }
 
 class SelectionMenu extends React.Component {
@@ -75,6 +94,27 @@ class SelectionMenu extends React.Component {
 
     clearData = () => {
         this.setState({ selected: null });
+
+        if (this.state.mode === "Race") {
+            this.props.changeRace(this.state.selected);
+        }
+
+        else if (this.state.mode === "Background") {
+            this.props.changeBackground(this.state.selected);
+        }
+        
+    }
+
+    selectItem = (item) => {
+        this.setState({ selected: item.value });
+
+        if (this.state.mode === "Race") {
+            this.props.changeRace(this.state.selected);
+        }
+
+        else if (this.state.mode === "Background") {
+            this.props.changeBackground(this.state.selected);
+        }
     }
 
     render() {
@@ -98,9 +138,7 @@ class SelectionMenu extends React.Component {
 
                     selected={this.state.selected}
 
-                    onSelect={item => {
-                        this.setState({ selected: item.value });
-                    }}
+                    onSelect={this.selectItem}
 
                     emptyView={(
                         <Card
@@ -146,4 +184,4 @@ class SelectionMenu extends React.Component {
     }
 }
 
-export default connect(mapStateToProps)(SelectionMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectionMenu);

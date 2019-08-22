@@ -4,7 +4,6 @@ import MainStats from './test/MainStats';
 
 import { Pane } from 'evergreen-ui';
 import ClassDisplay from './ClassDisplay';
-import HitPointsDisplay from './HitPointsDisplay';
 
 class CharPage extends React.Component {
     
@@ -27,9 +26,11 @@ class CharPage extends React.Component {
                 width="100%"
                 height="100%"
             >
-                <ProfileCard/>
+
+                <ProfileCard />
+                
                 <ClassDisplay dbPath={this.props.dbPath} />
-                <HitPointsDisplay/>
+
             </Pane>
                 
             
