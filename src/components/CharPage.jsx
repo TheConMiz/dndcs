@@ -27,7 +27,7 @@ class CharPage extends React.Component {
                 width="100%"
                 height="100%"
             >
-                <ProfileCard dbPath={this.props.dbPath} />
+                <ProfileCard/>
                 <ClassDisplay dbPath={this.props.dbPath} />
                 <HitPointsDisplay/>
             </Pane>

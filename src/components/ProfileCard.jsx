@@ -3,8 +3,6 @@ import { Pane, Card, Avatar, TextInputField } from 'evergreen-ui';
 
 import { Paper, Grid } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core/styles';
-
 import SelectionMenu from './ProfileCard/SelectionMenu';
 import NameField from './ProfileCard/NameField';
 
@@ -16,12 +14,6 @@ class ProfileCard extends React.Component {
 
         }
     }
-
-    // useStyles = makeStyles(theme => ({
-    //     card: {
-    //         padding: theme.spacing(3, 2),
-    //     },
-    // }));
 
     render() {
         return (

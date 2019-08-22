@@ -4,7 +4,11 @@ export default function characterReducer(state = {}, action) {
 
     switch (action.type) {
         case UPDATE_CHAR_NAME:
-            return action.payload.characterName;
+            console.log(action);
+            console.log(state);
+            let temp = state;
+            temp.name = action.payload.name
+            return temp;
         
         default:
             return state;

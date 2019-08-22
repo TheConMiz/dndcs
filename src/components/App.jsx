@@ -4,23 +4,7 @@ import { Grid, Button } from '@material-ui/core';
 
 import CharPage from './CharPage';
 
-import { connect } from 'react-redux';
-
 import '@blueprintjs/core/lib/css/blueprint.css';
-
-/**
- * MapStateToProps: get data from the store
- */
-
-// const mapStateToProps = state => {
-//     return state;
-// }
-
-// const mapDispatchToProps = dispatch => {
-//     console.log(dispatch);
-// }
-
-
 
 class App extends React.Component {
     constructor(props) {
@@ -33,11 +17,10 @@ class App extends React.Component {
     render() {
         return (
             <Grid>
-                <CharPage dbPath={this.props.dbPath} />
+                <CharPage />
             </Grid>
         );
     }
 }
 
 export default App;
-    // connect(mapStateToProps, mapDispatchToProps)(App);

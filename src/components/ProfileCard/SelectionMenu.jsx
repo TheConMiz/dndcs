@@ -4,15 +4,13 @@ import { SelectMenu, Card, Pane, Text, IconButton, Button } from 'evergreen-ui';
 
 import { connect } from 'react-redux';
 
+import { updateCharName } from './../../actions/characterActions';
+
 const mapStateToProps = state => {
     
     const dbPath = state.app.dbPath;
     return {dbPath};
 }
-
-// const mapDispatchToProps = dispatch => {
-//     console.log(dispatch);
-// }
 
 class SelectionMenu extends React.Component {
     constructor(props) {
