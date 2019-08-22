@@ -8,7 +8,7 @@ class ClassDisplay extends React.Component {
         super(props);
 
         this.state = {
-            selectedClasses: []
+
         };
     }
 
@@ -16,7 +16,7 @@ class ClassDisplay extends React.Component {
         return (
             <div>
                 <ClassTable dbPath={this.props.dbPath}/>
-                <ClassSelectionMenu bPath={this.props.dbPath}/>
+                <ClassSelectionMenu/>
             </div>
         );
     }

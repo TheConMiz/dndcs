@@ -5,9 +5,7 @@ import { Avatar, Button } from 'evergreen-ui';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
-
-    const name = state.character.name;
-
+    
     return {
         name: state.character.name
     };

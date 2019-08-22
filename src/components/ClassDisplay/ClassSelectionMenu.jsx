@@ -6,9 +6,23 @@ import { NumericInput } from '@blueprintjs/core';
 
 import update from 'immutability-helper';
 
-export default class ClassSelectionMenu extends React.Component {
-    constructor(props) {
-        super(props);
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+
+    return {
+        classes: state.character.classes,
+        dbPath: state.app.dbPath
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    
+}
+
+class ClassSelectionMenu extends React.Component {
+    constructor() {
+        super();
 
         /*
         * selectedClasses.classValue stores the SelectMenu component that is chosen
@@ -17,8 +31,6 @@ export default class ClassSelectionMenu extends React.Component {
         
         this.state = {
             open: false,
-            
-            classSelected: false,
             
             classList: [],
             
@@ -370,3 +382,5 @@ export default class ClassSelectionMenu extends React.Component {
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClassSelectionMenu);
