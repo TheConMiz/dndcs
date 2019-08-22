@@ -26,15 +26,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 class NameField extends React.Component {
     constructor() {
         super();
-        this.state = {
-            name: ""
-        };
+        this.state = {};
     }
 
     handleNameChange = (event) => {
-        
-        this.setState({ name: event.target.value });
-        this.props.changeName(this.state.name);
+        this.props.changeName(event.target.value);
     }
     
     render() {
@@ -42,9 +38,9 @@ class NameField extends React.Component {
             <div>
                 <TextInputField
                     description={this.props.mode + " Name"}
-                    isInvalid={this.state.name === "" ? true : false}
+                    isInvalid={this.props.name === "" ? true : false}
                     width={180}
-                    value={this.state.name}
+                    value={this.props.name}
                     onChange={this.handleNameChange}
                 />
             </div>

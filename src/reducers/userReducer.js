@@ -6,9 +6,9 @@ export default function userReducer(state = {}, action) {
 
         case UPDATE_USER_NAME:
 
-            let temp = state;
-            temp.name = action.payload.name
-            return temp;
+            return Object.assign({}, state, {
+                name: action.payload.name
+            });
         
         default:
             return state;

@@ -9,8 +9,11 @@ import { updateCharRace, updateCharBackground } from './../../actions/characterA
 const mapStateToProps = (state, ownProps) => {
     
     const dbPath = state.app.dbPath;
-    return { dbPath };
-    
+    const race = state.character.race;
+    const background = state.character.background;
+
+    return { dbPath, race, background };
+
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -33,11 +36,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 class SelectionMenu extends React.Component {
     constructor(props) {
+        
         super(props);
+
         this.state = {
-            mode: this.props.mode,
             itemsList: [],
-            selected: null
         }
     }
 
@@ -54,7 +57,7 @@ class SelectionMenu extends React.Component {
 
         let dbQuery;
 
-        if (this.state.mode === "Race") {
+        if (this.props.mode === "Race") {
             dbQuery =
                 knex({
                     sr: 'Subraces'
@@ -75,7 +78,7 @@ class SelectionMenu extends React.Component {
             });
         }
 
-        if (this.state.mode === "Background") {
+        if (this.props.mode === "Background") {
             dbQuery =
                 knex({
                     bg: 'Backgrounds'
@@ -93,27 +96,28 @@ class SelectionMenu extends React.Component {
     }
 
     clearData = () => {
-        this.setState({ selected: null });
-
-        if (this.state.mode === "Race") {
-            this.props.changeRace(this.state.selected);
+        
+        if (this.props.mode === "Race") {
+            this.props.changeRace(null);
         }
 
-        else if (this.state.mode === "Background") {
-            this.props.changeBackground(this.state.selected);
+        else if (this.props.mode === "Background") {
+            this.props.changeBackground(null);
         }
         
     }
 
     selectItem = (item) => {
-        this.setState({ selected: item.value });
 
-        if (this.state.mode === "Race") {
-            this.props.changeRace(this.state.selected);
+        console.log(item);
+
+        if (this.props.mode === "Race") {
+
+            this.props.changeRace(item.value);
         }
 
-        else if (this.state.mode === "Background") {
-            this.props.changeBackground(this.state.selected);
+        else if (this.props.mode === "Background") {
+            this.props.changeBackground(item.value);
         }
     }
 
@@ -124,9 +128,9 @@ class SelectionMenu extends React.Component {
                 border="muted"
             >
                 <SelectMenu
-                    title={"Select a " + this.state.mode}
+                    title={"Select a " + this.props.mode}
                     options={
-                        this.state.mode === "Race" ? 
+                        this.props.mode === "Race" ? 
                         this.state.itemsList.map(label => ({
                             label: label.subraceID === 0 ? label.raceName : label.raceName + ", " + label.subraceName, value: label
                         }))
@@ -136,7 +140,7 @@ class SelectionMenu extends React.Component {
                         }))
                     }
 
-                    selected={this.state.selected}
+                    selected={this.props.mode === "Race" ? (this.props.race) : this.props.mode === "Background" ? (this.props.background) : null}
 
                     onSelect={this.selectItem}
 
@@ -160,14 +164,20 @@ class SelectionMenu extends React.Component {
                 >
                     <Button
                         style={{ width: '150px' }}
-                        appearance={this.state.selected === null ? "none" : "primary"}
+                        appearance={
+                            this.props.mode === "Race" ?
+                            (this.props.race === null ? "none" : "primary") :
+                            this.props.mode === "Background" ?
+                                (this.props.background === null ? "none" : "primary")
+                                : "none"
+                        }
                     >
                         {
-                            this.state.mode === "Race" ? (
-                                this.state.selected === null ? "Race" : this.state.selected.subraceID === 0 ? this.state.selected.raceName : this.state.selected.raceName + ", " + this.state.selected.subraceName
+                            this.props.mode === "Race" ? (
+                                this.props.race === null ? "Race" : this.props.race.subraceID === 0 ? this.props.race.raceName : this.props.race.raceName + ", " + this.props.race.subraceName
                             ) : 
                             
-                            (this.state.selected === null ? "Background" : this.state.selected.backgroundName)
+                                (this.props.background === null ? "Background" : this.props.background.backgroundName)
                         }
                     </Button>
                 </SelectMenu>
@@ -177,7 +187,8 @@ class SelectionMenu extends React.Component {
                     icon="trash"
                     intent="danger"
                     onClick={this.clearData}
-                    disabled={this.state.selected === null ? true: false}
+                    disabled={
+                        this.props.mode === "Race" ? (this.props.race === null ? true : false) : this.props.mode === "Background" ? (this.props.background === null ? true : false) : true}
                 />
             </Pane>
         );

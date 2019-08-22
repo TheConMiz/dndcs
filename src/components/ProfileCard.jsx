@@ -1,18 +1,16 @@
 import React from 'react';
-import { Pane, Card, Avatar, TextInputField } from 'evergreen-ui';
 
 import { Paper, Grid } from '@material-ui/core';
 
 import SelectionMenu from './ProfileCard/SelectionMenu';
+
 import NameField from './ProfileCard/NameField';
 
+import CharAvatar from './ProfileCard/CharAvatar';
+
 class ProfileCard extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-
-        }
+    constructor() {
+        super();
     }
 
     render() {
@@ -34,15 +32,13 @@ class ProfileCard extends React.Component {
                         direction="row"
                     >
                         <Grid>
-                            <Avatar name="" size={160} />
+                            <CharAvatar/>
                             <SelectionMenu mode="Race" />
                         </Grid>
 
                         <Grid>
-                            
                             <NameField mode="Character" />
                             <NameField mode="Player" />
-                           
                             <SelectionMenu mode="Background" />
                         </Grid>
 
