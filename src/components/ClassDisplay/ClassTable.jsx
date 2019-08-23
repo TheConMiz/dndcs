@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Table, IconButton } from 'evergreen-ui';
+import { Table, IconButton, Icon } from 'evergreen-ui';
 
 import { connect } from 'react-redux';
 
@@ -15,28 +15,61 @@ class ClassTable extends React.Component {
         super();
     }
 
+    renderCell = (item) => {
+        //console.log(item);
+        
+        if (item.classValue != null) {
+            if (item.subClassValue === null) {
+                return (
+                    <Table.Row>
+                        <Table.TextCell flexBasis={10}>
+                            <Icon icon="info-sign" color="info" />
+                        </Table.TextCell>
+
+                        <Table.TextCell flexBasis={10}>
+                            {item.level === 0 ? null : item.level}
+                        </Table.TextCell>
+
+                        <Table.TextCell flexBasis={80}>
+                            {item.classValue.label === null ? null : item.classValue.label}
+                        </Table.TextCell>
+
+                        <Table.TextCell flexBasis={160}>
+                            
+                        </Table.TextCell>
+
+                    </Table.Row>
+                );
+            }
+            
+            else {
+                return (
+                    <Table.Row>
+                        <Table.TextCell flexBasis={10}>
+                            <Icon icon="info-sign" color="info" />
+                        </Table.TextCell>
+
+                        <Table.TextCell flexBasis={10}>
+                            {item.level === 0 ? null : item.level}
+                        </Table.TextCell>
+
+                        <Table.TextCell flexBasis={80}>
+                            {item.classValue.label === null ? null : item.classValue.label}
+                        </Table.TextCell>
+
+                        <Table.TextCell flexBasis={160}>
+                            {item.subClassValue.label === null ? null : item.subClassValue.label}
+                        </Table.TextCell>
+
+                    </Table.Row>
+                );
+            }
+        }
+
+        else return null;
+    }
+
     render() {
-        const cell = (
-            <Table.Row isSelectable>
-                <Table.TextCell flexBasis={10}>
-                    <IconButton icon="info-sign" intent="default" appearance="minimal" />
-                </Table.TextCell>
-
-                <Table.TextCell flexBasis={10}>
-                    2
-                </Table.TextCell>
-
-                <Table.TextCell flexBasis={80}>
-                    Druid
-                </Table.TextCell>
-
-                <Table.TextCell flexBasis={160}>
-                    Circle of the Moon
-                </Table.TextCell>
-
-            </Table.Row>
-        );
-
         return (
             <Table>
                 <Table.Head>
@@ -55,7 +88,9 @@ class ClassTable extends React.Component {
                     </Table.TextHeaderCell>                
                 </Table.Head>
                 <Table.Body height={150}>
-
+                    {this.props.classes.map((item, index) => {
+                        return this.renderCell(item);
+                    })}
                 </Table.Body>
             </Table>
         );
