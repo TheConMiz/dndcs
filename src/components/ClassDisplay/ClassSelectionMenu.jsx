@@ -8,6 +8,8 @@ import update from 'immutability-helper';
 
 import { connect } from 'react-redux';
 
+import { addClassCell, clearClassCell, setClass, setSubClass, setLevel, confirmClasses } from './../../actions/characterActions';
+
 const mapStateToProps = (state) => {
 
     return {
@@ -17,17 +19,36 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    
+    return {
+        addClassCell: (newClassCell) => {
+            dispatch(addClassCell(newClassCell));
+        },
+
+        clearClassCell: (classCellID) => {
+            dispatch(clearClassCell(classCellID));
+        },
+
+        setClass: (newClass, classCellID) => {
+            dispatch(setClass(newClass, classCellID));
+        },
+
+        setSubClass: (newSubClass, classCellID) => {
+            dispatch(setSubClass(newSubClass, classCellID));
+        },
+
+        setLevel: (newLevel, classCellID) => {
+            dispatch(setLevel(newLevel, classCellID));
+        },
+
+        confirmClasses: (finalClasses) => {
+            dispatch(confirmClasses(finalClasses));
+        }
+    }
 }
 
 class ClassSelectionMenu extends React.Component {
     constructor() {
         super();
-
-        /*
-        * selectedClasses.classValue stores the SelectMenu component that is chosen
-        * selectedClasses.subClassValue stores the SelectMenu component that is chosen
-        */
         
         this.state = {
             open: false,
@@ -36,13 +57,13 @@ class ClassSelectionMenu extends React.Component {
             
             subclassList: [],
 
-            selectedClasses: [
-                {
-                    classValue: null,
-                    subClassValue: null,
-                    level: 0
-                }
-            ],
+            // selectedClasses: [
+            //     {
+            //         classValue: null,
+            //         subClassValue: null,
+            //         level: 0
+            //     }
+            // ],
         };
     }
 
@@ -92,105 +113,119 @@ class ClassSelectionMenu extends React.Component {
         });
     }
 
-    /**
-     * Method for adding new class and subClass elements to the selectedClasses state array
-     * Note the technique used to set state: more efficient than copying and replacing array
-     */
     addClassArrayElement = () => {
-        let newElement = this.emptyClassCell;
         
-        this.setState(state => {
-            const list = state.selectedClasses.concat(newElement);
-            return {
-                selectedClasses: list
-            }
-        });
+        // let newElement = this.emptyClassCell;
+        
+        // this.setState(state => {
+        //     const list = state.selectedClasses.concat(newElement);
+        //     return {
+        //         selectedClasses: list
+        //     }
+        // });
+
+
+        this.props.addClassCell(this.emptyClassCell);
     }
 
     clearClassArrayElements = (classCellID) => {
-        let tempClassCell = update(this.state.selectedClasses[classCellID], {
-            classValue: { $set: null },
-            subClassValue: { $set: null },
-            level: {$set: 0}
-        })
+        // let tempClassCell = update(this.state.selectedClasses[classCellID], {
+        //     classValue: { $set: null },
+        //     subClassValue: { $set: null },
+        //     level: {$set: 0}
+        // })
 
-        let tempList = this.state.selectedClasses;
+        // let tempList = this.state.selectedClasses;
 
-        tempList[classCellID] = tempClassCell;
+        // tempList[classCellID] = tempClassCell;
 
-        this.setState({ selectedClasses: tempList });
+        // this.setState({ selectedClasses: tempList });
+
+
+        this.props.clearClassCell(classCellID);
     }
 
     setClassValue = (item, classCellID) => {
 
-            let tempClassCell = update(this.state.selectedClasses[classCellID], {
-                classValue: { $set: item.value }
-            });
+        // let tempClassCell = update(this.state.selectedClasses[classCellID], {
+        //     classValue: { $set: item.value }
+        // });
 
-            let tempList = this.state.selectedClasses;
+        // let tempList = this.state.selectedClasses;
 
-            tempList[classCellID] = tempClassCell;
+        // tempList[classCellID] = tempClassCell;
 
-            this.setState({ selectedClasses: tempList });
+        // this.setState({ selectedClasses: tempList });
+        
+        
+        this.props.setClass(item, classCellID);
+
     }
 
-
     setSubClassValue = (item, classCellID) => {
-        let tempClassCell = update(this.state.selectedClasses[classCellID], {
-            subClassValue: { $set: item.value }
-        });
+        // let tempClassCell = update(this.state.selectedClasses[classCellID], {
+        //     subClassValue: { $set: item.value }
+        // });
 
-        let tempList = this.state.selectedClasses;
+        // let tempList = this.state.selectedClasses;
 
-        tempList[classCellID] = tempClassCell;
+        // tempList[classCellID] = tempClassCell;
 
-        this.setState({ selectedClasses: tempList });
+        // this.setState({ selectedClasses: tempList });
+
+        
+        this.props.setSubClass(item, classCellID);
+
     }
 
     filterSubClassList = (classCellID) => {
-        if (this.state.selectedClasses[classCellID].classValue === null) {
+        if (this.props.classes[classCellID].classValue === null) {
             return this.state.subclassList;
         }
-        
-        else {
-            let temp = this.state.subclassList.filter(item => item.classID === this.state.selectedClasses[classCellID].classValue.classID)
 
-            return temp;
+        else {
+            return this.state.subclassList.filter(item => item.classID === this.props.classes[classCellID].classValue.value.classID);
         }
     }
 
-
     setLevelValue = (levelValue, classCellID) => {
-        let tempClassCell = update(this.state.selectedClasses[classCellID], {
-            level: { $set: levelValue}
-        })
+        // let tempClassCell = update(this.state.selectedClasses[classCellID], {
+        //     level: { $set: levelValue}
+        // })
 
-        let tempList = this.state.selectedClasses;
+        // let tempList = this.state.selectedClasses;
 
-        tempList[classCellID] = tempClassCell;
+        // tempList[classCellID] = tempClassCell;
 
-        this.setState({ selectedClasses: tempList });
+        // this.setState({ selectedClasses: tempList });
+
+        this.props.setLevel(levelValue, classCellID);
     }
 
     confirmChoices = () => {
         this.setState({ open: false });
 
-        if (this.state.selectedClasses.length > 1) {
-            let temp = this.state.selectedClasses.filter(item => item.classValue != null);
+        // if (this.state.selectedClasses.length > 1) {
+        //     let temp = this.state.selectedClasses.filter(item => item.classValue != null);
 
-            if (temp.length === 0) {
-                temp.push(this.emptyClassCell);
-            }
+        //     if (temp.length === 0) {
+        //         temp.push(this.emptyClassCell);
+        //     }
 
-            this.setState({selectedClasses: temp});
+        //     this.setState({ selectedClasses: temp });
+        // }
+
+        // if there are blank ones, remove them
+
+        if (this.props.classes.length >= 1) {
+            this.props.confirmClasses(this.props.classes.filter(item => item.classValue != null));
         }
+
+
+
+        
     }
-    
-    /**
-     * Method for rendering class values stored in the selectedClass state array
-     * The classValue argument stores the assets required for generating the class and sub-class SelectMenus
-     * The classCellID argument stores the index of the provided classValue within the selectedClass state array
-     */
+
     classCell = (classCellID) => (
         <Pane
             width="100%"
@@ -208,7 +243,9 @@ class ClassSelectionMenu extends React.Component {
                     label: label.className, value: label
                 }))}
 
-                selected={this.state.selectedClasses[classCellID].classValue === null ? null : this.state.selectedClasses[classCellID].classValue }
+                // selected={this.state.selectedClasses[classCellID].classValue === null ? null : this.state.selectedClasses[classCellID].classValue}
+                
+                selected={this.props.classes[classCellID].classValue === null ? null : this.props.classes[classCellID].classValue.value}
 
                 onSelect={item => {
                     this.setClassValue(item, classCellID);
@@ -236,7 +273,9 @@ class ClassSelectionMenu extends React.Component {
                     style={{ width: '120px' }}
                     appearance="primary"
                 >
-                    {this.state.selectedClasses[classCellID].classValue === null ? "Select a Class..." : this.state.selectedClasses[classCellID].classValue.className}
+                    {/* {this.state.selectedClasses[classCellID].classValue === null ? "Select a Class..." : this.state.selectedClasses[classCellID].classValue.className} */}
+                    
+                    {this.props.classes[classCellID].classValue === null ? "Select a Class..." : this.props.classes[classCellID].classValue.label}
                 </Button>
             </SelectMenu>
 
@@ -246,6 +285,7 @@ class ClassSelectionMenu extends React.Component {
                 options={this.filterSubClassList(classCellID).map(label => ({
                     label: label.subClassName, value: label
                 }))}
+
                 emptyView={(
                     <Pane
                         height="100%"
@@ -266,18 +306,25 @@ class ClassSelectionMenu extends React.Component {
                     this.setSubClassValue(item, classCellID);
                 }}
 
-                selected={this.state.selectedClasses[classCellID].subClassValue === null ? null : this.state.selectedClasses[classCellID].subClassValue}
+                // selected={this.state.selectedClasses[classCellID].subClassValue === null ? null : this.state.selectedClasses[classCellID].subClassValue}
+
+                selected={this.props.classes[classCellID].subClassValue === null ? null : this.props.classes[classCellID].subClassValue.value}
 
                 closeOnSelect={true}
             >
                 <Button
                     style={{ width: '150px' }}
-                    disabled={this.state.selectedClasses[classCellID].classValue === null ? true : false}
+                    // disabled={this.state.selectedClasses[classCellID].classValue === null ? true : false}
+                    disabled={this.props.classes[classCellID].classValue === null ? true : false}
                     appearance="default"
                 >
-                    {this.state.selectedClasses[classCellID].subClassValue === null ? "Select a Sub-Class..." : this.state.selectedClasses[classCellID].subClassValue.subClassName}
+                    {/* {this.state.selectedClasses[classCellID].subClassValue === null ? "Select a Sub-Class..." : this.state.selectedClasses[classCellID].subClassValue.subClassName} */}
+
+                    {this.props.classes[classCellID].subClassValue === null ? "Select a Sub-Class..." : this.props.classes[classCellID].subClassValue.label}
+
                 </Button>
             </SelectMenu>
+
             <NumericInput
                 allowNumericCharactersOnly={true}
                 max={20}
@@ -285,8 +332,10 @@ class ClassSelectionMenu extends React.Component {
                 intent="primary"
                 style={{ width: '70px' }}
                 placeholder="Level..."
-                disabled={this.state.selectedClasses[classCellID].classValue === null ? true : false}
-                value={this.state.selectedClasses[classCellID].level === 0 ? "" : this.state.selectedClasses[classCellID].level}
+                // disabled={this.state.selectedClasses[classCellID].classValue === null ? true : false}
+                disabled={this.props.classes[classCellID].classValue === null ? true : false}
+                // value={this.state.selectedClasses[classCellID].level === 0 ? "" : this.state.selectedClasses[classCellID].level}
+                value={this.props.classes[classCellID].level === 0 ? "" : this.props.classes[classCellID].level}
                 onValueChange={(event) => {
                     this.setLevelValue(event, classCellID);
                 }}
@@ -294,7 +343,8 @@ class ClassSelectionMenu extends React.Component {
             <IconButton
                 icon="trash"
                 intent="danger"
-                disabled={this.state.selectedClasses[classCellID].classValue === null ? true: false}
+                // disabled={this.state.selectedClasses[classCellID].classValue === null ? true: false}
+                disabled={this.props.classes[classCellID].classValue === null ? true: false}
                 onClick={() => {
                     this.clearClassArrayElements(classCellID);
                 }}
@@ -329,7 +379,7 @@ class ClassSelectionMenu extends React.Component {
                             backgroundColor="tint2"
                             style={{overflow: "auto"}}
                         >
-                            {this.state.selectedClasses.map((item, index) => {
+                            {this.props.classes.map((item, index) => {
                                 return (
                                     this.classCell(index)
                                 );
@@ -356,7 +406,7 @@ class ClassSelectionMenu extends React.Component {
                                 marginTop={12}
                                 intent="success"
                                 appearance="primary"
-                                disabled={this.state.selectedClasses.filter(item => item.classValue != null).length > 0 ? false: true }
+                                disabled={this.props.classes.filter(item => item.classValue != null).length > 0 ? false: true }
                                 onClick={() => {
                                     this.confirmChoices();
                                 }}
@@ -366,13 +416,13 @@ class ClassSelectionMenu extends React.Component {
                         </Pane>
                     </Pane>
                     
-                   
-
-                   
                 </Dialog>
                 <Button
                     onClick={() => {
                         this.setState({ open: true });
+                        if (this.props.classes.length === 0) {
+                            this.addClassArrayElement();
+                        }
                     }}
                     style={{ width: '150px' }}
                 >

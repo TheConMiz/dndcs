@@ -15,7 +15,7 @@ class ClassDisplay extends React.Component {
     render() {
         return (
             <div>
-                <ClassTable dbPath={this.props.dbPath}/>
+                <ClassTable/>
                 <ClassSelectionMenu/>
             </div>
         );

@@ -2,13 +2,17 @@ import React from 'react';
 
 import { Table, IconButton } from 'evergreen-ui';
 
-export default class ClassTable extends React.Component {
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+    return {
+        classes: state.character.classes
+    }
+}
+
+class ClassTable extends React.Component {
     constructor() {
         super();
-
-        this.state = {
-
-        };
     }
 
     render() {
@@ -30,10 +34,9 @@ export default class ClassTable extends React.Component {
                     Circle of the Moon
                 </Table.TextCell>
 
-                
-                
             </Table.Row>
         );
+
         return (
             <Table>
                 <Table.Head>
@@ -52,15 +55,11 @@ export default class ClassTable extends React.Component {
                     </Table.TextHeaderCell>                
                 </Table.Head>
                 <Table.Body height={150}>
-                    {cell}
-                    {cell}
-                    {cell}
-                    {cell}
-                    {cell}
-                    {cell}
-                    {cell}
+
                 </Table.Body>
             </Table>
         );
     }
 }
+
+export default connect(mapStateToProps, null)(ClassTable);
