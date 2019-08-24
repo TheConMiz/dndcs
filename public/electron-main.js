@@ -19,8 +19,8 @@ function createWindow() {
     screenSize = electron.screen.getPrimaryDisplay().size;
 
     win = new BrowserWindow({
-        width: screenSize.width * 0.75,
-        height: screenSize.height * 0.75,
+        width: screenSize.width * 0.8,
+        height: screenSize.height * 0.8,
         show: false,
         webPreferences: {
             nodeIntegration: true
@@ -44,6 +44,9 @@ function createWindow() {
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {
+        // Maximize the window prior to showing it
+        win.maximize();
+        // Show the prepared window
         win.show();
     });
 
