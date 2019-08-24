@@ -3,6 +3,17 @@ import React from 'react';
 import ClassTable from './ClassDisplay/ClassTable';
 import ClassSelectionMenu from './ClassDisplay/ClassSelectionMenu';
 
+import { Paper } from '@material-ui/core';
+
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    paper: {
+        padding: theme.spacing(3, 2),
+        display: "flex"
+    },
+}));
+
 class ClassDisplay extends React.Component {
     constructor(props) {
         super(props);
@@ -13,11 +24,14 @@ class ClassDisplay extends React.Component {
     }
 
     render() {
+        const classes = useStyles;
         return (
-            <div>
+            <Paper
+                className={classes.paper}
+            >
                 <ClassTable/>
                 <ClassSelectionMenu/>
-            </div>
+            </Paper>
         );
     }
 }

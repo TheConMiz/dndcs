@@ -20,13 +20,11 @@ const isDev = window.require('electron-is-dev');
 if (isDev) {
     console.log("DEV MODE");
     dbPath = path.resolve('./public/data/database/DnDCS.db');
-    // console.log(dbPath);
 }
 
 else {
     console.log("PROD MODE");
     dbPath = path.resolve('./resources/app.asar.unpacked/public/data/database/DnDCS.db');
-    // console.log(dbPath);
 }
 
 /**

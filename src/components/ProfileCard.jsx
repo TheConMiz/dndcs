@@ -8,15 +8,18 @@ import NameField from './ProfileCard/NameField';
 
 import CharAvatar from './ProfileCard/CharAvatar';
 
+
 class ProfileCard extends React.Component {
     constructor() {
         super();
     }
 
     render() {
+
         return (
             <Paper
                 elevation={1}
+                className={classes.papier}
             >
                 <Grid
                     container

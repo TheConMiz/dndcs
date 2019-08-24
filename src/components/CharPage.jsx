@@ -2,8 +2,9 @@ import React from 'react';
 import ProfileCard from './ProfileCard';
 import MainStats from './test/MainStats';
 
-import { Pane } from 'evergreen-ui';
 import ClassDisplay from './ClassDisplay';
+
+import { Grid } from '@material-ui/core';
 
 class CharPage extends React.Component {
     
@@ -18,22 +19,16 @@ class CharPage extends React.Component {
 
     render() {
         return (
-            <Pane
-                display="flex"
-                flexDirection="row"
+            <Grid
+                container
+                direction="column"
+                justify="center"
                 alignItems="center"
-                justifyItems="space-evenly"
-                width="100%"
-                height="100%"
             >
-
                 <ProfileCard />
-                
-                <ClassDisplay dbPath={this.props.dbPath} />
 
-            </Pane>
-                
-            
+                <ClassDisplay />
+            </Grid>
         );
     }
 }

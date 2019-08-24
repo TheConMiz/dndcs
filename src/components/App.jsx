@@ -7,18 +7,13 @@ import CharPage from './CharPage';
 import '@blueprintjs/core/lib/css/blueprint.css';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
+    constructor() {
+        super();
     }
 
     render() {
         return (
-            <Grid>
-                <CharPage />
-            </Grid>
+            <CharPage />
         );
     }
 }
