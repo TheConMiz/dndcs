@@ -19,7 +19,6 @@ class ProfileCard extends React.Component {
         return (
             <Paper
                 elevation={1}
-                className={classes.papier}
             >
                 <Grid
                     container
