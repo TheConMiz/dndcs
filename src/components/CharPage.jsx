@@ -4,6 +4,7 @@ import MainStats from './test/MainStats';
 
 import ClassDisplay from './ClassDisplay';
 
+
 import { Grid } from '@material-ui/core';
 
 class CharPage extends React.Component {
@@ -28,6 +29,9 @@ class CharPage extends React.Component {
                 <ProfileCard />
 
                 <ClassDisplay />
+
+                <MainStats/>
+
             </Grid>
         );
     }

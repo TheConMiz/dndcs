@@ -1,17 +1,38 @@
 import React from 'react';
 
-import { Divider } from '@blueprintjs/core';
+import { Paper, Typography, Button, Divider, Grid, Table } from '@material-ui/core';
 
-import { Heading, Text, Pane, Card, Tooltip, Position, Strong, Table, Checkbox } from 'evergreen-ui';
+import { withStyles } from '@material-ui/styles';
+
+import { connect } from 'react-redux';
+
+const styles = theme => ({
+    root: {
+        padding: theme.spacing(2)
+    },
+    statUnit: {
+        
+    }
+})
+
+const mapStateToProps = (state) => {
+    return {
+        dbPath: state.app.dbPath,
+        abilityScores: state.character.abilityScores
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    
+}
 
 class MainStats extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
         this.state = {
             abilityScores: [],
-            skills: [],
-            intent: "none"
+            skills: []
         }
     }
 
@@ -61,56 +82,40 @@ class MainStats extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
-            <Card
-                background="tint1"
-                height={500}
-                width={440}
-                elevation={1}
-                
-            >
-                <Pane
-                    width={260}
-                    height={500}
+            <Paper className={classes.root}>
+                <Grid
+                    container
+                    direction="row"
                 >
-                    <Table>
-                        <Table.Head style={{ textAlign: "center" }} >
+                    <Grid
+                        item
+                    >
+                        <Typography variant="h5">
+                            DEX
+                        </Typography>
 
-                            <Table.TextHeaderCell flexBasis={10}>
-                                Skills
-                            </Table.TextHeaderCell>
-                            <Table.TextHeaderCell>
-                                Mod.
-                            </Table.TextHeaderCell>
-                        </Table.Head>
+                        <Typography variant="h6">
+                            10
+                        </Typography>
 
-                        <Table.Body height={444}>
-                            {this.state.skills.length === 0 ? "" : this.state.skills.map((item, index) => {
-                                // console.log(item);
-                                return (
-                                    <Tooltip content={item.skillDesc}>
-                                        <Table.Row isSelectable height={32} intent={this.state.intent} onSelect={() => {
-                                            this.setState({ intent: "success" })
-                                        }}>
-                                            <Table.TextCell flexBasis={10}>
-                                                {item.skillName}
-                                            </Table.TextCell>
+                        <Divider />
 
+                        <Typography variant="h6">
+                            +1
+                        </Typography>
+                    </Grid>
 
-                                            <Table.TextCell style={{ textAlign: "center" }} >
-                                                0
-                                        </Table.TextCell>
-                                        </Table.Row>
-                                    </Tooltip>        
-                                )
-                            })}
+                    <Grid item>
+                        <Table/>
+                    </Grid>
 
-                        </Table.Body>
-                    </Table>
-                </Pane>
-            </Card>
+                </Grid>
+
+            </Paper>
         );
     }
 }
 
-export default MainStats;
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MainStats));
