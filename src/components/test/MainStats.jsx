@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Paper, Typography, Button, Divider, Grid, Table } from '@material-ui/core';
+import { Paper, Typography, Button, Divider, Grid, Table, TableBody, TableHead, TableCell, TableRow, Checkbox } from '@material-ui/core';
 
 import { withStyles } from '@material-ui/styles';
 
@@ -9,9 +9,6 @@ import { connect } from 'react-redux';
 const styles = theme => ({
     root: {
         padding: theme.spacing(2)
-    },
-    statUnit: {
-        
     }
 })
 
@@ -93,7 +90,7 @@ class MainStats extends React.Component {
                         item
                     >
                         <Typography variant="h5">
-                            DEX
+                            STR
                         </Typography>
 
                         <Typography variant="h6">
@@ -108,7 +105,35 @@ class MainStats extends React.Component {
                     </Grid>
 
                     <Grid item>
-                        <Table/>
+                        <Table size="small">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Prof.</TableCell>
+                                    <TableCell>Exp.</TableCell>
+                                    <TableCell>Skill</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {this.state.skills.map(item => {
+                                    if (item.skillID === 1) {
+                                        return (
+                                            <TableRow>
+                                                <TableCell>
+                                                    <Checkbox />
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Checkbox />
+                                                </TableCell>
+                                                <TableCell>
+                                                    {item.skillName}
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    }
+                                })}
+                               
+                            </TableBody>
+                        </Table>
                     </Grid>
 
                 </Grid>

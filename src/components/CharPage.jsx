@@ -5,7 +5,7 @@ import MainStats from './test/MainStats';
 import ClassDisplay from './ClassDisplay';
 
 
-import { Grid } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 
 class CharPage extends React.Component {
     
@@ -22,14 +22,18 @@ class CharPage extends React.Component {
         return (
             <Grid
                 container
-                direction="column"
-                justify="center"
+                direction="row"
+                justify="space-around"
                 alignItems="center"
+                spacing={4}
             >
-                <ProfileCard />
+                {/* <Grid item>
+                    <ProfileCard />
+                </Grid>
 
-                <ClassDisplay />
-
+                <Grid item>
+                    <ClassDisplay />
+                </Grid>                 */}
                 <MainStats/>
 
             </Grid>

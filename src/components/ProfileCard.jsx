@@ -2,11 +2,20 @@ import React from 'react';
 
 import { Paper, Grid } from '@material-ui/core';
 
+import { withStyles } from '@material-ui/styles';
+
 import SelectionMenu from './ProfileCard/SelectionMenu';
 
 import NameField from './ProfileCard/NameField';
 
 import CharAvatar from './ProfileCard/CharAvatar';
+
+
+const styles = theme => ({
+    root: {
+        padding: theme.spacing(2)
+    }
+})
 
 
 class ProfileCard extends React.Component {
@@ -15,10 +24,11 @@ class ProfileCard extends React.Component {
     }
 
     render() {
-
+        const { classes } = this.props;
         return (
             <Paper
                 elevation={1}
+                className={classes.root}
             >
                 <Grid
                     container
@@ -32,13 +42,18 @@ class ProfileCard extends React.Component {
                         alignItems="center"
                         justify="space-between"
                         direction="row"
+                        spacing={2}
                     >
-                        <Grid>
+                        <Grid
+                            item
+                        >
                             <CharAvatar/>
                             <SelectionMenu mode="Race" />
                         </Grid>
 
-                        <Grid>
+                        <Grid
+                            item
+                        >
                             <NameField mode="Character" />
                             <NameField mode="Player" />
                             <SelectionMenu mode="Background" />
@@ -51,4 +66,4 @@ class ProfileCard extends React.Component {
     }
 }
 
-export default ProfileCard;
+export default withStyles(styles)(ProfileCard);

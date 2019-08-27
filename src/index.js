@@ -54,7 +54,10 @@ const store = createStore(
             feats: []
         },
         app: {
-            dbPath: dbPath
+            dbPath: dbPath,
+            dbData: {
+                
+            }
         },
         user: {
             name: ""
