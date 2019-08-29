@@ -1,16 +1,12 @@
 import React from 'react';
 
-import { Paper, Typography, Button, Divider, Grid, Table, TableBody, TableHead, TableCell, TableRow, Checkbox } from '@material-ui/core';
+import { Paper, Typography, Divider, Grid, Table, TableBody, TableHead, TableCell, TableRow, Checkbox } from '@material-ui/core';
 
 import { withStyles } from '@material-ui/styles';
 
 import { connect } from 'react-redux';
 
-const styles = theme => ({
-    root: {
-        padding: theme.spacing(2)
-    }
-})
+import AScoreCard from './AScoreCard';
 
 const mapStateToProps = (state) => {
     return {
@@ -49,10 +45,10 @@ class MainStats extends React.Component {
             })
 
                 .select({
-                    aSName: 'aScore.name',
-                    aSAbbr: 'aScore.abbr',
-                    aSID: 'aScore.index',
-                    aSDesc: 'aScore.desc'
+                    name: 'aScore.name',
+                    abbr: 'aScore.abbr',
+                    index: 'aScore.index',
+                    desc: 'aScore.desc'
                 })
                 .orderBy("aScore.index", 'asc');
 
@@ -66,10 +62,10 @@ class MainStats extends React.Component {
             })
         
                 .select({
-                    skillName: 'skills.name',
-                    skillID: 'skills.index',
-                    skillDesc: 'skills.desc',
-                    skillAScoreID: 'skills.abilityScoreID'
+                    name: 'skills.name',
+                    index: 'skills.index',
+                    desc: 'skills.desc',
+                    abilityScoreID: 'skills.abilityScoreID'
                 })
                 .orderBy("skills.name", "asc");
         
@@ -79,68 +75,19 @@ class MainStats extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
         return (
-            <Paper className={classes.root}>
-                <Grid
-                    container
-                    direction="row"
-                >
-                    <Grid
-                        item
-                    >
-                        <Typography variant="h5">
-                            STR
-                        </Typography>
+            this.state.abilityScores.map(abilityScoreItem => {
+                
+                let temp = this.state.skills.filter(item => item.abilityScoreID === abilityScoreItem.index);
 
-                        <Typography variant="h6">
-                            10
-                        </Typography>
-
-                        <Divider />
-
-                        <Typography variant="h6">
-                            +1
-                        </Typography>
-                    </Grid>
-
-                    <Grid item>
-                        <Table size="small">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Prof.</TableCell>
-                                    <TableCell>Exp.</TableCell>
-                                    <TableCell>Skill</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {this.state.skills.map(item => {
-                                    if (item.skillID === 1) {
-                                        return (
-                                            <TableRow>
-                                                <TableCell>
-                                                    <Checkbox />
-                                                </TableCell>
-                                                <TableCell>
-                                                    <Checkbox />
-                                                </TableCell>
-                                                <TableCell>
-                                                    {item.skillName}
-                                                </TableCell>
-                                            </TableRow>
-                                        )
-                                    }
-                                })}
-                               
-                            </TableBody>
-                        </Table>
-                    </Grid>
-
-                </Grid>
-
-            </Paper>
+                return (
+                    <AScoreCard abilityScoreValue={abilityScoreItem} skillList={temp}/>
+                );
+            })
         );
+        
     }
+  
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MainStats));
+export default connect(mapStateToProps, mapDispatchToProps)(MainStats);

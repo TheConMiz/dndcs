@@ -13,7 +13,7 @@ import '@blueprintjs/core/lib/css/blueprint.css';
 const theme = createMuiTheme({
     palette: {
         type: 'light',
-        primary: purple,
+        primary: orange,
         secondary: green,
     },
     status: {
@@ -24,6 +24,10 @@ const theme = createMuiTheme({
 class App extends React.Component {
     constructor() {
         super();
+    }
+
+    componentDidMount = () => {
+        
     }
 
     render() {

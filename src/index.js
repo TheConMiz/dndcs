@@ -49,7 +49,10 @@ const store = createStore(
             xp: 0,
             maxHP: 0,
             currentHP: 0,
-            abilityScores: {},
+            abilityScores: [],
+            skillProficiencies: {
+                
+            },
             equipment: [],
             feats: []
         },
