@@ -17,8 +17,8 @@ class AScoreCard extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         const { classes } = this.props;
+
         return (
             <Paper className={classes.root}>
                 <Grid

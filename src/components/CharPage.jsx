@@ -6,6 +6,7 @@ import ClassDisplay from './ClassDisplay';
 
 
 import { Grid, Paper } from '@material-ui/core';
+import SpellTable from './SpellTable';
 
 class CharPage extends React.Component {
     
@@ -38,6 +39,8 @@ class CharPage extends React.Component {
                 <Grid item>
                     <MainStats />
                 </Grid>
+
+                <SpellTable/>
                 
 
             </Grid>
