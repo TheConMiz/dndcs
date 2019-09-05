@@ -1,4 +1,3 @@
-// Add spells that are not in the SRD
 [
 	{
 		name : "Arcane Gate",
@@ -586,53 +585,3 @@
 		descriptionFull : "The next time you hit with a melee weapon attack during this spell's duration, your attack deals an extra 1d6 psychic damage. Additionally, if the target is a creature, it must make a Wisdom saving throw or be frightened of you until the spell ends. As an action, the creature can make a Wisdom check against your spell save DC to steel its resolve and end this spell."
 	}
 ]
-
-// Add a function if not already defined
-// if (typeof AddToNotes === 'undefined') {
-// 	AddToNotes = function(noteStr, alertTxt, oldNoteStr) {
-// 		if (What("Unit System") === "metric") {
-// 			noteStr = ConvertToMetric(noteStr, 0.5);
-// 			if (oldNoteStr) oldNoteStr = ConvertToMetric(oldNoteStr, 0.5);
-// 		};
-// 		noteStr = noteStr.replace(/\n/g, "\r");
-// 		if (oldNoteStr) oldNoteStr = oldNoteStr.replace(/\n/g, "\r");
-// 		var replaceOldNote = false;
-// 		if (!isTemplVis("ASnotes")) {
-// 			var noteFld = DoTemplate("ASnotes", "Add");
-// 			noteFld += "Notes.Left";
-// 		} else {
-// 			var noteFld = false;
-// 			var noteFlds = ["Notes.Left", "Notes.Right"];
-// 			var notesPrefix = What("Template.extras.ASnotes").split(",");
-// 			for (var i = 1; i < notesPrefix.length; i++) {
-// 				for (var n = 0; n < noteFlds.length; n++) {
-// 					var aFld = notesPrefix[i] + noteFlds[n];
-// 					var inFld = What(aFld);
-// 					if (noteStr && inFld.toLowerCase().indexOf(noteStr.toLowerCase()) !== -1) {
-// 						return;
-// 					} else if (oldNoteStr && inFld.toLowerCase().indexOf(oldNoteStr.toLowerCase()) !== -1) {
-// 						noteFld = aFld;
-// 						replaceOldNote = true;
-// 						i = noteFlds.length;
-// 						break;
-// 					} else if (inFld === "" && !noteFld) {
-// 						noteFld = aFld;
-// 					};
-// 				};
-// 			};
-// 			if (!noteFld && noteStr) {
-// 				noteFld = DoTemplate("ASnotes", "Add");
-// 			} else if (!noteStr && !oldNoteStr) {
-// 				return;
-// 			};
-// 		};
-// 		ReplaceString(noteFld, noteStr, false, oldNoteStr ? oldNoteStr : "");
-// 		if (!replaceOldNote && noteStr && alertTxt) {
-// 			app.alert({
-// 				cTitle : alertTxt + " is added on the Notes page",
-// 				cMsg : "You can find the rules for " + alertTxt + " on the \"Notes\" page at page no. " + (tDoc.getField(noteFld).page + 1) + ".\n\nThese rules are simply to much for the Class Features section and do not fit with the rest that needs to go in the third page's Notes section. Thus, these rules will be put on a Notes page and will be updated there.",
-// 				nIcon : 3
-// 			});
-// 		};
-// 	};
-// };

@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Table, TableHead, TableCell, TableRow, Checkbox, TableBody, Tabs, Tab, Paper } from '@material-ui/core';
+import { Table, TableHead, TableCell, TableRow, Checkbox, TableBody, Tabs, Tab, Paper, Button } from '@material-ui/core';
+
+import MaterialTable from 'material-table';
 
 import { connect } from 'react-redux';
 
@@ -19,7 +21,7 @@ class SpellTable extends React.Component {
         };
     }
 
-    componentDidMount = () => {
+    generateSpellTable = () => {
         const knex = window.require('knex')({
             client: "sqlite3",
             connection: {
@@ -29,20 +31,36 @@ class SpellTable extends React.Component {
             debug: true
         });
 
+        let temp = []
+
+        this.props.classes.map(item => {
+            temp.push(item.classValue.value.classID);
+        })
+
+        console.log(temp);
+
         let dbQuery =
             knex({
                 spells: "Spells"
             })
-            
+                
+                .join("SpellsToClass", "spells.index", "=", "SpellsToClass.spellID")
+                .join("Classes", "Classes.index", "=", "SpellsToClass.classID")
+                .whereIn("SpellsToClass.classID", temp)
                 .select({
-                    name: "spells.name",
                     index: "spells.index",
-                    desc: "spells.desc/0"
+                    name: "spells.name",
+                    level: "spells.level"
+
                 })
-            
-                .orderBy("spells.name", "asc");
+
+                .distinct()
+                
+                .orderBy("spells.name", "asc")
+                .orderBy("spells.level", "asc")
         
         dbQuery.then((rows) => {
+            console.log(rows);
             this.setState({ spellList: rows });
         });
 
@@ -50,58 +68,26 @@ class SpellTable extends React.Component {
 
     render() {
         return (
-
-            <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell
-                            align="center"
-                            padding="checkbox"
-                        >
-                            Prep.
-                </TableCell>
-                        <TableCell
-                            align="center"
-                            padding="checkbox"
-                        >
-                            Spell
-                </TableCell>
-                        <TableCell
-                            align="center"
-                            padding="checkbox"
-                        >
-                            Description
-                </TableCell>
-                    </TableRow>
-                </TableHead>
-
-                <TableBody>
-                    {this.state.spellList.length === 0 ? "" : this.state.spellList.map((item, index) => {
-                        return (
-                            <TableRow>
-                                <TableCell
-                                    align="center"
-                                    padding="checkbox"
-                                >
-                                    <Checkbox disableFocusRipple />
-                                </TableCell>
-                                <TableCell
-                                    align="center"
-                                    padding="checkbox"
-                                >
-                                    {item.name}
-                                </TableCell>
-                                <TableCell
-                                    align="center"
-                                    padding="checkbox"
-                                >
-                                    {item.desc}
-                                </TableCell>
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>            
+            <div>
+                <MaterialTable
+                    columns={[
+                        { title: "Name", field: "name" },
+                        
+                    ]}
+                    data={
+                        this.state.spellList.length === 0 ? [] : 
+                            this.state.spellList.map((item, index) => {
+                                return {
+                                    name: item.name
+                                }
+                            })
+                    }
+                />
+                
+                <Button onClick={this.generateSpellTable}>
+                    Database Test
+                </Button>
+            </div>
         );
     }
 }

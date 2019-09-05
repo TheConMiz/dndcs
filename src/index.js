@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import characterReducer from './reducers/characterReducer';
 import appReducer from './reducers/appReducer';
 import userReducer from './reducers/userReducer';
+import rulesReducer from './reducers/rulesReducer';
 
 // Database Path variables
 const path = window.require('path');
@@ -34,7 +35,8 @@ else {
 const allReducers = combineReducers({
     character: characterReducer,
     app: appReducer,
-    user: userReducer
+    user: userReducer,
+    rules: rulesReducer
 })
 
 const store = createStore(
@@ -57,16 +59,15 @@ const store = createStore(
             feats: []
         },
         app: {
-            dbPath: dbPath,
-            dbData: {
-                
-            }
+            dbPath: dbPath
         },
         user: {
             name: ""
+        },
+        rules: {
+            levels: []
         }
     },
-    
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
