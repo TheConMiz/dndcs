@@ -29,23 +29,23 @@ class AScoreCard extends React.Component {
                     <Grid
                         item
                     >
-                        <Typography variant="h5">
+                        <Typography variant="h6" align="center">
                             {this.props.abilityScoreValue.abbr}
                         </Typography>
 
-                        <Typography variant="h6">
+                        <Typography variant="h7" align="center">
                             10
                         </Typography>
 
                         <Divider />
 
-                        <Typography variant="h6">
+                        <Typography variant="h7" align="center">
                             +1
                         </Typography>
 
                         <Divider />
                         
-                        <Typography variant="h7">
+                        <Typography variant="h8" align="center">
                             Save: +4
                         </Typography>
                     </Grid>
@@ -64,6 +64,7 @@ class AScoreCard extends React.Component {
                                     >
                                         Prof.
                                     </TableCell>
+
                                     <TableCell
                                         align="center"
                                         padding="checkbox"
@@ -75,6 +76,13 @@ class AScoreCard extends React.Component {
                                         padding="checkbox"
                                     >
                                         Skill
+                                    </TableCell>
+
+                                    <TableCell
+                                        align="left"
+                                        padding="checkbox"
+                                    >
+                                        Mod.
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
@@ -90,6 +98,7 @@ class AScoreCard extends React.Component {
                                                 >
                                                     <Checkbox
                                                         disableFocusRipple
+                                                        checked={item.proficiency}
                                                     />
                                                 </TableCell>
                                                 <TableCell
@@ -99,6 +108,7 @@ class AScoreCard extends React.Component {
                                                     <Checkbox
                                                         disableFocusRipple
                                                         color="primary"
+                                                        checked={item.expertise}
                                                     />
                                                 </TableCell>
                                                 <TableCell
@@ -106,6 +116,12 @@ class AScoreCard extends React.Component {
                                                     padding="checkbox"
                                                 >
                                                     {item.name}
+                                                </TableCell>
+                                                <TableCell
+                                                    align="left"
+                                                    padding="checkbox"
+                                                >
+                                                    12
                                                 </TableCell>
                                             </TableRow>
                                         )

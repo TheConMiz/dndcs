@@ -28,21 +28,30 @@ class CharPage extends React.Component {
                 alignItems="center"
                 spacing={4}
             >
-                <Grid item>
-                    <ProfileCard />
+
+                <Grid
+                    item
+                    direction="column"
+                >
+                    <Grid
+                        item
+                    >
+                        <ProfileCard />
+                    </Grid>
+
+                    <Grid
+                        item
+                    >
+                        <MainStats />
+                    </Grid>
                 </Grid>
 
-                <Grid item>
-                    <ClassDisplay />
-                </Grid>   
-                
-                <Grid item>
-                    <MainStats />
+                <Grid item direction="column">
+                    <Grid item>
+                        <ClassDisplay />
+                    </Grid>
+                    
                 </Grid>
-
-                <SpellTable/>
-                
-
             </Grid>
         );
     }

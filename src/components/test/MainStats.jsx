@@ -43,7 +43,6 @@ class MainStats extends React.Component {
             knex({
                 aScore: 'AbilityScores'
             })
-
                 .select({
                     name: 'aScore.name',
                     abbr: 'aScore.abbr',
@@ -70,20 +69,57 @@ class MainStats extends React.Component {
                 .orderBy("skills.name", "asc");
         
         dbQuery.then((rows) => {
-            this.setState({ skills: rows });
+            let tempRows = rows.map(item => ({ ...item, proficiency: false, expertise: false }));
+            this.setState({ skills: tempRows });
         });
     }
 
     render() {
         return (
-            this.state.abilityScores.map(abilityScoreItem => {
-                
-                let temp = this.state.skills.filter(item => item.abilityScoreID === abilityScoreItem.index);
+            <div>
+                <Grid
+                    container
+                    direction="row"
+                >
 
-                return (
-                    <AScoreCard abilityScoreValue={abilityScoreItem} skillList={temp}/>
-                );
-            })
+                    {
+                        this.state.abilityScores.map((abilityScoreItem, index) => {
+
+                            if (index / 2 === 0) {
+                                let temp = this.state.skills.filter(item => item.abilityScoreID === abilityScoreItem.index);
+
+                                return (
+                                    <Grid item>
+                                        <AScoreCard abilityScoreValue={abilityScoreItem} skillList={temp} />
+                                    </Grid>
+                                );
+                            }
+                        })
+                    }
+                </Grid> 
+
+                <Grid
+                    container
+                    direction="row"
+                >
+
+                    {
+                        this.state.abilityScores.map((abilityScoreItem, index) => {
+
+                            if (index / 2 != 0) {
+                                let temp = this.state.skills.filter(item => item.abilityScoreID === abilityScoreItem.index);
+
+                                return (
+                                    <Grid item>
+                                        <AScoreCard abilityScoreValue={abilityScoreItem} skillList={temp} />
+                                    </Grid>
+                                );
+                            }
+                        })
+                    }
+                </Grid> 
+            </div>
+            
         );
         
     }

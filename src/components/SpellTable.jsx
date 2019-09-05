@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
         classes: state.character.classes
     };
 }
+
 class SpellTable extends React.Component {
     constructor() {
         super();

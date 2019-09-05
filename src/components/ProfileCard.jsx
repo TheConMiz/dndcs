@@ -32,35 +32,38 @@ class ProfileCard extends React.Component {
             >
                 <Grid
                     container
-                    direction="column"
-                    justify="space-between"
+                    direction="row"
                     alignItems="center"
+                    justify="space-evenly"
                 >
-                    <Grid
-                        container
-                        item
-                        alignItems="center"
-                        justify="space-between"
-                        direction="row"
-                        spacing={2}
-                    >
-                        <Grid
-                            item
-                        >
-                            <CharAvatar/>
-                            <SelectionMenu mode="Race" />
+                    
+                    <Grid item direction="column" spacing={2}>
+                        <Grid item>
+                            <CharAvatar />
                         </Grid>
 
-                        <Grid
-                            item
-                        >
+                        <Grid item>
+                            <SelectionMenu mode="Race" />
+                        </Grid>        
+                    </Grid>
+
+                    <Grid item direction="column" spacing={2}>
+                        <Grid item>
                             <NameField mode="Character" />
+                        </Grid>
+
+                        <Grid item>
                             <NameField mode="Player" />
+                        </Grid>
+                        
+                        <Grid item>
                             <SelectionMenu mode="Background" />
                         </Grid>
-
+                                
                     </Grid>
+       
                 </Grid>
+
             </Paper>
         );
     }
