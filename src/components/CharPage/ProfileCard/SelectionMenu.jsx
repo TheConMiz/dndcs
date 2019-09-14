@@ -4,7 +4,7 @@ import { SelectMenu, Card, Pane, Text, IconButton, Button } from 'evergreen-ui';
 
 import { connect } from 'react-redux';
 
-import { updateCharRace, updateCharBackground } from './../../actions/characterActions';
+import { updateCharRace, updateCharBackground } from './../../../actions/characterActions';
 
 const mapStateToProps = (state, ownProps) => {
     

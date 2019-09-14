@@ -51,10 +51,6 @@ class ProfileCard extends React.Component {
                         <Grid item>
                             <NameField mode="Character" />
                         </Grid>
-
-                        <Grid item>
-                            <NameField mode="Player" />
-                        </Grid>
                         
                         <Grid item>
                             <SelectionMenu mode="Background" />

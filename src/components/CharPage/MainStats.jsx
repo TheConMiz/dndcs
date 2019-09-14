@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Paper, Typography, Divider, Grid, Table, TableBody, TableHead, TableCell, TableRow, Checkbox } from '@material-ui/core';
 
-import { withStyles } from '@material-ui/styles';
-
 import { connect } from 'react-redux';
 
 import AScoreCard from './AScoreCard';

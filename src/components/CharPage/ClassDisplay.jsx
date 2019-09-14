@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ClassTable from './ClassDisplay/ClassTable';
+
 import ClassSelectionMenu from './ClassDisplay/ClassSelectionMenu';
 
 import { Paper } from '@material-ui/core';

@@ -26,10 +26,6 @@ class App extends React.Component {
         super();
     }
 
-    componentDidMount = () => {
-        
-    }
-
     render() {
         return (
             <ThemeProvider theme={theme}>
