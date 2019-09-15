@@ -1,41 +1,88 @@
-import React, {useState} from 'react';
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import { Drawer, List, ListItem, Divider, ListItemIcon, ListItemText, Switch, Avatar } from '@material-ui/core';
+import { Drawer, List, Divider, ListItemIcon, ListItemText, ListItem } from '@material-ui/core';
 
-import {makeStyles, useTheme } from '@material-ui/styles';
-
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import DescriptionIcon from '@material-ui/icons/Description';
 import SaveIcon from '@material-ui/icons/SaveSharp';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex'
-    },
-    drawer: {
-        width: 240
+const drawerWidth = 205;
+
+const useStyles = makeStyles(theme => (
+    {
+        root: {
+            display: 'flex',
+        },
+        drawer: {
+            width: drawerWidth,
+            flexShrink: 0,
+            whiteSpace: 'nowrap',
+        },
+        drawerOpen: {
+            width: drawerWidth,
+            transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+        },
+        drawerClose: {
+            transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.leavingScreen,
+            }),
+            overflowX: 'hidden',
+            width: theme.spacing(5) + 1,
+            [theme.breakpoints.up('sm')]: {
+                width: theme.spacing(9) + 1,
+            },
+        }
     }
-}));
+));
 
 export default function SideMenu() {
-    
     const classes = useStyles();
+    const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
+
+    function handleDrawerOpen() {
+        setOpen(true);
+    }
+
+    function handleDrawerClose() {
+        setOpen(false);
+    }
 
     return (
-        <div>
+        <div className={classes.root}>
+
             <Drawer
                 variant="permanent"
-                className={classes.drawer}
+                className={clsx(classes.drawer, {
+                    [classes.drawerOpen]: open,
+                    [classes.drawerClose]: !open,
+                })}
+                classes={{
+                    paper: clsx({
+                        [classes.drawerOpen]: open,
+                        [classes.drawerClose]: !open,
+                    }),
+                }}
+                open={open}
+                elevation={2}
             >
+                <Divider />
                 <List>
-                    <ListItem>
-                        <Avatar
-                            alt="Tim Cerberus"
-                        />
-                        <ListItemText primary="Tim Cerberus" />
-                    </ListItem>
+                {/* <ListItem>
+                    <Avatar
+                        alt="Tim Cerberus"
+                    />
+                    <ListItemText primary="Tim Cerberus" />
+                </ListItem> */}
 
                     <ListItem button>
                         <ListItemIcon>
@@ -73,22 +120,14 @@ export default function SideMenu() {
 
                     <Divider />
 
-                    <ListItem>
-                        <Switch
-                            size="medium"
-                        >
-
-                        </Switch>
-                    </ListItem>
-
-                    <Divider />
-
-                    <ListItem button>
+                    <ListItem button onClick={!open ? handleDrawerOpen: handleDrawerClose}>
                         <ListItemIcon>
-                            <ChevronRightIcon />
+                            {!open ? <ChevronRightIcon /> : <ChevronLeftIcon/>}
                         </ListItemIcon>
                     </ListItem>
+                
                 </List>
+
             </Drawer>
         </div>
     );

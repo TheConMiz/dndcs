@@ -16,11 +16,11 @@ class CharPage extends React.Component {
 
     render() {
         return (
-            <div>
-                {/* <ProfileCard />
-                <MainStats /> */}
-                {/* <ClassDisplay />
-                <SpellTable /> */}
+            <div style={{marginLeft: '180px'}}>
+                {/* <ProfileCard /> */}
+                <MainStats />
+                <ClassDisplay />
+                <SpellTable />
             </div>
         );
     }

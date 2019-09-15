@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Paper, Typography, Divider, Grid, Table, TableBody, TableHead, TableCell, TableRow, Checkbox } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 
@@ -74,50 +74,24 @@ class MainStats extends React.Component {
 
     render() {
         return (
-            <div>
-                <Grid
-                    container
-                    direction="row"
-                >
+            <Grid
+                container
+                direction="row"
+                spacing={2}
+            >
+                {
+                    this.state.abilityScores.map((abilityScoreItem, index) => {
 
-                    {
-                        this.state.abilityScores.map((abilityScoreItem, index) => {
+                        let temp = this.state.skills.filter(item => item.abilityScoreID === abilityScoreItem.index);
 
-                            if (index / 2 === 0) {
-                                let temp = this.state.skills.filter(item => item.abilityScoreID === abilityScoreItem.index);
-
-                                return (
-                                    <Grid item>
-                                        <AScoreCard abilityScoreValue={abilityScoreItem} skillList={temp} />
-                                    </Grid>
-                                );
-                            }
-                        })
-                    }
-                </Grid> 
-
-                <Grid
-                    container
-                    direction="row"
-                >
-
-                    {
-                        this.state.abilityScores.map((abilityScoreItem, index) => {
-
-                            if (index / 2 != 0) {
-                                let temp = this.state.skills.filter(item => item.abilityScoreID === abilityScoreItem.index);
-
-                                return (
-                                    <Grid item>
-                                        <AScoreCard abilityScoreValue={abilityScoreItem} skillList={temp} />
-                                    </Grid>
-                                );
-                            }
-                        })
-                    }
-                </Grid> 
-            </div>
-            
+                        return (
+                            <Grid item>
+                                <AScoreCard abilityScoreValue={abilityScoreItem} skillList={temp} />
+                            </Grid>
+                        );
+                    })
+                }
+            </Grid>         
         );
         
     }

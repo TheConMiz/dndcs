@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import { Paper, Typography, Divider, Grid, Table, TableBody, TableHead, TableCell, TableRow, Checkbox } from '@material-ui/core';
+import { Paper, Typography, Divider, Grid, Table, TableBody, TableHead, TableCell, TableRow, Checkbox, Button } from '@material-ui/core';
 
 import { withStyles } from '@material-ui/styles';
 
 
 const styles = theme => ({
     root: {
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
+        height: 190,
+        width: 400
+    },
+    statBlock: {
+        textAlign: "center"
+    },
+    divider: {
+        height: 175
     }
+
 })
 
 class AScoreCard extends React.Component {
@@ -25,32 +34,34 @@ class AScoreCard extends React.Component {
                     container
                     direction="row"
                     spacing={2}
+                    alignItems="stretch"
                 >
                     <Grid
                         item
+                        className={classes.statBlock}
                     >
-                        <Typography variant="h6" align="center">
+                        <Typography variant="h6" >
                             {this.props.abilityScoreValue.abbr}
                         </Typography>
 
-                        <Typography variant="h7" align="center">
+                        <Typography variant="h7" >
                             10
                         </Typography>
 
                         <Divider />
 
-                        <Typography variant="h7" align="center">
+                        <Typography variant="h7" >
                             +1
                         </Typography>
 
                         <Divider />
                         
-                        <Typography variant="h8" align="center">
+                        <Typography variant="h8" >
                             Save: +4
                         </Typography>
                     </Grid>
 
-                    <Grid item>
+                    <Grid item className={classes.divider}>
                         <Divider orientation="vertical"/>
                     </Grid>
 
@@ -91,7 +102,7 @@ class AScoreCard extends React.Component {
                                 {this.props.skillList.map(item => {
                                     if (item.abilityScoreID === this.props.abilityScoreValue.index) {
                                         return (
-                                            <TableRow>
+                                            <TableRow hover={true}>
                                                 <TableCell
                                                     align="center"
                                                     padding="checkbox"
