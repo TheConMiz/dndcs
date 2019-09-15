@@ -17,10 +17,10 @@ class CharPage extends React.Component {
     render() {
         return (
             <div>
-                <ProfileCard />
-                <MainStats />
-                <ClassDisplay />
-                <SpellTable />
+                {/* <ProfileCard />
+                <MainStats /> */}
+                {/* <ClassDisplay />
+                <SpellTable /> */}
             </div>
         );
     }

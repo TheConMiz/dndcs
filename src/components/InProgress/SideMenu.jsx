@@ -1,60 +1,95 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import { Drawer, List, ListItem, IconButton, Divider, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Drawer, List, ListItem, Divider, ListItemIcon, ListItemText, Switch, Avatar } from '@material-ui/core';
+
+import {makeStyles, useTheme } from '@material-ui/styles';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
+import DescriptionIcon from '@material-ui/icons/Description';
 import SaveIcon from '@material-ui/icons/SaveSharp';
+import SearchIcon from '@material-ui/icons/Search';
+import AddIcon from '@material-ui/icons/Add';
 
-
-export default class SideMenu extends React.Component {
-    constructor(props) {
-        super(props);
-        
-        this.state = {
-            menuOpen: false
-        };
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex'
+    },
+    drawer: {
+        width: 240
     }
+}));
 
-    handleMenuToggle = () => {
-        this.setState({ menuOpen: !this.state.menuOpen });
-        console.log(this.state.menuOpen);
-    }
+export default function SideMenu() {
+    
+    const classes = useStyles();
 
-    render() {
-        return (
-            <div>
-                <Drawer
-                    variant="permanent"
-                    open={this.state.menuOpen}
-                >
+    return (
+        <div>
+            <Drawer
+                variant="permanent"
+                className={classes.drawer}
+            >
+                <List>
+                    <ListItem>
+                        <Avatar
+                            alt="Tim Cerberus"
+                        />
+                        <ListItemText primary="Tim Cerberus" />
+                    </ListItem>
 
-                    <List>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <SaveIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Save" />
-                        </ListItem>
-                        
-                        <Divider/>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="New Character" />
+                    </ListItem>
 
-                        <ListItem button>
-                            <ListItemIcon>
-                                <SaveIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Save" />
-                        </ListItem>
-                    </List>
-                    <div>
-                        <IconButton disableFocusRipple onClick={this.handleMenuToggle}>
+                    <Divider />
+
+                    <ListItem button>
+                        <ListItemIcon>
+                            <DescriptionIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Spell Sheet" />
+                    </ListItem>
+
+                    <Divider />
+
+                    <ListItem button>
+                        <ListItemIcon>
+                            <SearchIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Search" />
+                    </ListItem>
+
+                    <Divider />
+
+                    <ListItem button>
+                        <ListItemIcon>
+                            <SaveIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Save" />
+                    </ListItem>
+
+                    <Divider />
+
+                    <ListItem>
+                        <Switch
+                            size="medium"
+                        >
+
+                        </Switch>
+                    </ListItem>
+
+                    <Divider />
+
+                    <ListItem button>
+                        <ListItemIcon>
                             <ChevronRightIcon />
-                        </IconButton>
-                    </div>
-                        
-                    
-                </Drawer>
-            </div>
-        );
-    }
+                        </ListItemIcon>
+                    </ListItem>
+                </List>
+            </Drawer>
+        </div>
+    );
 }

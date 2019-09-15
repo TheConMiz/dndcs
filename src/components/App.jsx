@@ -2,17 +2,19 @@ import React from 'react';
 
 import CharPage from './CharPage';
 
+import SideMenu from './InProgress/SideMenu'
+
 import { createMuiTheme } from '@material-ui/core';
 
 import { ThemeProvider } from '@material-ui/styles';
 
-import { green, orange, purple } from '@material-ui/core/colors';
+import { green, orange } from '@material-ui/core/colors';
 
 import '@blueprintjs/core/lib/css/blueprint.css';
 
 const theme = createMuiTheme({
     palette: {
-        type: 'light',
+        type: 'dark',
         primary: orange,
         secondary: green,
     },
@@ -22,14 +24,15 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     render() {
         return (
             <ThemeProvider theme={theme}>
                 <CharPage />
+                <SideMenu/>
             </ThemeProvider>  
         );
     }

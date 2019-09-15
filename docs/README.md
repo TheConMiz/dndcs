@@ -4,6 +4,7 @@
 
 1. [**Versions**](#versions)
 2. **Development Logs**
+   1. Known Oversights
 3. **Database Schema**
 4. [**To-Do's**](#to-dos)
 
