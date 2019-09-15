@@ -10,6 +10,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import SaveIcon from '@material-ui/icons/SaveSharp';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 import CharPage from './SideMenu/CharPage';
 
@@ -110,11 +111,22 @@ export default function SideMenu() {
 
                     <Divider />
 
+
+
                     <ListItem button disabled={true}>
                         <ListItemIcon>
                             <SaveIcon />
                         </ListItemIcon>
                         <ListItemText primary="Save" />
+                    </ListItem>
+
+                    <Divider />
+
+                    <ListItem button disabled={true}>
+                        <ListItemIcon>
+                            <SettingsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Settings" />
                     </ListItem>
 
                     <Divider />
