@@ -14,6 +14,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CharPage from './SideMenu/CharPage';
 
 import SelectionMenu from './SideMenu/CharPage/ProfileCard/SelectionMenu';
+import ClassDisplay from './SideMenu/CharPage/ClassDisplay';
 
 const drawerWidth = 205;
 
@@ -132,7 +133,8 @@ export default function SideMenu() {
             
             <Grid>
                 {/* <CharPage /> */}
-                <SelectionMenu/>
+                {/* <SelectionMenu/> */}
+                <ClassDisplay/>
             </Grid>
         </div>
     );

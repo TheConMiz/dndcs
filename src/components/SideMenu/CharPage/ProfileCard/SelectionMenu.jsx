@@ -204,6 +204,7 @@ export default function SelectionMenu() {
         
         <Select
             isClearable
+            placeholder="Select a Background"
         />
         
     );
