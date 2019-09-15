@@ -4,9 +4,9 @@ import { TextInputField, Button } from 'evergreen-ui';
 
 import { connect } from 'react-redux';
 
-import { updateCharName } from './../../../actions/characterActions';
+import { updateCharName } from './../../../../actions/characterActions';
 
-import { updateUserName } from './../../../actions/userActions';
+import { updateUserName } from './../../../../actions/userActions';
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {

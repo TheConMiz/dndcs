@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 
-import AScoreCard from './AScoreCard';
+import AScoreCard from './MainStats/AScoreCard';
 
 const mapStateToProps = (state) => {
     return {

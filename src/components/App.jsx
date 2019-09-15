@@ -1,8 +1,6 @@
 import React from 'react';
 
-import CharPage from './CharPage';
-
-import SideMenu from './InProgress/SideMenu'
+import SideMenu from './SideMenu'
 
 import { createMuiTheme, CssBaseline } from '@material-ui/core';
 
@@ -29,9 +27,7 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <SideMenu />
-            <CharPage />
-            
+            <SideMenu />            
         </ThemeProvider>
     );
 }

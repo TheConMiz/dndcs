@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { Drawer, List, Divider, ListItemIcon, ListItemText, ListItem } from '@material-ui/core';
+import { Drawer, List, Divider, ListItemIcon, ListItemText, ListItem, Grid } from '@material-ui/core';
 
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -10,6 +10,10 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import SaveIcon from '@material-ui/icons/SaveSharp';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
+
+import CharPage from './SideMenu/CharPage';
+
+import SelectionMenu from './SideMenu/CharPage/ProfileCard/SelectionMenu';
 
 const drawerWidth = 205;
 
@@ -21,7 +25,7 @@ const useStyles = makeStyles(theme => (
         drawer: {
             width: drawerWidth,
             flexShrink: 0,
-            whiteSpace: 'nowrap',
+            whiteSpace: 'nowrap'
         },
         drawerOpen: {
             width: drawerWidth,
@@ -36,17 +40,15 @@ const useStyles = makeStyles(theme => (
                 duration: theme.transitions.duration.leavingScreen,
             }),
             overflowX: 'hidden',
-            width: theme.spacing(5) + 1,
-            [theme.breakpoints.up('sm')]: {
-                width: theme.spacing(9) + 1,
-            },
-        }
+            width: 55
+        },
     }
 ));
 
 export default function SideMenu() {
+
     const classes = useStyles();
-    const theme = useTheme();
+
     const [open, setOpen] = React.useState(false);
 
     function handleDrawerOpen() {
@@ -66,6 +68,7 @@ export default function SideMenu() {
                     [classes.drawerOpen]: open,
                     [classes.drawerClose]: !open,
                 })}
+                
                 classes={{
                     paper: clsx({
                         [classes.drawerOpen]: open,
@@ -75,16 +78,11 @@ export default function SideMenu() {
                 open={open}
                 elevation={2}
             >
-                <Divider />
-                <List>
-                {/* <ListItem>
-                    <Avatar
-                        alt="Tim Cerberus"
-                    />
-                    <ListItemText primary="Tim Cerberus" />
-                </ListItem> */}
 
-                    <ListItem button>
+                <List>
+                    <Divider />
+
+                    <ListItem button disabled={true}>
                         <ListItemIcon>
                             <AddIcon />
                         </ListItemIcon>
@@ -93,7 +91,7 @@ export default function SideMenu() {
 
                     <Divider />
 
-                    <ListItem button>
+                    <ListItem button disabled={true}>
                         <ListItemIcon>
                             <DescriptionIcon />
                         </ListItemIcon>
@@ -102,7 +100,7 @@ export default function SideMenu() {
 
                     <Divider />
 
-                    <ListItem button>
+                    <ListItem button disabled={true}>
                         <ListItemIcon>
                             <SearchIcon />
                         </ListItemIcon>
@@ -111,7 +109,7 @@ export default function SideMenu() {
 
                     <Divider />
 
-                    <ListItem button>
+                    <ListItem button disabled={true}>
                         <ListItemIcon>
                             <SaveIcon />
                         </ListItemIcon>
@@ -125,10 +123,17 @@ export default function SideMenu() {
                             {!open ? <ChevronRightIcon /> : <ChevronLeftIcon/>}
                         </ListItemIcon>
                     </ListItem>
+
+                    <Divider />
                 
                 </List>
 
             </Drawer>
+            
+            <Grid>
+                {/* <CharPage /> */}
+                <SelectionMenu/>
+            </Grid>
         </div>
     );
 }

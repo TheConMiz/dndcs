@@ -8,20 +8,22 @@ import ClassDisplay from './CharPage/ClassDisplay';
 
 import SpellTable from './CharPage/SpellTable';
 
+import { Grid } from '@material-ui/core';
+
 class CharPage extends React.Component {
     
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
     }
 
     render() {
         return (
-            <div style={{marginLeft: '180px'}}>
-                {/* <ProfileCard /> */}
-                <MainStats />
-                <ClassDisplay />
-                <SpellTable />
-            </div>
+            <Grid>
+                <ProfileCard />
+                {/* <MainStats /> */}
+                {/* <ClassDisplay />
+                <SpellTable /> */}
+            </Grid>    
         );
     }
 }

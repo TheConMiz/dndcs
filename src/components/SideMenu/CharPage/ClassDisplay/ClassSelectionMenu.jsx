@@ -6,7 +6,7 @@ import { NumericInput } from '@blueprintjs/core';
 
 import { connect } from 'react-redux';
 
-import { addClassCell, clearClassCell, setClass, setSubClass, setLevel, confirmClasses } from './../../../actions/characterActions';
+import { addClassCell, clearClassCell, setClass, setSubClass, setLevel, confirmClasses } from './../../../../actions/characterActions';
 
 const mapStateToProps = (state) => {
 

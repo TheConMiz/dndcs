@@ -43,7 +43,8 @@ class ProfileCard extends React.Component {
                         </Grid>
 
                         <Grid item>
-                            <SelectionMenu mode="Race" />
+                            {/* <SelectionMenu mode="Race" /> */}
+                            <SelectionMenu/>
                         </Grid>        
                     </Grid>
 
@@ -53,7 +54,7 @@ class ProfileCard extends React.Component {
                         </Grid>
                         
                         <Grid item>
-                            <SelectionMenu mode="Background" />
+                            {/* <SelectionMenu mode="Background" /> */}
                         </Grid>
                                 
                     </Grid>
