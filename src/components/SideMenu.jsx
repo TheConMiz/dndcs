@@ -17,6 +17,8 @@ import CharPage from './SideMenu/CharPage';
 import SelectionMenu from './SideMenu/CharPage/ProfileCard/SelectionMenu';
 import ClassDisplay from './SideMenu/CharPage/ClassDisplay';
 
+import SpellDialog from './InProgress/SpellDialog';
+
 const drawerWidth = 205;
 
 const useStyles = makeStyles(theme => (
@@ -146,7 +148,8 @@ export default function SideMenu() {
             <Grid>
                 {/* <CharPage /> */}
                 {/* <SelectionMenu/> */}
-                <ClassDisplay/>
+                {/* <ClassDisplay/> */}
+                <SpellDialog/>
             </Grid>
         </div>
     );

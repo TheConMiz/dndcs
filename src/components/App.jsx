@@ -8,8 +8,6 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import { green, orange } from '@material-ui/core/colors';
 
-// import '@blueprintjs/core/lib/css/blueprint.css';
-
 const theme = createMuiTheme({
     palette: {
         type: 'dark',
