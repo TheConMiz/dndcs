@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import App from './components/App';
 
-import { HashRouter } from 'react-router-dom';
+// import { HashRouter } from 'react-router-dom';
 
 import { createStore, combineReducers } from 'redux';
 
@@ -77,9 +77,9 @@ const store = createStore(
 
 render(
     <Provider store={store}>
-        <HashRouter>
+        {/* <HashRouter> */}
             <App/>
-        </HashRouter>
+        {/* </HashRouter> */}
     </Provider> 
     
     , document.getElementById('root')
