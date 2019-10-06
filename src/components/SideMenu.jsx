@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Drawer, List, Divider, ListItemIcon, ListItemText, ListItem, Grid } from '@material-ui/core';
+import { Drawer, List, Divider, ListItemIcon, ListItemText, ListItem, Grid, Avatar } from '@material-ui/core';
 
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -82,6 +82,12 @@ export default function SideMenu() {
             >
 
                 <List>
+                    {/* <ListItem button disabled={true}>
+                        <Avatar />
+                    </ListItem> */}
+                    
+                    
+
                     <Divider />
 
                     <ListItem button disabled={true}>
@@ -146,7 +152,7 @@ export default function SideMenu() {
             <Grid>
                 {/* <CharPage /> */}
                 {/* <SelectionMenu/> */}
-                <ClassDisplay/>
+                {/* <ClassDisplay/> */}
             </Grid>
         </div>
     );
