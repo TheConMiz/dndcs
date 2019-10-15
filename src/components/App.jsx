@@ -2,7 +2,7 @@ import React from 'react';
 
 import SideMenu from './SideMenu'
 
-import { createMuiTheme, CssBaseline } from '@material-ui/core';
+import { createMuiTheme, CssBaseline, Button } from '@material-ui/core';
 
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -27,7 +27,11 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <SideMenu />            
+            <Button color="primary">Test</Button>
+            <Button color="primary">Test</Button>
+            <Button color="primary">Test</Button>
+            <Button color="primary">Test</Button>
+            <Button color="primary">Test</Button>
         </ThemeProvider>
     );
 }

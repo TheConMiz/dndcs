@@ -12,13 +12,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import SettingsIcon from '@material-ui/icons/Settings';
 
-import CharPage from './SideMenu/CharPage';
-
-import SelectionMenu from './SideMenu/CharPage/ProfileCard/SelectionMenu';
-import ClassDisplay from './SideMenu/CharPage/ClassDisplay';
-
-import SpellDialog from './InProgress/SpellDialog';
-
 const drawerWidth = 205;
 
 const useStyles = makeStyles(theme => (
@@ -155,10 +148,6 @@ export default function SideMenu() {
                 {/* <CharPage /> */}
                 {/* <SelectionMenu/> */}
                 {/* <ClassDisplay/> */}
-<<<<<<< HEAD
-=======
-                <SpellDialog/>
->>>>>>> 98c517860d1a22632beb0895afb066aed6abac86
             </Grid>
         </div>
     );
