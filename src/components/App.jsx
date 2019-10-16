@@ -6,7 +6,7 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import { green, orange } from '@material-ui/core/colors';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import SpellTable from './SpellTable';
 
