@@ -58,7 +58,7 @@ const store = createStore(
         },
         app: {
             dbPath: dbPath,
-            spells:[],
+            spells: [],
         },
         user: {
             name: ""

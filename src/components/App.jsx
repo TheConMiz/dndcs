@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-import { createMuiTheme, CssBaseline, Button } from '@material-ui/core';
+import { createMuiTheme, CssBaseline } from '@material-ui/core';
 
 import { ThemeProvider } from '@material-ui/styles';
 
 import { green, orange } from '@material-ui/core/colors';
 
-import SpellTable from './SpellTable'
+import { useSelector } from 'react-redux';
 
-// Hook API transition 
+import SpellTable from './SpellTable';
+
 const theme = createMuiTheme({
     palette: {
         type: 'dark',
