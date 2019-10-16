@@ -21,7 +21,7 @@ function createWindow() {
     win = new BrowserWindow({
         width: screenSize.width * 0.8,
         height: screenSize.height * 0.8,
-        show: false,
+        show: true,
         webPreferences: {
             nodeIntegration: true
         }
@@ -43,12 +43,12 @@ function createWindow() {
     }));
 
     // Wait until everything has been rendered before showing the app window
-    win.once("ready-to-show", () => {
-        // Maximize the window prior to showing it
-        win.maximize();
-        // Show the prepared window
-        win.show();
-    });
+    // win.once("ready-to-show", () => {
+    //     // Maximize the window prior to showing it
+    //     win.maximize();
+    //     // Show the prepared window
+    //     win.show();
+    // });
 
     //TODO: Top menu bar visibility set to false when packaging
     win.setMenuBarVisibility(false);
