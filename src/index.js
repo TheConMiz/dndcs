@@ -45,21 +45,20 @@ const store = createStore(
     {
         character: {
             name: "",
-            race: null,
+            race: {},
             classes: [],
-            background: null,
+            background: {},
             xp: 0,
             maxHP: 0,
             currentHP: 0,
             abilityScores: [],
-            skillProficiencies: {
-                
-            },
+            skillProficiencies: {},
             equipment: [],
             feats: []
         },
         app: {
-            dbPath: dbPath
+            dbPath: dbPath,
+            spells:[],
         },
         user: {
             name: ""
@@ -77,9 +76,7 @@ const store = createStore(
 
 render(
     <Provider store={store}>
-        {/* <HashRouter> */}
             <App/>
-        {/* </HashRouter> */}
     </Provider> 
     
     , document.getElementById('root')
