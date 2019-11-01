@@ -35,8 +35,8 @@ else {
 const allReducers = combineReducers({
     character: characterReducer,
     app: appReducer,
-    user: userReducer,
-    rules: rulesReducer
+    // user: userReducer,
+    // rules: rulesReducer
 })
 
 const store = createStore(
@@ -49,20 +49,20 @@ const store = createStore(
             classes: [],
             background: {},
             xp: 0,
-            maxHP: 0,
-            currentHP: 0,
-            abilityScores: [],
-            skillProficiencies: {},
+            // maxHP: 0,
+            // currentHP: 0,
+            // abilityScores: [],
+            // skillProficiencies: {},
             equipment: [],
-            feats: []
+            // feats: []
         },
         app: {
             dbPath: dbPath,
             spells: [],
         },
-        user: {
-            name: ""
-        },
+        // user: {
+        //     name: ""
+        // },
         rules: {
             levels: []
         }

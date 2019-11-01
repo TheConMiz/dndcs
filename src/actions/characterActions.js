@@ -21,73 +21,73 @@ export function updateCharName(newName) {
     }
 }
 
-export function updateCharRace(newRace) {
-    return {
-        type: UPDATE_CHAR_RACE,
-        payload: {
-            race: newRace
-        }
-    }
-}
+// export function updateCharRace(newRace) {
+//     return {
+//         type: UPDATE_CHAR_RACE,
+//         payload: {
+//             race: newRace
+//         }
+//     }
+// }
 
-export function updateCharBackground(newBackground) {
-    return {
-        type: UPDATE_CHAR_BACKGROUND,
-        payload: {
-            background: newBackground
-        }
-    }
-}
+// export function updateCharBackground(newBackground) {
+//     return {
+//         type: UPDATE_CHAR_BACKGROUND,
+//         payload: {
+//             background: newBackground
+//         }
+//     }
+// }
 
-export function addClassCell(newClassElement) {
-    return {
-        type: ADD_CLASS_CELL,
-        payload: newClassElement
-    }
-}
+// export function addClassCell(newClassElement) {
+//     return {
+//         type: ADD_CLASS_CELL,
+//         payload: newClassElement
+//     }
+// }
 
-export function clearClassCell(classCellID) {
-    return {
-        type: CLEAR_CLASS_CELL,
-        payload: {classCellID}
-    }
-}
+// export function clearClassCell(classCellID) {
+//     return {
+//         type: CLEAR_CLASS_CELL,
+//         payload: {classCellID}
+//     }
+// }
 
-export function setClass(newClass, classCellID) {
-    return {
-        type: SET_CLASS,
-        payload: {
-            newClass,
-            classCellID
-        }
-    }
-}
+// export function setClass(newClass, classCellID) {
+//     return {
+//         type: SET_CLASS,
+//         payload: {
+//             newClass,
+//             classCellID
+//         }
+//     }
+// }
 
-export function setSubClass(newSubClass, classCellID) {
-    return {
-        type: SET_SUBCLASS,
-        payload: {
-            newSubClass,
-            classCellID
-        }
-    }
-}
+// export function setSubClass(newSubClass, classCellID) {
+//     return {
+//         type: SET_SUBCLASS,
+//         payload: {
+//             newSubClass,
+//             classCellID
+//         }
+//     }
+// }
 
-export function setLevel(newLevel, classCellID) {
-    return {
-        type: SET_LEVEL,
-        payload: {
-            newLevel,
-            classCellID
-        }
-    }
-}
+// export function setLevel(newLevel, classCellID) {
+//     return {
+//         type: SET_LEVEL,
+//         payload: {
+//             newLevel,
+//             classCellID
+//         }
+//     }
+// }
 
-export function confirmClasses(finalClasses) {
-    return {
-        type: CONFIRM_CLASSES,
-        payload: {
-            finalClasses
-        }
-    }
-}
+// export function confirmClasses(finalClasses) {
+//     return {
+//         type: CONFIRM_CLASSES,
+//         payload: {
+//             finalClasses
+//         }
+//     }
+// }
