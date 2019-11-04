@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-import { createMuiTheme, CssBaseline, Grid } from '@material-ui/core';
+import { createMuiTheme, CssBaseline, Grid, Button } from '@material-ui/core';
 
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -8,7 +8,7 @@ import { green, orange } from '@material-ui/core/colors';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import test from './../DataPuller';
+import getRulesLevel from './../DataPuller';
 
 import { UPDATE_RULE_LEVEL } from './../actions/rulesActions';
 
@@ -27,21 +27,26 @@ const theme = createMuiTheme({
     }
 });
 
-export default function App() {
-
+function pullData() {
+    
     const dbPath = useSelector(state => state.app.dbPath);
     
-    const levels = test(dbPath);
-
-    console.log(levels);
+    const levels = getRulesLevel(dbPath);
 
     const dispatch = useDispatch();
 
-    dispatch({ type: UPDATE_RULE_LEVEL, payload: levels })
+    dispatch({ type: UPDATE_RULE_LEVEL, payload: levels });
+}
+
+
+export default function App() {
+
+    pullData();
 
     return (
+        
         <ThemeProvider theme={theme}>
-            
+
             <CssBaseline />
             
             <Grid

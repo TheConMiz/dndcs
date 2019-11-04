@@ -36,7 +36,7 @@ const allReducers = combineReducers({
     character: characterReducer,
     app: appReducer,
     // user: userReducer,
-    // rules: rulesReducer
+    rules: rulesReducer
 })
 
 const store = createStore(
@@ -64,7 +64,8 @@ const store = createStore(
         //     name: ""
         // },
         rules: {
-            levels: []
+            levels: [],
+            currency: []
         }
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

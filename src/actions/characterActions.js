@@ -1,15 +1,17 @@
 export const UPDATE_CHAR_NAME = "UPDATE_CHAR_NAME";
-export const UPDATE_CHAR_RACE = "UPDATE_CHAR_RACE";
-export const UPDATE_CHAR_BACKGROUND = "UPDATE_CHAR_BACKGROUND";
+export const UPDATE_CHAR_XP = "UPDATE_CHAR_XP";
 
-export const ADD_CLASS_CELL = "ADD_CLASS_CELL";
-export const CLEAR_CLASS_CELL = "CLEAR_CLASS_CELL";
+// export const UPDATE_CHAR_RACE = "UPDATE_CHAR_RACE";
+// export const UPDATE_CHAR_BACKGROUND = "UPDATE_CHAR_BACKGROUND";
 
-export const SET_CLASS = "SET_CLASS";
-export const SET_SUBCLASS = "SET_SUBCLASS";
-export const SET_LEVEL = "SET_LEVEL";
+// export const ADD_CLASS_CELL = "ADD_CLASS_CELL";
+// export const CLEAR_CLASS_CELL = "CLEAR_CLASS_CELL";
 
-export const CONFIRM_CLASSES = "CONFIRM_CLASSES";
+// export const SET_CLASS = "SET_CLASS";
+// export const SET_SUBCLASS = "SET_SUBCLASS";
+// export const SET_LEVEL = "SET_LEVEL";
+
+// export const CONFIRM_CLASSES = "CONFIRM_CLASSES";
 
 
 export function updateCharName(newName) {
@@ -17,6 +19,15 @@ export function updateCharName(newName) {
         type: UPDATE_CHAR_NAME,
         payload: {
             name: newName
+        }
+    }
+}
+
+export function updateCharXP(newXP) {
+    return {
+        type: UPDATE_CHAR_XP,
+        payload: {
+            name: newXP
         }
     }
 }
