@@ -7,7 +7,6 @@ export default function rulesReducer(state = {}, action) {
         
         case UPDATE_RULE_LEVEL:
 
-            console.log(action.payload);
             return Object.assign({}, state, {
                 levels: action.payload
             });

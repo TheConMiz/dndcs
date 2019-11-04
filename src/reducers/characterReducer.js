@@ -1,13 +1,14 @@
 import {
     UPDATE_CHAR_NAME,
-    ADD_CLASS_CELL,
-    UPDATE_CHAR_RACE,
-    UPDATE_CHAR_BACKGROUND,
-    CLEAR_CLASS_CELL,
-    SET_CLASS,
-    SET_SUBCLASS,
-    SET_LEVEL,
-    CONFIRM_CLASSES
+    UPDATE_CHAR_XP,
+    // ADD_CLASS_CELL,
+    // UPDATE_CHAR_RACE,
+    // UPDATE_CHAR_BACKGROUND,
+    // CLEAR_CLASS_CELL,
+    // SET_CLASS,
+    // SET_SUBCLASS,
+    // SET_LEVEL,
+    // CONFIRM_CLASSES
 } from './../actions/characterActions';
 
 export default function characterReducer(state = {}, action) {
@@ -17,6 +18,11 @@ export default function characterReducer(state = {}, action) {
         case UPDATE_CHAR_NAME:
             return Object.assign({}, state, {
                 name: action.payload
+            });
+        
+        case UPDATE_CHAR_XP:
+            return Object.assign({}, state, {
+                xp: action.payload
             });
         
         // case UPDATE_CHAR_RACE:

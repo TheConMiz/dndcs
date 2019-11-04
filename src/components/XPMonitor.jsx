@@ -1,28 +1,39 @@
 import React, { Fragment, useState } from 'react';
 
-import { TextField } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 
 import { useSelector, useDispatch } from 'react-redux';
-
-// import { UPDATE_CHAR_NAME } from './../actions/characterActions';
-
+import { UPDATE_CHAR_XP } from '../actions/characterActions';
 
 export default function XPMonitor() {
 
-    // const charName = useSelector(state => state.character.name)
+    const charXP = useSelector(state => state.character.xp);
+    const levelRules = useSelector(state => state.rules.levels);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    for (const i in levelRules) {
+        console.log(i)
+        console.log("sd")
+    }
 
     return (
         <Fragment>
             <TextField
                 variant="outlined"
                 type="number"
-                label="Experience Points"
-                // value={charName}
-                // onChange={(event) => dispatch({ type: UPDATE_CHAR_NAME, payload: event.target.value })}
-                // error={charName === "" ? true : false}
+                label="XP"
+                value={charXP}
+                inputProps={{ min: 0, max: 1000 }}
+                onChange={(event) => {
+                    dispatch({
+                        type: UPDATE_CHAR_XP,
+                        payload: event.target.value
+                    })
+                }}
             />
+            
+            
         </Fragment>
     )
 }
