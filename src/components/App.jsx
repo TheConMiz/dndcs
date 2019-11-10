@@ -8,13 +8,13 @@ import { green, orange } from '@material-ui/core/colors';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import getRulesLevel from './../DataPuller';
 
 import { UPDATE_RULE_LEVEL } from './../actions/rulesActions';
 
 import SpellTable from './SpellTable';
 import NameInput from './NameInput';
 import XPMonitor from './XPMonitor';
+import LevelView from './LevelView';
 
 const theme = createMuiTheme({
     palette: {
@@ -27,15 +27,38 @@ const theme = createMuiTheme({
     }
 });
 
-function pullData() {
-    
-    const dbPath = useSelector(state => state.app.dbPath);
-    
-    const levels = getRulesLevel(dbPath);
+function saveRulesToRedux(dbPath) {
+    let knex = window.require('knex')({
+        client: "sqlite3",
+        connection: {
+            filename: dbPath
+        },
+        useNullAsDefault: true,
+        debug: true
+    });
 
     const dispatch = useDispatch();
 
-    dispatch({ type: UPDATE_RULE_LEVEL, payload: levels });
+    let dbQuery = knex({
+        lvl: 'Rule-Level'
+    })
+
+        .select({
+            level: "lvl.level",
+            xp: "lvl.xp",
+        })
+
+        .orderBy("lvl.level", "asc");
+
+    dbQuery.then((rows) => {
+        dispatch({ type: UPDATE_RULE_LEVEL, payload: rows });
+    })
+}
+
+function pullData() {
+    const dbPath = useSelector(state => state.app.dbPath);
+
+    saveRulesToRedux(dbPath);
 }
 
 
@@ -53,17 +76,26 @@ export default function App() {
                 container
                 spacing={4}
                 alignItems="center"
-                justify="center"
+                justify="space-evenly"
+                alignItems="center"
                 direction="column"
             >
-                <Grid
-                    item
-                >
+                <br/>
+                <br />
+                
+                <Grid item>
                     <XPMonitor/>
                 </Grid>
                 
-                <Grid item>
-                    <NameInput />
+                <Grid item container direction="row" justify="center" alignItems="center">
+                    <Grid item>
+                        <LevelView/>
+                    </Grid>
+
+                    <Grid item>
+                        <NameInput />
+                    </Grid>
+     
                 </Grid>
 
                 <Grid item>
