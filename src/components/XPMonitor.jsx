@@ -91,7 +91,7 @@ export default function XPMonitor() {
                 label="XP"
                 value={currentXP}
                 
-                inputProps={{ min: 0, max: levelRules.length < 1 ? 10 : levelRules[levelRules.length - 1].xp }}
+                // inputProps={{ min: 0, max: levelRules.length < 1 ? 10 : levelRules[levelRules.length - 1].xp }}
 
                 onChange={(event) => {
                     xpBounds(event, levelRules);
