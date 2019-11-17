@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { UPDATE_RULE_LEVEL } from './../actions/rulesActions';
 
+import { UPDATE_SPELLS } from './../actions/appActions';
+
 import SpellTable from './SpellTable';
 import NameInput from './NameInput';
 import XPMonitor from './XPMonitor';
@@ -27,7 +29,7 @@ const theme = createMuiTheme({
     }
 });
 
-function saveRulesToRedux(dbPath) {
+function saveDataToRedux(dbPath) {
     let knex = window.require('knex')({
         client: "sqlite3",
         connection: {
@@ -53,12 +55,29 @@ function saveRulesToRedux(dbPath) {
     dbQuery.then((rows) => {
         dispatch({ type: UPDATE_RULE_LEVEL, payload: rows });
     })
+
+    dbQuery = knex({
+        sp: "Spell"
+    })
+        .select({
+            name: "sp.name",
+            level: "sp.level",
+            id: "sp.index"
+        })
+    
+        .orderBy("sp.level", "asc")
+        .orderBy("sp.name", "asc")
+    
+    dbQuery.then((rows) => {
+        dispatch({type: UPDATE_SPELLS, payload: rows})
+    })
+    
 }
 
 function pullData() {
     const dbPath = useSelector(state => state.app.dbPath);
 
-    saveRulesToRedux(dbPath);
+    saveDataToRedux(dbPath);
 }
 
 
