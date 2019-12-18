@@ -7,9 +7,7 @@ import { useSelector } from 'react-redux';
 function SpellTable() {
 
     // let columns = ["Name", "Description", "Save", "School", "Time", "Range", "Components", "Duration", "Source"];
-    let columns = ["Name", "Description", "School", "Time", "Range", "Components", "Duration", "Source"];
-    // let columns = ["Name", "Level"];
-
+    
     const spells = useSelector(state => state.app.spells);
 
     return (
