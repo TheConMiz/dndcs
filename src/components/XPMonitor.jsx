@@ -24,41 +24,7 @@ export default function XPMonitor() {
     
     const levelRules = useSelector(state => state.rules.levels);
 
-    // function closestLevel() {
-    //     var minDiff = levelRules[levelRules.length - 1].xp;
-        
-    //     var ans;
-
-    //     levelRules.map((level) => {
-    //         var m = Math.abs(currentXP - level.xp);
-
-    //         if (m < minDiff) {
-
-    //             minDiff = m;
-
-    //             ans = level;
-    //         }
-    //     })
-
-    //     console.log(ans)
-    //     // return ans;
-    // }
-
-    // function findLevel() {
-
-    //     let xpDifference = levelRules[levelRules.length - 1].xp;
-
-    //     levelRules.map((item, index) => {
-    //         if (currentXP >= item.xp) {
-    //             console.log(item.level)
-    //         }
-    //     });
-    // }
-
     function xpBounds(event, levelRules) {
-
-        // closestLevel()
-
 
         if (event.target.value > levelRules[levelRules.length - 1].xp) {
             dispatch({
@@ -90,8 +56,6 @@ export default function XPMonitor() {
                 type="number"
                 label="XP"
                 value={currentXP}
-                
-                // inputProps={{ min: 0, max: levelRules.length < 1 ? 10 : levelRules[levelRules.length - 1].xp }}
 
                 onChange={(event) => {
                     xpBounds(event, levelRules);

@@ -38,8 +38,19 @@ function saveDataToRedux(dbPath) {
             name: "sp.name",
             level: "sp.level",
             id: "sp.index",
-            school: "sp.schoolID"
+            school: "sp.schoolID",
+            shortDesc: "Spell-Description-Short.desc",
+            material: "Spell-Material.material",
+            altName: "Spell-Name-Alt.name",
+            range: "sp.range",
+            castingTime: "sp.casting_time",
         })
+
+        .join('Spell-Description-Short', { 'sp.index': 'Spell-Description-Short.spellID' })
+
+        .leftOuterJoin('Spell-Material', { 'sp.index': 'Spell-Material.spellID' })
+
+        .leftOuterJoin('Spell-Name-Alt', { 'sp.index': 'Spell-Name-Alt.spellID' })
 
         .orderBy("sp.name", "asc");
 
@@ -58,7 +69,9 @@ function saveDataToRedux(dbPath) {
 }
 
 function pullData() {
+    
     const dbPath = useSelector(state => state.app.dbPath);
+
     saveDataToRedux(dbPath);
 }
 

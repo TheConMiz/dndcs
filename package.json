@@ -5,7 +5,7 @@
   "description": "A Character sheet solution for Dungeons & Dragons, built using Electron, React and SQLite3",
   "main": "./public/electron-main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron . ",
     "postinstall": "electron-builder install-app-deps",
     "dev": "webpack && webpack-dev-server",
     "test-build": "webpack && electron-builder --dir",
@@ -75,6 +75,7 @@
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/styles": "^4.7.1",
+    "clsx": "^1.0.4",
     "draft-js": "^0.11.3",
     "electron": "^7.1.6",
     "electron-devtools-installer": "^2.2.4",

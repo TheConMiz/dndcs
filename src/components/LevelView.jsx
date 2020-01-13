@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography, Fab, CircularProgress, Popover } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useSelector } from 'react-redux';
 
+import { UPDATE_CHAR_XP } from '../actions/characterActions';
+
 const useStyles = makeStyles(theme => ({
-    levelButton: {
-        width: 50,
-        height: 55
-    }
+    
 }));
 
 export default function LevelView() {
 
     const classes = useStyles();
+
+    const xp = useSelector(state => state.app.xp)
     
     return (
-        <Button className={classes.levelButton} variant="contained" color="primary">
-            <Typography variant="h5">
-
-            </Typography>
-        </Button>
+        <Fab
+            disableFocusRipple
+            variant="round"
+        >
+            <Typography
+                color="primary"
+            >
+                2
+                </Typography>
+        </Fab>
     );
 }

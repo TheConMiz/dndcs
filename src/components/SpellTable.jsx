@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 function SpellTable() {
 
-    // let columns = ["Name", "Description", "Save", "School", "Time", "Range", "Components", "Duration", "Source"];
+    let columns = ["Name", "Description", "Material", "Range", "Casting Time", "Save", "School", "Components", "Duration", "Source"];
     
     const spells = useSelector(state => state.app.spells);
 
@@ -17,7 +17,7 @@ function SpellTable() {
                 <TableRow>
 
                     <TableCell padding="checkbox" align="left">
-                        <Checkbox />
+
                     </TableCell>
                     
                     {
@@ -31,17 +31,21 @@ function SpellTable() {
                 </TableRow>
                 
             </TableHead>
-
             
             <TableBody>
 
-                {spells.map((item) => {
+                {
+                    spells.map((item) => {
                     return (
 
-                        <TableRow>
+                        <TableRow
+                            hover={true}
+                        >
 
                             <TableCell padding="checkbox" align="left">
-                                <Checkbox/>
+                                <Checkbox
+                                    disableFocusRipple
+                                />
                             </TableCell>
 
                             <TableCell padding="checkbox" align="left">
@@ -49,11 +53,22 @@ function SpellTable() {
                             </TableCell>
 
                             <TableCell padding="checkbox" align="left">
-                                {item.level}
+                                {item.shortDesc}
+                            </TableCell>
+
+                            <TableCell padding="checkbox" align="left">
+                                {item.material}
+                            </TableCell>
+
+                            <TableCell padding="checkbox" align="left">
+                                {item.range}
+                            </TableCell>
+
+                            <TableCell padding="checkbox" align="left">
+                                {item.castingTime}
                             </TableCell>
 
                         </TableRow>
-
 
                     );
                 })}

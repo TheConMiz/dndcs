@@ -1,29 +1,38 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import { createMuiTheme, CssBaseline, Grid } from '@material-ui/core';
 
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider, makeStyles } from '@material-ui/styles';
 
-import { green, orange } from '@material-ui/core/colors';
-
-// import SpellTable from './SpellTable';
-import NameInput from './NameInput';
-import XPMonitor from './XPMonitor';
-import LevelView from './LevelView';
 import DataPuller from './DataPuller';
 
+import SpellTable from './SpellTable';
+import NameInput from './NameInput';
+import LevelView from './LevelView';
+
 const theme = createMuiTheme({
-    palette: {
-        type: 'dark',
-        primary: orange,
-        secondary: green,
-        background: {
-            default: "#302929"
-        }
-    }
+    // palette: {
+    //     type: 'dark',
+    //     primary: orange,
+    //     secondary: green,
+    //     background: {
+    //         default: "#302929"
+    //     }
+    // }
 });
 
+const useStyles = makeStyles({
+    mainGrid: {
+        width: '100%',
+        height: '100%',
+    }
+})
+
+
+
 export default function App() {
+
+    const classes = useStyles();
 
     return (
         
@@ -34,6 +43,7 @@ export default function App() {
             <CssBaseline />
             
             <Grid
+                className={classes.mainGrid}
                 container
                 spacing={4}
                 alignItems="center"
@@ -42,26 +52,21 @@ export default function App() {
                 direction="column"
             >
                 <br/>
-                <br />
-                
                 <Grid item>
-                    <XPMonitor/>
+                    <NameInput/>
+                </Grid>
+
+                <Grid
+                    item
+                >
+                    <LevelView/>
+                </Grid>
+
+                <Grid item>
+                    <SpellTable />
                 </Grid>
                 
-                <Grid item container direction="row" justify="center" alignItems="center">
-                    <Grid item>
-                        <LevelView/>
-                    </Grid>
 
-                    <Grid item>
-                        <NameInput />
-                    </Grid>
-     
-                </Grid>
-
-                {/* <Grid item>
-                    <SpellTable />
-                </Grid> */}
             </Grid>
             
         </ThemeProvider>
