@@ -4,6 +4,7 @@ import { Table, TableHead, TableCell, TableBody, Checkbox, TableRow } from '@mat
 
 import { useSelector } from 'react-redux';
 
+
 function SpellTable() {
 
     let columns = ["Name", "Description", "Material", "Range", "Casting Time", "Save", "School", "Components", "Duration", "Source"];
