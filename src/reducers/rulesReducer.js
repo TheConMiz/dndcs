@@ -1,5 +1,6 @@
 import {
-    UPDATE_RULE_LEVEL
+    UPDATE_RULE_LEVEL,
+    UPDATE_RULE_ABILITY_SCORE,
 } from './../actions/rulesActions';
 
 export default function rulesReducer(state = {}, action) {
@@ -10,6 +11,13 @@ export default function rulesReducer(state = {}, action) {
             return Object.assign({}, state, {
                 levels: action.payload
             });
+        
+        case UPDATE_RULE_ABILITY_SCORE:
+
+            return Object.assign({}, state, {
+                abilityScores: action.payload
+            });
+            
         
         default:
             return state;

@@ -52,6 +52,7 @@ export default function App() {
                 direction="column"
             >
                 <br/>
+                <br/>
                 <Grid item>
                     <NameInput/>
                 </Grid>
@@ -62,7 +63,9 @@ export default function App() {
                     <LevelView/>
                 </Grid>
 
-                <Grid item>
+                <Grid
+                    item
+                >
                     <SpellTable />
                 </Grid>
                 
