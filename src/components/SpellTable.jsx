@@ -1,11 +1,18 @@
 import React, {useState, Fragment} from 'react'
-import { Paper, TableContainer, Table, TableHead, TableCell, TableBody, Checkbox, TableRow, Toolbar, TextField, IconButton } from '@material-ui/core'
-import { useSelector } from 'react-redux'
+import { Paper, TableContainer, Table, TableHead, TableCell, TableBody, Checkbox, TableRow, Toolbar, TextField, IconButton, Button, Typography } from '@material-ui/core'
+
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+
 import SpellTableRow from './SpellTableRow'
+
 import { makeStyles } from '@material-ui/styles'
 
-import SearchIcon from '@material-ui/icons/Search'
-import SettingsIcon from '@material-ui/icons/Settings';
+import SettingsIcon from '@material-ui/icons/Settings'
+
+import FilterListIcon from '@material-ui/icons/FilterListRounded'
+
+import { UPDATE_SPELL_SEARCH } from './../actions/appActions'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,11 +29,13 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-function SpellTable() {
+const SpellTable = () => {
     
-    const spells = useSelector(state => state.app.spells);
+    const spells = useSelector(state => state.app.spells)
 
     const classes = useStyles()
+
+    const dispatch = useDispatch()
 
     const columns = [
         {
@@ -109,15 +118,31 @@ function SpellTable() {
             
         >
             <Toolbar>
-                <TextField
-                    
+                {/* <TextField
+                    onChange={(event) => dispatch({ type: UPDATE_SPELL_SEARCH, payload: event.target.value })}
+                    value={spellSearch}
+                /> */}
+
+                <IconButton
+                    disableFocusRipple
                 >
-
-                </TextField>
-
-                <IconButton>
                     <SettingsIcon/>
                 </IconButton>
+
+                <IconButton
+                    disableFocusRipple
+                >
+                    <FilterListIcon />
+                </IconButton>
+
+                <Button
+                    color="secondary"
+                    variant="outlined"
+                >
+                    <Typography>
+                        Clear Selection
+                    </Typography>
+                </Button>
             </Toolbar>
             <Table
                 size="small"
@@ -153,6 +178,8 @@ function SpellTable() {
 
                 <TableBody>
                     {
+                        spells.length < 1 ? <Fragment />
+                            : 
                         spells.map((item) => {
 
                             return (
@@ -161,7 +188,6 @@ function SpellTable() {
                                 />
                             );
                         })
-
                     }
                 </TableBody>
 

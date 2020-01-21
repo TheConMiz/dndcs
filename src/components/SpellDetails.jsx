@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(1),
     },
     innerGrid: {
-        minWidth: '150px',
+        minWidth: '240px',
         minHeight: '150px',
     }
 }));
@@ -42,13 +42,12 @@ export default function MouseOverPopover(props) {
                 onMouseLeave={handlePopoverClose}
                 disableFocusRipple
                 color="secondary"
-                
             >
                 <HelpSharpIcon/>
             </IconButton>
             
             <Popover
-                id="mouse-over-popover"
+                id={props.spellData.name + "-popover"}
                 className={classes.popover}
                 classes={{
                     paper: classes.paper,
@@ -72,7 +71,32 @@ export default function MouseOverPopover(props) {
                     direction="column"
                     justify="center"
                     alignItems="center"
+                    spacing={2}
                 >
+                    <Grid item>
+                        <Typography
+                            variant="h7"
+                            color="secondary"
+                        >
+                            Level {props.spellData.level}
+                        </Typography>
+                    </Grid>
+
+                    <Grid item>
+                        {props.spellData.material}
+                    </Grid>
+                    <Grid item>
+                        <Typography
+                            variant="h7"
+                            color="secondary"
+                        >
+                            Also Known As...
+                        </Typography>
+                    </Grid>
+
+                    <Grid item>
+                        {props.spellData.altName}
+                    </Grid>
                 
                     <Grid item>
                         <Typography
@@ -86,6 +110,19 @@ export default function MouseOverPopover(props) {
                     <Grid item>
                         {props.spellData.material}
                     </Grid>
+
+                    {/* <Grid item>
+                        <Typography
+                            variant="h7"
+                            color="secondary"
+                        >
+                            Source
+                        </Typography>
+                    </Grid>
+
+                    <Grid item>
+                        {props.spellData.material}
+                    </Grid> */}
 
                 </Grid>
             </Popover>

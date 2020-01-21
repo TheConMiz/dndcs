@@ -60,14 +60,24 @@ const store = createStore(
         app: {
             dbPath: dbPath,
             spells: [],
+            spellSearch: "",
         },
         // user: {
         //     name: ""
         // },
         rules: {
+            abilityScores: [],
+            conditions: [],
+            damageTypes: [],
+            // languageRarities: [],
+            spellComponents: [],
+            magicSchools: [],
             levels: [],
-            currency: [],
-            abilityScores: []
+            // currencies: [],
+            // skills: [],
+            sources: [],
+
+            
         }
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

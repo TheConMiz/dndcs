@@ -1,7 +1,14 @@
 import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
-import { UPDATE_RULE_LEVEL, UPDATE_RULE_ABILITY_SCORE } from './../actions/rulesActions';
-import { UPDATE_SPELLS } from '../actions/appActions';
+import {
+    UPDATE_RULE_ABILITY_SCORE,
+    UPDATE_RULE_CONDITION,
+    UPDATE_RULE_DAMAGE_TYPE,
+    UPDATE_RULE_SPELL_COMPONENT,
+    UPDATE_RULE_MAGIC_SCHOOL,
+    UPDATE_RULE_LEVEL,
+    UPDATE_RULE_SOURCE,
+} from './../actions/rulesActions';
 
 function pullData(dbPath) {
     const dispatch = useDispatch();
@@ -14,17 +21,6 @@ function pullData(dbPath) {
         useNullAsDefault: true,
         debug: true
     });
-
-    const levelQuery = knex({
-        lvl: 'Rule-Level'
-    })
-
-        .select({
-            level: "lvl.level",
-            xp: "lvl.xp",
-        })
-
-        .orderBy("lvl.level", "asc");
 
     const abilityScoreQuery = knex({
         as: 'Rule-AbilityScore'
@@ -41,17 +37,32 @@ function pullData(dbPath) {
 
         .orderBy("as.name", "asc");
 
-    let dbQuery = levelQuery;
 
-    dbQuery.then((rows) => {
-        dispatch({ type: UPDATE_RULE_LEVEL, payload: rows });
+    const levelQuery = knex({
+        lvl: 'Rule-Level'
     })
 
-    dbQuery = abilityScoreQuery
+        .select({
+            level: "lvl.level",
+            xp: "lvl.xp",
+        })
+
+        .orderBy("lvl.level", "asc");
+    
+    
+
+
+    
+
+    let dbQuery = abilityScoreQuery;
 
     dbQuery.then((rows) => {
-        console.log(rows)
         dispatch({ type: UPDATE_RULE_ABILITY_SCORE, payload: rows });
+    })
+
+    dbQuery = levelQuery
+    dbQuery.then((rows) => {
+        dispatch({ type: UPDATE_RULE_LEVEL, payload: rows });
     })
     
 }
