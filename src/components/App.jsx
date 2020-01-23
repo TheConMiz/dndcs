@@ -6,19 +6,19 @@ import { ThemeProvider, makeStyles } from '@material-ui/styles';
 
 import DataPuller from './DataPuller';
 
-import SpellTable from './SpellTable';
+import SpellTableShell from './SpellTableShell';
 import NameInput from './NameInput';
 import LevelView from './LevelView';
 
 const theme = createMuiTheme({
-    // palette: {
-    //     type: 'dark',
-    //     primary: orange,
-    //     secondary: green,
-    //     background: {
-    //         default: "#302929"
-    //     }
-    // }
+    palette: {
+        type: 'dark',
+        // primary: orange,
+        // secondary: green,
+        // background: {
+        //     default: "#302929"
+        // }
+    }
 });
 
 const useStyles = makeStyles({
@@ -66,7 +66,7 @@ export default function App() {
                 <Grid
                     item
                 >
-                    <SpellTable />
+                    <SpellTableShell />
                 </Grid>
                 
 

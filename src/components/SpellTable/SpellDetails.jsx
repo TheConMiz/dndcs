@@ -71,7 +71,7 @@ export default function MouseOverPopover(props) {
                     direction="column"
                     justify="center"
                     alignItems="center"
-                    spacing={2}
+                    spacing={1}
                 >
                     <Grid item>
                         <Typography
@@ -81,23 +81,26 @@ export default function MouseOverPopover(props) {
                             Level {props.spellData.level}
                         </Typography>
                     </Grid>
+                    
 
-                    <Grid item>
-                        {props.spellData.material}
-                    </Grid>
-                    <Grid item>
-                        <Typography
-                            variant="h7"
-                            color="secondary"
-                        >
-                            Also Known As...
-                        </Typography>
-                    </Grid>
+                        {
+                            props.spellData.altName !== null ?
+                                <Grid item>
+                                    <Typography
+                                        variant="h7"
+                                        color="secondary"
+                                    >
+                                        Also Known As...
+                                    </Typography>
+                                    {props.spellData.altName}
 
-                    <Grid item>
-                        {props.spellData.altName}
-                    </Grid>
-                
+                                </Grid>
+
+                                :
+
+                                <Fragment/>
+                        }
+
                     <Grid item>
                         <Typography
                             variant="h7"
