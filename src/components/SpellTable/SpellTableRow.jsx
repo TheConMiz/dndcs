@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, memo} from 'react'
 
 import { TableCell, Checkbox, TableRow, Typography } from '@material-ui/core'
 
@@ -7,10 +7,14 @@ import SpellDetails from './SpellDetails'
 import StarBorderIcon from '@material-ui/icons/StarBorderRounded'
 
 import StarIcon from '@material-ui/icons/StarRounded';
+import { useSelector } from 'react-redux';
 
-export default function SpellTableRow(props) {
+const SpellTableRow = (props) => {
 
     const [checked, setChecked] = useState(false)
+
+    const abilityScores = useSelector(state => state.rules.abilityScores)
+    
 
     return (
         <TableRow
@@ -76,7 +80,12 @@ export default function SpellTableRow(props) {
             </TableCell>
 
             <TableCell>
-
+                {
+                    typeof(abilityScores.find(item => props.spellData.save === item.index)) === "undefined" ? 
+                        ""
+                        :
+                        abilityScores.find(item=>props.spellData.save === item.index).abbr
+                }
             </TableCell>
 
             <TableCell>
@@ -84,7 +93,7 @@ export default function SpellTableRow(props) {
             </TableCell>
 
             <TableCell>
-
+                {props.spellData.duration}
             </TableCell>
 
             <TableCell>
@@ -92,6 +101,11 @@ export default function SpellTableRow(props) {
                     spellData={props.spellData}
                 />
             </TableCell>
+            
         </TableRow>
     )
 }
+
+export default SpellTableRow
+
+export const MemoizedSpellTableRow = memo(SpellTableRow)

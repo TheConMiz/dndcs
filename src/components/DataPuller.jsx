@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import SpellPuller from './SpellPuller'
-import RulePuller from './RulePuller'
+import SpellPuller from './DataPuller/SpellPuller'
+import RulePuller from './DataPuller/RulePuller'
 
 export default function DataPuller() {
 

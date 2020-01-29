@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 import { useDispatch } from 'react-redux';
 
-import { UPDATE_SPELLS } from './../actions/appActions';
+import { UPDATE_SPELLS } from './../../actions/appActions';
 
 function pullData(dbPath) {
 
@@ -32,6 +32,8 @@ function pullData(dbPath) {
             castingTime: "sp.casting_time",
             concentration: "Spell-Type-Concentration.concentration",
             ritual: "Spell-Type-Ritual.ritual",
+            save: "Spell-Save.saveID",
+            duration: "sp.duration"
         })
 
         .join('Spell-Description-Short', { 'sp.index': 'Spell-Description-Short.spellID' })
@@ -43,6 +45,9 @@ function pullData(dbPath) {
         .leftOuterJoin('Spell-Type-Concentration', { 'sp.index': 'Spell-Type-Concentration.spellID' })
         
         .leftOuterJoin('Spell-Type-Ritual', { 'sp.index': 'Spell-Type-Ritual.spellID' })
+
+        .leftOuterJoin('Spell-Save', { 'sp.index': 'Spell-Save.spellID' })
+
 
         .orderBy("sp.name", "asc");
 
