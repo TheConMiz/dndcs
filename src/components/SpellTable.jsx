@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react'
+import React, {useState, Fragment, memo} from 'react'
 import { Paper, TableContainer, Table, TableHead, TableCell, TableBody, Checkbox, TableRow, Toolbar, TextField, IconButton, Button, Typography } from '@material-ui/core'
 
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
@@ -12,8 +12,6 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import FilterListIcon from '@material-ui/icons/FilterListRounded'
 
 import { UPDATE_SPELL_SEARCH } from './../actions/appActions'
-
-
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -196,4 +194,8 @@ const SpellTable = () => {
     )
 }
 
-export default SpellTable;
+const MemoizedSpellTable = memo(SpellTable)
+
+// export default SpellTable;
+
+export default MemoizedSpellTable

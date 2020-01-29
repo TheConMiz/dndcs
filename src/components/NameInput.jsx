@@ -1,11 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 
 import { TextField } from '@material-ui/core';
 
 import { useSelector, useDispatch } from 'react-redux';
 
 import {UPDATE_CHAR_NAME} from './../actions/characterActions';
-    
 
 export default function NameInput() {
 
