@@ -1,13 +1,15 @@
 import React, {Fragment, useState, memo} from 'react'
 
-import { TableCell, Checkbox, TableRow, Typography } from '@material-ui/core'
+import { TableCell, Checkbox, TableRow } from '@material-ui/core'
 
 import SpellDetails from './SpellDetails'
 
 import StarBorderIcon from '@material-ui/icons/StarBorderRounded'
 
 import StarIcon from '@material-ui/icons/StarRounded';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import UPDATE_CHAR_PREPARED_SPELL from './../../actions/characterActions'
 
 const SpellTableRow = (props) => {
 
@@ -15,6 +17,12 @@ const SpellTableRow = (props) => {
 
     const abilityScores = useSelector(state => state.rules.abilityScores)
     
+    const preparedSpells = useSelector(state => state.character.preparedSpells)
+
+    // const setPrepared = (spellID) => {
+    //     // preparedSpells
+    // }
+
 
     return (
         <TableRow

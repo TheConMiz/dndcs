@@ -10,6 +10,8 @@ import SpellTableShell from './SpellTableShell';
 import NameInput from './NameInput';
 import LevelView from './LevelView';
 
+import CharacterListShell from './CharacterListShell'
+
 const theme = createMuiTheme({
     palette: {
         type: 'dark',
@@ -23,8 +25,10 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles({
     mainGrid: {
+        display: 'flex',
         width: '100%',
         height: '100%',
+        userSelect: "none"
     }
 })
 
@@ -52,7 +56,10 @@ export default function App() {
                 direction="column"
             >
                 <br/>
-                <br/>
+                <br />
+
+                <CharacterListShell/>
+                
                 <Grid item>
                     <NameInput/>
                 </Grid>

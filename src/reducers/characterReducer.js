@@ -1,6 +1,7 @@
 import {
     UPDATE_CHAR_NAME,
     UPDATE_CHAR_XP,
+    UPDATE_CHAR_PREPARED_SPELL,
 } from './../actions/characterActions';
 
 export default function characterReducer(state = {}, action) {
@@ -15,6 +16,11 @@ export default function characterReducer(state = {}, action) {
         case UPDATE_CHAR_XP:
             return Object.assign({}, state, {
                 xp: action.payload
+            });
+        
+        case UPDATE_CHAR_PREPARED_SPELL:
+            return Object.assign({}, state, {
+                preparedSpells: action.payload
             });
         
         default:

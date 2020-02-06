@@ -45,16 +45,17 @@ const store = createStore(
     {
         character: {
             name: "",
-            race: {},
-            classes: [],
-            background: {},
+            // race: {},
+            // classes: [],
+            // background: {},
             xp: 0,
             level: 0,
+            preparedSpells: [],
             // maxHP: 0,
             // currentHP: 0,
             // abilityScores: [],
             // skillProficiencies: {},
-            equipment: [],
+            // equipment: [],
             // feats: []
         },
         app: {

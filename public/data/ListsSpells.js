@@ -4537,6 +4537,5 @@ let fs = require("fs")
 
 fs.appendFile("testSpell.js", JSON.stringify(test), (err) => {
 	if (err) throw err;
-
 	console.log("SAVED TO FILE!")
 })

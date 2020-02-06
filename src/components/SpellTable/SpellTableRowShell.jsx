@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { memo } from 'react'
 
 import { Paper, TableContainer, Table, TableHead, TableCell, TableBody, Checkbox, TableRow, Toolbar, TextField, IconButton, Button, Typography } from '@material-ui/core'
 
@@ -21,4 +21,6 @@ const SpellTableRowShell = () => {
     )
 }
 
-export default SpellTableRowShell
+const MemoizedSpellTableRowShell = memo(SpellTableRowShell)
+
+export default MemoizedSpellTableRowShell

@@ -3,10 +3,11 @@ import React from 'react'
 import { Paper, TableContainer, Table, TableHead, TableBody } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
-import SpellTableRowShell from "./SpellTable/SpellTableRowShell"
+// import { VariableSizeList } from 'react-window'
+
+import MemoizedSpellTableRowShell from "./SpellTable/SpellTableRowShell"
 import SpellTableToolbarShell from "./SpellTable/SpellTableToolbarShell"
 import SpellTableColumns from './SpellTable/SpellTableColumns'
-
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -44,8 +45,12 @@ const SpellTableShell = () => {
                 </TableHead>
 
                 <TableBody>
-                    {console.log("rerender")}
-                    <SpellTableRowShell/>
+                    {/* <VariableSizeList>
+                    </VariableSizeList> */}
+
+                        <MemoizedSpellTableRowShell />
+
+                    
                 </TableBody>
 
             </Table>
