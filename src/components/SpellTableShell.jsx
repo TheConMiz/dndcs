@@ -2,23 +2,21 @@ import React from 'react'
 
 import { Paper, TableContainer, Table, TableHead, TableBody } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-
-// import { VariableSizeList } from 'react-window'
-
+import { Skeleton } from '@material-ui/lab'
 import MemoizedSpellTableRowShell from "./SpellTable/SpellTableRowShell"
 import SpellTableToolbarShell from "./SpellTable/SpellTableToolbarShell"
 import SpellTableColumns from './SpellTable/SpellTableColumns'
 
 const useStyles = makeStyles(theme => ({
     table: {
-        minWidth: '500px',
-        width: '60vw',
-
+        minWidth: '60%',
+        width: '80%',
     },
     tablePaper: {
-        minHeight: '500px',
-        overflowY: 'scroll',
-        height: "60vh"
+        minHeight: '40%',
+        height: "60%",
+        width: "80%",
+        minWidth: '80%',
     }
 }));
 
@@ -41,16 +39,12 @@ const SpellTableShell = () => {
             >
 
                 <TableHead>
-                    <SpellTableColumns/>
+                    {/* <SpellTableColumns/> */}
                 </TableHead>
 
                 <TableBody>
-                    {/* <VariableSizeList>
-                    </VariableSizeList> */}
+                    {/* <MemoizedSpellTableRowShell /> */}
 
-                        <MemoizedSpellTableRowShell />
-
-                    
                 </TableBody>
 
             </Table>
