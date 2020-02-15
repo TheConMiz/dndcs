@@ -1,77 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react'
 
-import { createMuiTheme, CssBaseline, Grid } from '@material-ui/core';
+import { Layout } from 'antd'
 
-import { ThemeProvider, makeStyles } from '@material-ui/styles';
+import DataPuller from './DataPuller'
 
-import DataPuller from './DataPuller';
+import SpellTableShell from './SpellTableShell'
 
-import SpellTableShell from './SpellTableShell';
-import NameInput from './NameInput';
-import LevelView from './LevelView';
+import SideBar from './SideBar'
 
-const theme = createMuiTheme({
-    palette: {
-        type: 'dark',
-        // primary: orange,
-        // secondary: green,
-        // background: {
-        //     default: "#302929"
-        // }
-    }
-});
+const App = () => {
 
-const useStyles = makeStyles({
-    mainGrid: {
-        width: '100%',
-        height: '100%',
-    }
-})
-
-
-
-export default function App() {
-
-    const classes = useStyles();
+    const [closed, setClosed] = useState(true)
 
     return (
-        
-        <ThemeProvider theme={theme}>
-            
+        <Layout style={{ height: '100vh' }}>
+
             <DataPuller />
-
-            <CssBaseline />
             
-            <Grid
-                className={classes.mainGrid}
-                container
-                spacing={4}
-                alignItems="center"
-                justify="space-evenly"
-                alignItems="center"
-                direction="column"
+            <Layout.Sider
+                theme="dark"
+                collapsible
+                collapsed={closed}
+                // onCollapse={() => {
+                //     setOpen(!open)
+                // }}
             >
-                <br/>
-                <br/>
-                <Grid item>
-                    <NameInput/>
-                </Grid>
-
-                <Grid
-                    item
-                >
-                    <LevelView/>
-                </Grid>
-
-                <Grid
-                    item
-                >
-                    <SpellTableShell />
-                </Grid>
+                <div
+                    style={{ height: '30px', margin: '15px', background: '#4d7' }}
+                />
                 
-
-            </Grid>
+                <SideBar />
             
-        </ThemeProvider>
+            </Layout.Sider>
+
+            <Layout.Content>
+                <SpellTableShell />
+            </Layout.Content>
+        </Layout>
     );
 }
+
+export default App
