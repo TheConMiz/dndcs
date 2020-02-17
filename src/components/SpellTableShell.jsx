@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { getSpellLevels } from './../functions/spellUtility'
 
 
-const SpellTableShell = () => {
+export const SpellTableShell = () => {
 
     const spells = useSelector(state => state.app.spells)
 
@@ -145,6 +145,7 @@ const SpellTableShell = () => {
                 title="Spell Sheet"
                 tabList={levelList}
                 activeTabKey={activeTab.toString()}
+                loading={spells.length === 0 ? true : false}
                 onTabChange={key => {
                     setActiveTab(key)
                     console.log(key)
@@ -155,6 +156,7 @@ const SpellTableShell = () => {
                 extra={
                     <Button
                         type="danger"
+                        disabled={true}
                     >
                         Generate
                     </Button>
@@ -178,5 +180,3 @@ const SpellTableShell = () => {
 
     )
 }
-
-export default SpellTableShell

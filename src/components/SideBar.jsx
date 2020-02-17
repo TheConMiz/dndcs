@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Menu, Icon } from 'antd'
 
-const SideBar = () => {
+export const SideBar = () => {
     
     return (
         <Menu theme="dark" mode="inline">
@@ -25,5 +25,3 @@ const SideBar = () => {
         </Menu>
     );
 }
-
-export default SideBar

@@ -1,8 +1,8 @@
-import React from 'react';
-import {render} from 'react-dom';
-import App from './components/App';
+import React from 'react'
 
-// import { HashRouter } from 'react-router-dom';
+import { render } from 'react-dom'
+
+import { App } from './components/App'
 
 import { createStore, combineReducers } from 'redux';
 
@@ -10,7 +10,6 @@ import { Provider } from 'react-redux';
 
 import characterReducer from './reducers/characterReducer';
 import appReducer from './reducers/appReducer';
-import userReducer from './reducers/userReducer';
 import rulesReducer from './reducers/rulesReducer';
 
 // Database Path variables
@@ -35,7 +34,6 @@ else {
 const allReducers = combineReducers({
     character: characterReducer,
     app: appReducer,
-    // user: userReducer,
     rules: rulesReducer
 })
 
@@ -50,34 +48,21 @@ const store = createStore(
             background: {},
             xp: 0,
             level: 0,
-            // maxHP: 0,
-            // currentHP: 0,
-            // abilityScores: [],
-            // skillProficiencies: {},
             equipment: [],
-            // feats: []
         },
         app: {
             dbPath: dbPath,
             spells: [],
             spellSearch: "",
         },
-        // user: {
-        //     name: ""
-        // },
         rules: {
             abilityScores: [],
             conditions: [],
             damageTypes: [],
-            // languageRarities: [],
             spellComponents: [],
             magicSchools: [],
             levels: [],
-            // currencies: [],
-            // skills: [],
-            sources: [],
-
-            
+            sources: [],  
         }
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -88,8 +73,9 @@ const store = createStore(
  */
 
 render(
+    
     <Provider store={store}>
-            <App/>
+        <App/>
     </Provider> 
     
     , document.getElementById('root')

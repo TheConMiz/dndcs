@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import SpellPuller from './DataPuller/SpellPuller'
 import RulePuller from './DataPuller/RulePuller'
 
-export default function DataPuller() {
-
+export const DataPuller = () => {
+    
     const dbPath = useSelector(state => state.app.dbPath);
 
     return (
@@ -16,7 +16,6 @@ export default function DataPuller() {
             <RulePuller
                 dbPath={dbPath}
             />
-
         </Fragment>
     );
 }

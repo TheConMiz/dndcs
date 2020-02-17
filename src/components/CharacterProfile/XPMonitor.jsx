@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { UPDATE_CHAR_XP } from '../actions/characterActions';
+import { UPDATE_CHAR_XP } from '../../actions/characterActions';
 
 const useStyles = makeStyles(theme => ({
     xpCell: {
