@@ -179,13 +179,9 @@ const SpellTableShell = () => {
     return (        
         <div>
             <Card
-                style={{ width: '100%' }}
                 title="Spell Sheet"
-                
                 tabList={levels}
-
                 activeTabKey={activeTab.toString()}
-
                 onTabChange={key => {
                     setActiveTab(key)
                     console.log(key)
@@ -202,6 +198,7 @@ const SpellTableShell = () => {
                 }
             >
                 <Table
+                    style={{ width: '100%', height: '75vh', overflow: 'auto' }}
                     size="middle"
                     dataSource={spells.filter(spell => spell.level === Number(activeTab))}
                     columns={columns}
@@ -213,45 +210,6 @@ const SpellTableShell = () => {
                     }}
                 />
             </Card>
-
-            <Tabs
-                defaultActiveKey={0}
-                tabPosition="top"
-                size="large"
-                forceRender={false}
-            >
-                <Tabs.TabPane>
-                    
-                </Tabs.TabPane>
-
-                {/* {
-                    
-                    levels.map(item => {
-                        return (
-                            <Tabs.TabPane
-                                tab={item === 0 ? "Cantrips" : "Level " + item}
-                                key={item}
-                            >
-                                <Table
-                                    // title={() => 
-                                    //     <SpellFilter/>
-                                    // }
-                                    size="middle"
-                                    dataSource={spells.filter(spell => spell.level === item)}
-                                    columns={columns}
-                                    pagination={false}
-                                    rowSelection={{
-                                        onChange: (rowKeys, rows) => {
-                                            console.log(rowKeys, rows)
-                                        }
-                                    }}
-                                />
-                            </Tabs.TabPane>
-                        )
-                    })
-                } */}
-                
-            </Tabs>
             
         </div>
 
