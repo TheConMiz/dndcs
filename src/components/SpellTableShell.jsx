@@ -1,7 +1,6 @@
-import React from 'react'
-import { Table, Checkbox, Typography, Popover, Tabs } from 'antd'
+import React, {useState} from 'react'
+import { Table, Checkbox, Typography, Popover, Tabs, Card, Button } from 'antd'
 import { useSelector } from 'react-redux'
-
 
 const SpellTableShell = () => {
 
@@ -9,8 +8,7 @@ const SpellTableShell = () => {
 
     const abilityScores = useSelector(state => state.rules.abilityScores)
 
-    const filterList = abilityScores.map(({ desc, longDesc, ...abilityScores }) => abilityScores)
-    
+    const [activeTab, setActiveTab] = useState(0)
     
     const columns = [
         {
@@ -132,21 +130,101 @@ const SpellTableShell = () => {
             title: "Duration",
         },
     ]
-
-    const levels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     
+    /**TODO: FIX HARDCODED SPELL LEVELS */
+    const levels = [
+        {
+            key: 0,
+            tab: "Cantrips"
+        },
+        {
+            key: 1,
+            tab: "Level 1"
+        },
+        {
+            key: 2,
+            tab: "Level 2"
+        },
+        {
+            key: 3,
+            tab: "Level 3"
+        },
+        {
+            key: 4,
+            tab: "Level 4"
+        },
+        {
+            key: 5,
+            tab: "Level 5"
+        },
+        {
+            key: 6,
+            tab: "Level 6"
+        },
+        {
+            key: 7,
+            tab: "Level 7"
+        },
+        {
+            key: 8,
+            tab: "Level 8"
+        },
+        {
+            key: 9,
+            tab: "Level 9"
+        },
+    ]
 
-    return (
-        
+    
+    return (        
         <div>
+            <Card
+                style={{ width: '100%' }}
+                title="Spell Sheet"
+                
+                tabList={levels}
+
+                activeTabKey={activeTab.toString()}
+
+                onTabChange={key => {
+                    setActiveTab(key)
+                    console.log(key)
+                }}
+
+                // actions={[<Button>Generate</Button>]}
+
+                extra={
+                    <Button
+                        type="danger"
+                    >
+                        Generate
+                    </Button>
+                }
+            >
+                <Table
+                    size="middle"
+                    dataSource={spells.filter(spell => spell.level === Number(activeTab))}
+                    columns={columns}
+                    pagination={false}
+                    rowSelection={{
+                        onChange: (rowKeys, rows) => {
+                            console.log(rowKeys, rows)
+                        }
+                    }}
+                />
+            </Card>
+
             <Tabs
                 defaultActiveKey={0}
-                tabPosition="left"
+                tabPosition="top"
                 size="large"
                 forceRender={false}
             >
+                <Tabs.TabPane>
+                    
+                </Tabs.TabPane>
 
-                {
+                {/* {
                     
                     levels.map(item => {
                         return (
@@ -158,7 +236,7 @@ const SpellTableShell = () => {
                                     // title={() => 
                                     //     <SpellFilter/>
                                     // }
-                                    showHeader={true}
+                                    size="middle"
                                     dataSource={spells.filter(spell => spell.level === item)}
                                     columns={columns}
                                     pagination={false}
@@ -171,7 +249,7 @@ const SpellTableShell = () => {
                             </Tabs.TabPane>
                         )
                     })
-                }
+                } */}
                 
             </Tabs>
             

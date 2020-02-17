@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-import { Layout } from 'antd'
+import { Layout, Row, Col, Collapse, Button, Card } from 'antd'
 
 import DataPuller from './DataPuller'
 
@@ -9,11 +9,10 @@ import SpellTableShell from './SpellTableShell'
 import SideBar from './SideBar'
 
 const App = () => {
-
     const [closed, setClosed] = useState(true)
 
     return (
-        <Layout style={{ height: '100vh' }}>
+        <Layout style={{ height: '100vh', userSelect: 'none' }}>
 
             <DataPuller />
             
@@ -21,9 +20,9 @@ const App = () => {
                 theme="dark"
                 collapsible
                 collapsed={closed}
-                // onCollapse={() => {
-                //     setOpen(!open)
-                // }}
+                onCollapse={() => {
+                    setClosed(!closed)
+                }}
             >
                 <div
                     style={{ height: '30px', margin: '15px', background: '#4d7' }}
@@ -33,9 +32,32 @@ const App = () => {
             
             </Layout.Sider>
 
-            <Layout.Content>
-                <SpellTableShell />
-            </Layout.Content>
+            <Layout>
+                
+                <Layout.Content>
+
+                    <Row>
+                        <Col span={12}>SSSSSS</Col>
+                        <Col span={12}>BBBBBB</Col>
+                    </Row>
+
+                    <Row>
+                        <Col span={2}>SAD</Col>
+
+                        <Col span={20}>
+
+                            <SpellTableShell />
+
+                        </Col>
+                        
+                        <Col span={2}>SAD</Col>
+
+                        
+                    </Row>
+
+                </Layout.Content>
+            </Layout>
+
         </Layout>
     );
 }
