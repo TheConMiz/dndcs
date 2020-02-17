@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { UPDATE_SPELLS } from './../../actions/appActions';
 
-function pullData(dbPath) {
+
+const pullData = (dbPath) => {
 
     const dispatch = useDispatch();
 
@@ -54,6 +55,7 @@ function pullData(dbPath) {
     let dbQuery = spellQuery;
 
     dbQuery.then((rows) => {
+
         dispatch({ type: UPDATE_SPELLS, payload: rows })
     })
 }

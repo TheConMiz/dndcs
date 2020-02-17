@@ -2,9 +2,14 @@ import React, {useState} from 'react'
 import { Table, Checkbox, Typography, Popover, Tabs, Card, Button } from 'antd'
 import { useSelector } from 'react-redux'
 
+import { getSpellLevels } from './../functions/spellUtility'
+
+
 const SpellTableShell = () => {
 
     const spells = useSelector(state => state.app.spells)
+
+    let levelList = getSpellLevels(spells)
 
     const abilityScores = useSelector(state => state.rules.abilityScores)
 
@@ -76,6 +81,7 @@ const SpellTableShell = () => {
                 }
             ],
             onFilter: (content, item) => item.concentration === content,
+            align: 'center',
 
         },
         {
@@ -100,6 +106,7 @@ const SpellTableShell = () => {
                 }
             ],
             onFilter: (content, item) => item.ritual === content,
+            align: 'center'
         },
 
         {
@@ -119,6 +126,7 @@ const SpellTableShell = () => {
                     </Typography.Text>
                 )
             },
+            align: 'center'
             
         },
         {
@@ -130,57 +138,12 @@ const SpellTableShell = () => {
             title: "Duration",
         },
     ]
-    
-    /**TODO: FIX HARDCODED SPELL LEVELS */
-    const levels = [
-        {
-            key: 0,
-            tab: "Cantrips"
-        },
-        {
-            key: 1,
-            tab: "Level 1"
-        },
-        {
-            key: 2,
-            tab: "Level 2"
-        },
-        {
-            key: 3,
-            tab: "Level 3"
-        },
-        {
-            key: 4,
-            tab: "Level 4"
-        },
-        {
-            key: 5,
-            tab: "Level 5"
-        },
-        {
-            key: 6,
-            tab: "Level 6"
-        },
-        {
-            key: 7,
-            tab: "Level 7"
-        },
-        {
-            key: 8,
-            tab: "Level 8"
-        },
-        {
-            key: 9,
-            tab: "Level 9"
-        },
-    ]
-
-    
-    return (        
+        
+    return (
         <div>
             <Card
                 title="Spell Sheet"
-                tabList={levels}
+                tabList={levelList}
                 activeTabKey={activeTab.toString()}
                 onTabChange={key => {
                     setActiveTab(key)
