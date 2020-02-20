@@ -1,5 +1,5 @@
 export const UPDATE_SPELLS = "UPDATE_SPELLS";
-export const UPDATE_SPELL_SEARCH = "UPDATE_SPELL_SEARCH";
+export const UPDATE_CLASSES = "UPDATE_CLASSES";
 
 export function updateSpells(newSpells) {
     return {
@@ -10,11 +10,11 @@ export function updateSpells(newSpells) {
     }
 }
 
-export function updateSpellSearch(newSpellSearch) {
+export function updateClasses(newClasses) {
     return {
-        type: UPDATE_SPELL_SEARCH,
+        type: UPDATE_CLASSES,
         payload: {
-            spellSearch: newSpellSearch
+            classes: newClasses
         }
     }
 }

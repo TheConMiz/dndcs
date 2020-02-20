@@ -54,6 +54,8 @@ const store = createStore(
             dbPath: dbPath,
             spells: [],
             spellSearch: "",
+            classes: [],
+            subClasses: [],
         },
         rules: {
             abilityScores: [],

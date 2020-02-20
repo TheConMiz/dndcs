@@ -10,7 +10,8 @@ import {
     UPDATE_RULE_SOURCE,
 } from './../../actions/rulesActions';
 
-function pullData(dbPath) {
+const pullData = (dbPath) => {
+    
     const dispatch = useDispatch();
 
     let knex = window.require('knex')({
@@ -27,12 +28,11 @@ function pullData(dbPath) {
     })
 
         .select({
-            index: "as.index",
+            id: "as.index",
             name: "as.name",
             abbr: "as.abbr",
             desc: "as.desc",
             longDesc: "as.longDesc",
-
         })
 
         .orderBy("as.name", "asc");
@@ -57,7 +57,7 @@ function pullData(dbPath) {
         .select({
             name: "cond.name",
             desc: "cond.desc",
-            index: "cond.index"
+            id: "cond.index"
         })
 
         .orderBy("cond.name", "asc");
@@ -70,7 +70,7 @@ function pullData(dbPath) {
         .select({
             name: "dType.name",
             desc: "dType.desc",
-            index: "dType.index"
+            id: "dType.index"
         })
 
         .orderBy("dType.name", "asc");
@@ -83,7 +83,7 @@ function pullData(dbPath) {
         .select({
             name: "mSchool.name",
             desc: "mSchool.desc",
-            index: "mSchool.index",
+            id: "mSchool.index",
             abbr: "mSchool.abbr"
         })
 
@@ -97,7 +97,7 @@ function pullData(dbPath) {
         .select({
             name: "sComp.name",
             desc: "sComp.desc",
-            index: "sComp.index",
+            id: "sComp.index",
             abbr: "sComp.abbr"
         })
 
@@ -111,7 +111,7 @@ function pullData(dbPath) {
         .select({
             name: "src.name",
             abbr: "src.abbr",
-            index: "src.index"
+            id: "src.index"
         })
 
         .orderBy("src.name", "asc");
