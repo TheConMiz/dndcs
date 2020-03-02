@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
-import { Table, Checkbox, Typography, Popover, Tabs, Card, Button } from 'antd'
-import { useSelector } from 'react-redux'
+import { Table, Checkbox, Typography, Popover, Card, Button } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import { UPDATE_CHAR_PREPARED_SPELLS, UPDATE_CHAR_MAX_PREPARED_SPELLS } from './../actions/characterActions'
+
+import { some } from 'lodash'
 
 import { getSpellLevels } from './../functions/spellUtility'
 
@@ -9,9 +12,15 @@ export const SpellTableShell = () => {
 
     const spells = useSelector(state => state.app.spells)
 
+    const dispatch = useDispatch()
+
     let levelList = getSpellLevels(spells)
 
     const abilityScores = useSelector(state => state.rules.abilityScores)
+    
+    const preparedSpells = useSelector(state => state.character.preparedSpells)
+    
+    const maxPreparedSpells = useSelector(state => state.character.maxPreparedSpells)
 
     const [activeTab, setActiveTab] = useState(0)
     
@@ -20,7 +29,7 @@ export const SpellTableShell = () => {
             dataIndex: "name",
             title: "Name",
             key: "id",
-            sorter: (a, b) => a.name.localeCompare(b.name),
+            sorter: (a, b) => a.name.lo+leCompare(b.name),
             sortDirections: ['descend'],
             render: (content, item) => {
                 return (
@@ -148,11 +157,7 @@ export const SpellTableShell = () => {
                 loading={spells.length === 0 ? true : false}
                 onTabChange={key => {
                     setActiveTab(key)
-                    console.log(key)
                 }}
-
-                // actions={[<Button>Generate</Button>]}
-
                 extra={
                     <Button
                         type="danger"
@@ -168,11 +173,16 @@ export const SpellTableShell = () => {
                     dataSource={spells.filter(spell => spell.level === Number(activeTab))}
                     columns={columns}
                     pagination={false}
-                    rowSelection={{
-                        onChange: (rowKeys, rows) => {
-                            console.log(rowKeys, rows)
-                        }
-                    }}
+                    // rowSelection={{
+                    //     onChange: (selectedRowKeys, selectedRows) => {
+                    //         console.log(selectedRowKeys, selectedRows)
+                    //         dispatch({ type: UPDATE_CHAR_PREPARED_SPELLS, payload: selectedRows.length === 0 ? [] : selectedRows })
+                    //     },
+                    //     getCheckboxProps: record => ({
+                    //         checked: some(preparedSpells, record),
+                    //         name: record.name
+                    //     })
+                    // }}
                 />
             </Card>
             

@@ -25,7 +25,8 @@ function createWindow() {
         height: screenSize.height * 0.8,
         show: false,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            nodeIntegrationInWorker: true
         }
     });
 

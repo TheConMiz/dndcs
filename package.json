@@ -5,8 +5,8 @@
   "description": "A Character sheet solution for Dungeons & Dragons, built using Electron, React and SQLite3",
   "main": "./public/electron-main.js",
   "scripts": {
-    "start": "electron . ",
-    "postinstall": "electron-builder install-app-deps",
+    "start": "(@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./devToolsClear.ps1) & (electron .)",
+    "postinstall": "electron-builder install-app-deps",    
     "dev": "webpack && webpack-dev-server",
     "test-build": "webpack && electron-builder --dir",
     "dist": "webpack && electron-builder",
@@ -85,13 +85,13 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.8.3",
-    "@material-ui/icons": "^4.5.1",
     "@material-ui/styles": "^4.8.2",
     "antd": "^3.26.11",
     "clsx": "^1.1.0",
     "draft-js": "^0.11.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-is-dev": "^1.1.0",
+    "import-lazy": "^4.0.0",
     "knex": "^0.20.10",
     "lodash": "^4.17.15",
     "react-dom": "^16.12.0",
@@ -99,6 +99,7 @@
     "react-select": "^3.0.8",
     "react-virtualized": "^9.21.2",
     "redux": "^4.0.5",
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^4.1.1",
+    "v8-compile-cache": "^2.1.0"
   }
 }
