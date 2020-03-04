@@ -5,14 +5,12 @@ import { Card, Row, Col, Upload, Icon, Cascader, Table, Input, Button, InputNumb
 
 import { NameInput } from './CharacterProfile/NameInput'
 
+import { ClassSelection } from './CharacterProfile/ClassSelection'
+
 export const CharacterProfile = () => {
 
-    const [openClassModal, setOpenClassModal] = useState(false)
-
     return (
-        <Card
-            
-        >
+        <Card>
             <Upload
                 name="avatar"
                 listType="picture-card"
@@ -27,7 +25,7 @@ export const CharacterProfile = () => {
 
             <NameInput />
             
-            <Cascader
+            {/* <Cascader
                 allowClear={true}
                 placeholder="Character Race"
             />
@@ -36,25 +34,16 @@ export const CharacterProfile = () => {
                 allowClear={true}
                 showSearch={true}
                 placeholder="Character Background"
-            />
+            /> */}
 
-            <Input.Group>
+            {/* <Input.Group>
                 <InputNumber
                     placeholder="XP"
                 />
 
-            </Input.Group>
+            </Input.Group> */}
 
-            <Button
-                type="primary"
-                onClick={() => {
-                    setOpenClassModal(true)
-                }}
-            >
-                Select Class(es)
-            </Button>
-
-            <Table
+            {/* <Table
                 bordered
                 size="small"
                 columns={[
@@ -65,40 +54,9 @@ export const CharacterProfile = () => {
                 size="small"
             >
 
-            </Table>
-            
-            <Drawer
-                title="To-Do"
-                placement="left"
-                visible={openClassModal}
-                closable={true}
+            </Table> */}
 
-            >
-                <Collapse>
-                    
-                    <Collapse.Panel
-                        header="Select Class(es)"
-                        key={1}
-                    >
-                        <Card>
-                            <Cascader
-                                placeholder="Select a Class"
-                            />
-                        </Card>
-                    </Collapse.Panel>
-
-                    <Collapse.Panel
-                        header="Select Race"
-                        key={2}
-                    >
-                    
-                    </Collapse.Panel>
-                    
-                </Collapse>
-   
-            </Drawer>
-
-
+            <ClassSelection/>
 
         </Card>
     )

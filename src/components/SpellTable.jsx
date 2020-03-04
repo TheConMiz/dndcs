@@ -1,14 +1,12 @@
-import React, {useState} from 'react'
-import { Table, Checkbox, Typography, Popover, Card, Button } from 'antd'
+import React, { useState, Fragment } from 'react'
+import { Table, Checkbox, Typography, Popover, Card, Button, AutoComplete } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { UPDATE_CHAR_PREPARED_SPELLS, UPDATE_CHAR_MAX_PREPARED_SPELLS } from './../actions/characterActions'
-
-import { some } from 'lodash'
 
 import { getSpellLevels } from './../functions/spellUtility'
 
 
-export const SpellTableShell = () => {
+export const SpellTable = () => {
 
     const spells = useSelector(state => state.app.spells)
 
@@ -17,10 +15,6 @@ export const SpellTableShell = () => {
     let levelList = getSpellLevels(spells)
 
     const abilityScores = useSelector(state => state.rules.abilityScores)
-    
-    const preparedSpells = useSelector(state => state.character.preparedSpells)
-    
-    const maxPreparedSpells = useSelector(state => state.character.maxPreparedSpells)
 
     const [activeTab, setActiveTab] = useState(0)
     
@@ -29,7 +23,7 @@ export const SpellTableShell = () => {
             dataIndex: "name",
             title: "Name",
             key: "id",
-            sorter: (a, b) => a.name.lo+leCompare(b.name),
+            sorter: (a, b) => a.name.localeCompare(b.name),
             sortDirections: ['descend'],
             render: (content, item) => {
                 return (
@@ -50,7 +44,7 @@ export const SpellTableShell = () => {
                 return (
                     <Popover
                         title="Full Description"
-                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer est ligula, convallis a ante at, cursus tempus sem. Nullam lacinia porta ligula, sit amet vestibulum risus interdum cursus. Mauris et porttitor lectus."
+                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer est ligula, convallis a ante at, cursus tempus sem."
                     >
                         <Typography.Text>
                             {content}
@@ -159,12 +153,22 @@ export const SpellTableShell = () => {
                     setActiveTab(key)
                 }}
                 extra={
-                    <Button
-                        type="danger"
-                        disabled={true}
-                    >
-                        Generate
-                    </Button>
+                    <Fragment>
+                        <AutoComplete
+                            style={{ width: 200 }}
+                            placeholder="Input tags here"
+                        >
+
+                        </AutoComplete>
+                        <Button
+                            type="danger"
+                            disabled={true}
+                        >
+                            Generate
+                        </Button>
+
+                    </Fragment>
+                    
                 }
             >
                 <Table

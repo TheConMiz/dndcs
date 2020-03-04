@@ -3,7 +3,7 @@ import React from 'react'
 import { Layout, Row, Col } from 'antd'
 
 import { SideBar } from './SideBar'
-import { SpellTableShell } from './SpellTableShell'
+import { SpellTable } from './SpellTable'
 import { CharacterProfile } from './CharacterProfile'
 
 
@@ -37,7 +37,7 @@ export const UIShell = () => {
                         <Col span={8}></Col>
                         <Col span={8}></Col>
                         <Col span={8}>
-                            {/* <CharacterProfile/> */}
+                            <CharacterProfile/>
                         </Col>
                     </Row>
 
@@ -46,7 +46,7 @@ export const UIShell = () => {
                         justify="center"
                     >
                         <Col span={20}>
-                            <SpellTableShell />
+                            <SpellTable />
                         </Col>
                     </Row>
                 </Layout.Content>
