@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import { Table, Checkbox, Typography, Card, Button, AutoComplete, Popover } from 'antd'
+import { Table, Checkbox, Typography, Card, Button, AutoComplete, Popover, Collapse } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { getSpellLevels } from './../functions/spellUtility'
@@ -51,7 +51,7 @@ export const SpellTable = () => {
                         placement="right"
                         overlayStyle={{
                             maxWidth: '400px',
-                            maxHeight: '300px',
+                            maxHeight: '250px',
                             overflowY: 'auto',
                             // boxShadow: "0px 0px 26px 8px rgba(148,148,148,1)"
                         }}
@@ -161,12 +161,7 @@ export const SpellTable = () => {
         <div>
             <Card
                 title="Spell Sheet"
-                tabList={levelList}
-                activeTabKey={activeTab.toString()}
                 loading={spells.length === 0 ? true : false}
-                onTabChange={key => {
-                    setActiveTab(key)
-                }}
                 extra={
                     <Fragment>
                         <AutoComplete
@@ -186,23 +181,34 @@ export const SpellTable = () => {
                     
                 }
             >
-                <Table
-                    style={{ width: '100%', height: '75vh', overflow: 'auto' }}
-                    size="middle"
-                    dataSource={spells.filter(spell => spell.level === Number(activeTab))}
-                    columns={columns}
-                    pagination={false}
-                    // rowSelection={{
-                    //     onChange: (selectedRowKeys, selectedRows) => {
-                    //         console.log(selectedRowKeys, selectedRows)
-                    //         dispatch({ type: UPDATE_CHAR_PREPARED_SPELLS, payload: selectedRows.length === 0 ? [] : selectedRows })
-                    //     },
-                    //     getCheckboxProps: record => ({
-                    //         checked: some(preparedSpells, record),
-                    //         name: record.name
-                    //     })
-                    // }}
-                />
+                <Collapse
+                    defaultActiveKey={['0']}
+                    bordered={false}
+                    destroyInactivePanel={true}
+                >
+                    {
+                        levelList.length !== 0 ? 
+                        levelList.map((level) => {
+                            return (
+                                <Collapse.Panel
+                                    key={level.key.toString()}
+                                    disabled={spells.filter(spell => spell.level === level.key).length === 0}
+                                    header={level.key === 0 ? "Cantrips" : "Level " + level.key}
+                                >
+                                    <Table
+                                        style={{ width: '100%', maxHeight: '50vh', overflow: 'auto' }}
+                                        size="middle"
+                                        dataSource={spells.filter(spell => spell.level === level.key)}
+                                        columns={columns}
+                                        pagination={false}
+                                    />
+                                </Collapse.Panel>
+                            )
+                        })
+                            :
+                        <Fragment/>
+                    }
+                </Collapse>
             </Card>
             
         </div>

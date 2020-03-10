@@ -37,7 +37,7 @@ export const UIShell = () => {
                         <Col span={8}></Col>
                         <Col span={8}></Col>
                         <Col span={8}>
-                            <CharacterProfile/>
+                            {/* <CharacterProfile/> */}
                         </Col>
                     </Row>
 
