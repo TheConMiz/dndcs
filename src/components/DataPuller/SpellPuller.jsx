@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { UPDATE_SPELLS } from './../../actions/appActions';
 
@@ -18,7 +18,15 @@ const pullData = (dbPath) => {
         debug: true
     });
 
-    const spellQuery = knex({
+    /**
+     * Variable for adding descriptions, saves to spells from the database  
+     */
+    let tempSpells = []
+
+    /**
+     * Default Spell Query
+     */
+    let spellQuery = knex({
         sp: "Spell"
     })
         .select({
@@ -34,7 +42,8 @@ const pullData = (dbPath) => {
             concentration: "Spell-Type-Concentration.concentration",
             ritual: "Spell-Type-Ritual.ritual",
             save: "Spell-Save.saveID",
-            duration: "sp.duration"
+            duration: "sp.duration",
+            highLevelDesc: "Spell-Description-HighLevel.desc"
         })
 
         .join('Spell-Description-Short', { 'sp.index': 'Spell-Description-Short.spellID' })
@@ -49,14 +58,60 @@ const pullData = (dbPath) => {
 
         .leftOuterJoin('Spell-Save', { 'sp.index': 'Spell-Save.spellID' })
 
+        .leftOuterJoin('Spell-Description-HighLevel', { 'sp.index': 'Spell-Description-HighLevel.spellID' })
 
         .orderBy("sp.name", "asc");
-
+    
+    
+    
     let dbQuery = spellQuery;
-
     dbQuery.then((rows) => {
+        tempSpells = rows;
+    })
 
-        dispatch({ type: UPDATE_SPELLS, payload: rows })
+
+    let fullDescQuery = knex({
+        fDesc: "Spell-Description-Full"
+    })
+        .select({
+            spellID: "fDesc.spellID",
+            lineID: "fDesc.lineID",
+            desc: "fDesc.desc",
+        })
+        
+        .orderBy(["fDesc.spellID", "fDesc.lineID"], "asc");
+    
+    /**
+     * TODO: Get Spell Components
+     */
+    
+    // let componentQuery = knex({
+    //     spellComp: "Spell-"
+    // })
+    //     .select({
+    //         spellID: "spellComp.spellID",
+    //         lineID: "spellComp.lineID",
+    //         desc: "spellComp.desc",
+    //     })
+
+    //     .orderBy(["fDesc.spellID", "fDesc.lineID"], "asc");
+    
+    dbQuery = fullDescQuery;
+
+    /**
+     * Inclusion of Full descriptions
+     */
+    dbQuery.then((rows) => {
+        tempSpells.map((item) => {
+            let descriptions = rows.filter(row => row.spellID === item.id).map((desc) => {
+                return desc.desc
+            })
+
+            item.fullDesc = descriptions
+        })
+
+        dispatch({ type: UPDATE_SPELLS, payload: tempSpells })
+
     })
 }
 

@@ -1,9 +1,9 @@
 import React, { useState, Fragment } from 'react'
-import { Table, Checkbox, Typography, Popover, Card, Button, AutoComplete } from 'antd'
+import { Table, Checkbox, Typography, Card, Button, AutoComplete, Popover } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
-import { UPDATE_CHAR_PREPARED_SPELLS, UPDATE_CHAR_MAX_PREPARED_SPELLS } from './../actions/characterActions'
 
 import { getSpellLevels } from './../functions/spellUtility'
+import { SpellDescription } from './SpellDescription'
 
 
 export const SpellTable = () => {
@@ -17,7 +17,10 @@ export const SpellTable = () => {
     const abilityScores = useSelector(state => state.rules.abilityScores)
 
     const [activeTab, setActiveTab] = useState(0)
-    
+
+    /**
+     * TODO: FIX DESCRIPTION POPUP SHADOW
+     */
     const columns = [
         {
             dataIndex: "name",
@@ -43,8 +46,23 @@ export const SpellTable = () => {
             render: (content, item) => {
                 return (
                     <Popover
-                        title="Full Description"
-                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer est ligula, convallis a ante at, cursus tempus sem."
+                        trigger="hover"
+                        arrowPointAtCenter={true}
+                        placement="right"
+                        overlayStyle={{
+                            maxWidth: '400px',
+                            maxHeight: '300px',
+                            overflowY: 'auto',
+                            // boxShadow: "0px 0px 26px 8px rgba(148,148,148,1)"
+                        }}
+                        // title="Full Description"
+                        content={
+                            <SpellDescription
+                                fullDesc={item.fullDesc}
+                                altName={item.altName}
+                                highLevelDesc={item.highLevelDesc}
+                            />
+                        }
                     >
                         <Typography.Text>
                             {content}
@@ -121,10 +139,7 @@ export const SpellTable = () => {
                         type="warning"
                     >
                         {
-                            typeof (abilityScores.find(i => item.save === i.index)) === "undefined" ?
-                                ""
-                                :
-                                abilityScores.find(i => item.save === i.index).abbr
+                            item.save
                         }
                     </Typography.Text>
                 )
