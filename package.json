@@ -6,7 +6,7 @@
   "main": "./public/electron-main.js",
   "scripts": {
     "start": "(@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./devToolsClear.ps1) & (electron .)",
-    "postinstall": "electron-builder install-app-deps",    
+    "postinstall": "electron-builder install-app-deps",
     "dev": "webpack && webpack-dev-server",
     "test-build": "webpack && electron-builder --dir",
     "dist": "webpack && electron-builder",

@@ -48,9 +48,10 @@ const store = createStore(
             background: {},
             xp: 0,
             level: 0,
+            knownSpells: [],
             equipment: [],
-            preparedSpells: [],
-            maxPreparedSpells: 5,
+            maxPreparedSpells: 0,
+            maxKnownSpells: 0,
         },
         app: {
             dbPath: dbPath,

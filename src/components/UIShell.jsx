@@ -5,6 +5,7 @@ import { Layout, Row, Col } from 'antd'
 import { SideBar } from './SideBar'
 import { SpellTable } from './SpellTable'
 import { CharacterProfile } from './CharacterProfile'
+import { VirtualSpellTable } from './VirtualSpellTable'
 
 
 
@@ -45,9 +46,12 @@ export const UIShell = () => {
                         type="flex"
                         justify="center"
                     >
-                        <Col span={20}>
+                        <Col span={1}/>
+                        <Col span={22}>
                             <SpellTable />
+                            {/* <VirtualSpellTable/> */}
                         </Col>
+                        <Col span={1}/>
                     </Row>
                 </Layout.Content>
             </Layout>

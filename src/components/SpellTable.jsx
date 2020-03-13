@@ -2,8 +2,11 @@ import React, { useState, Fragment } from 'react'
 import { Table, Checkbox, Typography, Card, Button, AutoComplete, Popover, Collapse } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getSpellLevels } from './../functions/spellUtility'
+import { getSpellLevels, getSaveFilters } from './../functions/spellUtility'
 import { SpellDescription } from './SpellDescription'
+
+import { GenerateSpells } from './GenerateSpells'
+
 
 
 export const SpellTable = () => {
@@ -16,8 +19,6 @@ export const SpellTable = () => {
 
     const abilityScores = useSelector(state => state.rules.abilityScores)
 
-    const [activeTab, setActiveTab] = useState(0)
-
     /**
      * TODO: FIX DESCRIPTION POPUP SHADOW
      */
@@ -26,6 +27,7 @@ export const SpellTable = () => {
             dataIndex: "name",
             title: "Name",
             key: "id",
+            width: '10%',
             sorter: (a, b) => a.name.localeCompare(b.name),
             sortDirections: ['descend'],
             render: (content, item) => {
@@ -43,6 +45,7 @@ export const SpellTable = () => {
         {
             dataIndex: "shortDesc",
             title: "Description",
+            width: '35%',
             render: (content, item) => {
                 return (
                     <Popover
@@ -75,14 +78,17 @@ export const SpellTable = () => {
         {
             dataIndex: "range",
             title: "Range",
+            width: '7%',
         },
         {
             dataIndex: "castingTime",
             title: "Time",
+            width: '8%',
         },
         {
             dataIndex: "concentration",
             title: "Conc.",
+            width: '8%',
             render: (content, item) => {
                 return (
                     <Checkbox
@@ -103,11 +109,11 @@ export const SpellTable = () => {
             ],
             onFilter: (content, item) => item.concentration === content,
             align: 'center',
-
         },
         {
             dataIndex: "ritual",
             title: "Ritual",
+            width: '8%',
             render: (content, item) => {
                 return (
                     <Checkbox
@@ -133,85 +139,70 @@ export const SpellTable = () => {
         {
             dataIndex: "save",
             title: "Save",
+            width: '8%',
             render: (content, item) => {
                 return (
                     <Typography.Text
                         type="warning"
                     >
                         {
-                            item.save
+                            abilityScores.filter(aScore => aScore.id === item.save).length !== 0 ?
+                                abilityScores.filter(aScore => aScore.id === item.save)[0].abbr
+                            :
+                                ""
                         }
                     </Typography.Text>
                 )
             },
-            align: 'center'
-            
+            align: 'center',
+            filters: getSaveFilters(abilityScores),
+            onFilter: (content, item) => item.save === content 
         },
         {
             dataIndex: "components",
-            title: "Components",
+            title: "Comp.",
+            width: '6%',
         },
         {
             dataIndex: "duration",
             title: "Duration",
+            width: '10%',
         },
     ]
+
+    /**
+     * TODO: Spell Materials
+     * TODO: Alt. Spell Names
+     * TODO: Spell Levelling ==> NESTED TABLES
+     */
         
     return (
-        <div>
+        <Fragment>
             <Card
                 title="Spell Sheet"
+                style={{width: '100%', minWidth: '700px'}}
                 loading={spells.length === 0 ? true : false}
                 extra={
                     <Fragment>
-                        <AutoComplete
-                            style={{ width: 200 }}
-                            placeholder="Input tags here"
-                        >
 
-                        </AutoComplete>
-                        <Button
-                            type="danger"
-                            disabled={true}
-                        >
-                            Generate
-                        </Button>
+                        <GenerateSpells/>
 
                     </Fragment>
                     
                 }
             >
-                <Collapse
-                    defaultActiveKey={['0']}
-                    bordered={false}
-                    destroyInactivePanel={true}
-                >
-                    {
-                        levelList.length !== 0 ? 
-                        levelList.map((level) => {
-                            return (
-                                <Collapse.Panel
-                                    key={level.key.toString()}
-                                    disabled={spells.filter(spell => spell.level === level.key).length === 0}
-                                    header={level.key === 0 ? "Cantrips" : "Level " + level.key}
-                                >
-                                    <Table
-                                        style={{ width: '100%', maxHeight: '50vh', overflow: 'auto' }}
-                                        size="middle"
-                                        dataSource={spells.filter(spell => spell.level === level.key)}
-                                        columns={columns}
-                                        pagination={false}
-                                    />
-                                </Collapse.Panel>
-                            )
-                        })
-                            :
-                        <Fragment/>
-                    }
-                </Collapse>
+               
+                <Table
+                    style={{ width: '100%', overflow: 'auto' }}
+                    size="middle"
+                    dataSource={spells}
+                    columns={columns}
+                    pagination={false}
+                    scroll={{y: 500}}
+                />
             </Card>
             
-        </div>
+        </Fragment>
 
     )
 }
