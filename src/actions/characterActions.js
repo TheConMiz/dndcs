@@ -1,6 +1,6 @@
 export const UPDATE_CHAR_NAME = "UPDATE_CHAR_NAME";
 export const UPDATE_CHAR_XP = "UPDATE_CHAR_XP";
-export const UPDATE_CHAR_PREPARED_SPELLS = "UPDATE_CHAR_PREPARED_SPELLS";
+export const UPDATE_CHAR_KNOWN_SPELLS = "UPDATE_CHAR_KNOWN_SPELLS";
 export const UPDATE_CHAR_MAX_PREPARED_SPELLS = "UPDATE_CHAR_MAX_PREPARED_SPELLS";
 
 export function updateCharName(newName) {
@@ -21,11 +21,11 @@ export function updateCharXP(newXP) {
     }
 }
 
-export function updatePreparedSpells(newPreparedSpells) {
+export function updateKnownSpells(newKnownSpells) {
     return {
-        type: UPDATE_CHAR_PREPARED_SPELLS,
+        type: UPDATE_CHAR_KNOWN_SPELLS,
         payload: {
-            preparedSpells: newPreparedSpells
+            knownSpells: newKnownSpells
         }
     }
 }

@@ -1,8 +1,9 @@
 import React, { useState, Fragment } from 'react'
-import { Table, Checkbox, Typography, Card, Button, AutoComplete, Popover, Collapse } from 'antd'
+import { Table, Checkbox, Typography, Card, Button, AutoComplete, Popover } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getSpellLevels, getSaveFilters } from './../functions/spellUtility'
+import { getSaveFilters } from './../functions/spellUtility'
+
 import { SpellDescription } from './SpellDescription'
 
 import { GenerateSpells } from './GenerateSpells'
@@ -11,11 +12,9 @@ import { GenerateSpells } from './GenerateSpells'
 
 export const SpellTable = () => {
 
-    const spells = useSelector(state => state.app.spells)
+    const spells = useSelector(state => state.character.knownSpells)
 
     const dispatch = useDispatch()
-
-    let levelList = getSpellLevels(spells)
 
     const abilityScores = useSelector(state => state.rules.abilityScores)
 

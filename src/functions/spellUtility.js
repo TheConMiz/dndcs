@@ -25,7 +25,7 @@ export const getSpellLevels = (spells) => {
 export const getSaveFilters = (abilityScores) => {
     let filters = []
 
-    let test = abilityScores.map(item => {
+    abilityScores.map(item => {
         let temp = Object.assign({}, {
             text: item.abbr,
             value: item.id
