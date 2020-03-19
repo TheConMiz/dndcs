@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import { Table, Checkbox, Typography, Card, Button, AutoComplete, Popover } from 'antd'
+import { Table, Radio, Typography, Card, Button, AutoComplete, Popover } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { getSaveFilters } from './../functions/spellUtility'
@@ -7,8 +7,6 @@ import { getSaveFilters } from './../functions/spellUtility'
 import { SpellDescription } from './SpellDescription'
 
 import { GenerateSpells } from './GenerateSpells'
-
-
 
 export const SpellTable = () => {
 
@@ -180,7 +178,7 @@ export const SpellTable = () => {
             <Card
                 title="Spell Sheet"
                 style={{width: '100%', minWidth: '700px'}}
-                loading={spells.length === 0 ? true : false}
+                // loading={spells.length === 0 ? true : false}
                 extra={
                     <Fragment>
 
@@ -190,6 +188,11 @@ export const SpellTable = () => {
                     
                 }
             >
+                {/* <Card
+                    style={{ width: '50px', height: '50px' }}
+                >
+                    <Radio />
+                </Card> */}
                
                 <Table
                     style={{ width: '100%', overflow: 'auto' }}

@@ -36,3 +36,27 @@ export const getSaveFilters = (abilityScores) => {
 
     return filters
 }
+
+export const sortSpells = (spells) => {
+    let sortedSpells = spells.slice().sort((first, second) => {
+
+        if (first.name.toUpperCase() > second.name.toUpperCase()) {
+            return 1
+        }
+        
+        else if (first.name.toUpperCase() < second.name.toUpperCase()) {
+            return -1
+        }
+        
+        else {
+            return 0
+        }
+    })
+
+    return sortedSpells
+}
+
+export const getDefaultSpells = (spells) => {
+    let temp = ["Acid Splash"]
+    return temp
+}

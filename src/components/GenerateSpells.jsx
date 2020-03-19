@@ -4,11 +4,9 @@ import { Button, Modal, Select, Typography } from 'antd'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getSpellLevels } from './../functions/spellUtility'
+import { getSpellLevels, sortSpells, getDefaultSpells } from './../functions/spellUtility'
 
 import { UPDATE_CHAR_KNOWN_SPELLS } from './../actions/characterActions'
-
-
 
 export const GenerateSpells = () => {
 
@@ -29,32 +27,40 @@ export const GenerateSpells = () => {
     return (
         <Fragment>
             <Button
-                type="danger"
+                type={knownSpells.length === 0 ? "primary" : "danger"}
+                
                 onClick={() => {
                     setvisible(true)
                 }}
             >
-                Generate
+                {knownSpells.length === 0 ? "Generate" : "Re-Generate"}
             </Button>
 
             <Modal
                 closable={false}
                 destroyOnClose={true}
                 centered={true}
-                keyboard={true}
                 mask={true}
-                maskClosable={true}
+                maskClosable={false}
                 visible={visible}
                 onCancel={() => {
-                    setTempKnownSpells([])
+                    if (knownSpells.length === 0) {
+                        setTempKnownSpells([])                        
+                    }
 
+                    else {
+                        let cachedKnownSpells = knownSpells.slice()
+                        setTempKnownSpells(cachedKnownSpells)
+                    }
                     setvisible(false)
                 }}
 
                 onOk={() => {
-                    setvisible(false)
+                    let sortedSpells = sortSpells(tempKnownSpells)
 
-                    dispatch({type: UPDATE_CHAR_KNOWN_SPELLS, payload: tempKnownSpells})
+                    dispatch({ type: UPDATE_CHAR_KNOWN_SPELLS, payload: sortedSpells })
+
+                    setvisible(false)
                 }}
                 
                 title="Generate Spell Table"
@@ -64,13 +70,23 @@ export const GenerateSpells = () => {
                         return (
                             <Select
                                 mode="multiple"
-                                // allowClear={true}
+                                defaultValue={tempKnownSpells.length === 0 ? tempKnownSpells : tempKnownSpells.filter(spell => spell.level === level.key).map(spell => spell.name)}
+                                // TODO: Custom spell searching
+                                // filterOption={(input, option) => {
+                                //     console.log(option.props.data)
+                                //     return (
+                                //         option.props.data.name.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                //     )
+                                // }}
+                                // optionFilterProp="props.data.name"
+                                
                                 showArrow={true}
+
                                 placeholder={
                                     level.key === 0 ? "Cantrips" : "Level " + level.key + " Spell(s)"
                                 }
+                                
                                 style={{ width: '100%', overflowX: 'auto' }}
-
                                 onSelect={(item, instance) => {
                                     let finalKnownSpells = tempKnownSpells.slice()
                                     
