@@ -1,34 +1,55 @@
+/**
+ * Spell Table Generation Component
+ * - Allow user to choose spells to add to table
+ * TODO: Add all spells
+ * TODO: Filter based on class, level, max. number of spells known, etc.
+ */
+
+/**
+ * Components from 3rd-party Libraries
+ */
 import React, { Fragment, useState } from 'react'
-
 import { Button, Modal, Select, Typography } from 'antd'
-
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getSpellLevels, sortSpells, getDefaultSpells } from './../functions/spellUtility'
+/**
+ * Self-generated utility functions
+ */
+import { getSpellLevels, sortSpells } from '../../functions/spellUtility'
 
-import { UPDATE_CHAR_KNOWN_SPELLS } from './../actions/characterActions'
+/**
+ * Redux actions
+ */
+import { UPDATE_CHAR_KNOWN_SPELLS } from '../../actions/characterActions'
 
-export const GenerateSpells = () => {
+export const Generator = () => {
 
-    const [visible, setvisible] = useState(false)
-
-    // const maxKnownSpells = useSelector(state => state.character.maxKnownSpells)
-
+    /**
+     * Keyword for dispatch to Redux store
+     */
+    const dispatch = useDispatch()
+    
+    /**
+     * Access known spells and complete spell list in Redux store
+     */
     const knownSpells = useSelector(state => state.character.knownSpells)
-
     const spells = useSelector(state => state.app.spells)
-
+    
+    /**
+     * Extract spell levels available in database 
+     */
     let levelList = getSpellLevels(spells)
 
+    /**
+     * Local state for temporarily storing user's spell selections, and visibility of Modal component 
+     */
     const [tempKnownSpells, setTempKnownSpells] = useState([])
-
-    const dispatch = useDispatch()
+    const [visible, setvisible] = useState(false)
 
     return (
         <Fragment>
             <Button
                 type={knownSpells.length === 0 ? "primary" : "danger"}
-                
                 onClick={() => {
                     setvisible(true)
                 }}
@@ -44,6 +65,9 @@ export const GenerateSpells = () => {
                 maskClosable={false}
                 visible={visible}
                 onCancel={() => {
+                    /**
+                     * If user hasn't already selected spells, it is safe to remove the temporary array of user-selected spells
+                     */
                     if (knownSpells.length === 0) {
                         setTempKnownSpells([])                        
                     }
@@ -52,14 +76,25 @@ export const GenerateSpells = () => {
                         let cachedKnownSpells = knownSpells.slice()
                         setTempKnownSpells(cachedKnownSpells)
                     }
+                    /**
+                     * The Modal is closed
+                     */
                     setvisible(false)
                 }}
 
                 onOk={() => {
+                    /**
+                     * Sort the spells in alphabetical order
+                     */
                     let sortedSpells = sortSpells(tempKnownSpells)
 
+                    /**
+                     * Dispatch user-selected spells to the Redux Store
+                     */
                     dispatch({ type: UPDATE_CHAR_KNOWN_SPELLS, payload: sortedSpells })
-
+                    /**
+                     * Close the Modal
+                     */
                     setvisible(false)
                 }}
                 
@@ -70,7 +105,14 @@ export const GenerateSpells = () => {
                         return (
                             <Select
                                 mode="multiple"
+                                style={{ width: '100%', overflowX: 'auto' }}
+                                showArrow={true}
+
+                                /**
+                                 * On re-opening the Modal, this line ensures that previously-selected spells remain selected
+                                 */
                                 defaultValue={tempKnownSpells.length === 0 ? tempKnownSpells : tempKnownSpells.filter(spell => spell.level === level.key).map(spell => spell.name)}
+                                
                                 // TODO: Custom spell searching
                                 // filterOption={(input, option) => {
                                 //     console.log(option.props.data)
@@ -80,13 +122,16 @@ export const GenerateSpells = () => {
                                 // }}
                                 // optionFilterProp="props.data.name"
                                 
-                                showArrow={true}
-
+                                /**
+                                 * Level 0 spells are called Cantrips, and this line handles generation of placeholder text in this case 
+                                 */
                                 placeholder={
                                     level.key === 0 ? "Cantrips" : "Level " + level.key + " Spell(s)"
                                 }
                                 
-                                style={{ width: '100%', overflowX: 'auto' }}
+                                /**
+                                 * Selected spells are stored in a local state variable
+                                 */
                                 onSelect={(item, instance) => {
                                     let finalKnownSpells = tempKnownSpells.slice()
                                     
@@ -94,13 +139,21 @@ export const GenerateSpells = () => {
                                     
                                     setTempKnownSpells(finalKnownSpells)
                                 }}
-
+                                /**
+                                 * De-Selected spells are removed from the local state variable
+                                 */
                                 onDeselect={(item, instance) => {
                                     let finalKnownSpells = tempKnownSpells.slice().filter(spell => spell.id !== instance.props.data.id)
                                     
                                     setTempKnownSpells(finalKnownSpells)
                                 }}
+
                             >
+                                {
+                                    /**
+                                     * Ensures that the options available to each Selection component correspond to the required spell level
+                                     */
+                                }
                                 {spells.filter(spell => spell.level === level.key).map(spell => {
                                     return (
                                         <Select.Option
@@ -121,6 +174,5 @@ export const GenerateSpells = () => {
                 }
             </Modal>
         </Fragment>
-        
     )
 }

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { Typography, Divider } from 'antd'
 
 
-export const SpellDescription = (props) => {
+export const Description = (props) => {
     return (
         <Fragment>
 

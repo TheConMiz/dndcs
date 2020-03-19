@@ -55,8 +55,3 @@ export const sortSpells = (spells) => {
 
     return sortedSpells
 }
-
-export const getDefaultSpells = (spells) => {
-    let temp = ["Acid Splash"]
-    return temp
-}

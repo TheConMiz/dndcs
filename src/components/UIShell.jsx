@@ -1,18 +1,26 @@
-import React from 'react'
+/**
+ * Top-level UIShell
+ * - Parent to all UI components
+ */
 
+/**
+ * Components from 3rd-party Libraries
+ */
+import React from 'react'
 import { Layout, Row, Col } from 'antd'
 
+/**
+ * Self-generated components
+ */
 import { SideBar } from './SideBar'
 import { SpellTable } from './SpellTable'
-import { CharacterProfile } from './CharacterProfile'
-import { VirtualSpellTable } from './VirtualSpellTable'
-
+// import { CharacterProfile } from './CharacterProfile'
+// import { VirtualSpellTable } from './VirtualSpellTable'
 
 
 export const UIShell = () => {
-
-    return (
     
+    return (
         <Layout
             style={{ height: '100vh', userSelect: 'none' }}
         >
@@ -24,9 +32,7 @@ export const UIShell = () => {
                 <div
                     style={{ height: '30px', margin: '15px', background: '#4d7' }}
                 />
-
                 <SideBar />
-
             </Layout.Sider>
 
             <Layout>
@@ -35,8 +41,12 @@ export const UIShell = () => {
                         type="flex"
                         justify="space-evenly"
                     >
-                        <Col span={8}></Col>
-                        <Col span={8}></Col>
+                        {/**
+                         * Placeholder Columns, to be used later
+                         */}
+                        <Col span={8}/>
+                        <Col span={8}/>
+                        
                         <Col span={8}>
                             {/* <CharacterProfile/> */}
                         </Col>
@@ -46,16 +56,19 @@ export const UIShell = () => {
                         type="flex"
                         justify="center"
                     >
-                        <Col span={1}/>
+                        {/**
+                         * Empty Columns used for spacing
+                         */}
+                        <Col span={1} />
+                        
                         <Col span={22}>
                             <SpellTable />
-                            {/* <VirtualSpellTable/> */}
                         </Col>
-                        <Col span={1}/>
+                        
+                        <Col span={1} />
                     </Row>
                 </Layout.Content>
             </Layout>
-
         </Layout>
     )
 }
