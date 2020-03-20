@@ -14,7 +14,7 @@ import { Layout, Row, Col } from 'antd'
  */
 import { SideBar } from './SideBar'
 import { SpellTable } from './SpellTable'
-// import { CharacterProfile } from './CharacterProfile'
+import { CharacterProfile } from './CharacterProfile'
 // import { VirtualSpellTable } from './VirtualSpellTable'
 
 
@@ -48,7 +48,7 @@ export const UIShell = () => {
                         <Col span={8}/>
                         
                         <Col span={8}>
-                            {/* <CharacterProfile/> */}
+                            <CharacterProfile/>
                         </Col>
                     </Row>
 

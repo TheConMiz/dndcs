@@ -1,66 +1,24 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from 'react'
 
-import { TextField } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux'
 
-import { makeStyles } from '@material-ui/core/styles';
-
-import { useSelector, useDispatch } from 'react-redux';
-
-import { UPDATE_CHAR_XP } from '../../actions/characterActions';
-
-const useStyles = makeStyles(theme => ({
-    xpCell: {
-        width: 100
-    }
-}));
+import { UPDATE_CHAR_XP } from '../../actions/characterActions'
+import { InputNumber } from 'antd';
 
 export default function XPMonitor() {
-
-    const classes = useStyles();
 
     const dispatch = useDispatch();
 
     const currentXP = useSelector(state => state.character.xp);
     
-    const levelRules = useSelector(state => state.rules.levels);
-
-    function xpBounds(event, levelRules) {
-
-        if (event.target.value > levelRules[levelRules.length - 1].xp) {
-            dispatch({
-                type: UPDATE_CHAR_XP,
-                payload: levelRules[levelRules.length - 1].xp
-            })
-        }
-
-        else if (event.target.value < levelRules[0].xp) {
-            dispatch({
-                type: UPDATE_CHAR_XP,
-                payload: levelRules[0].xp
-            })
-        }
-
-        else {
-            dispatch({
-                type: UPDATE_CHAR_XP,
-                payload: event.target.value
-            })
-        }
-    }
+    const levels = useSelector(state => state.rules.levels);
 
     return (
         <Fragment>
-            <TextField
-                className={classes.xpCell}
-                variant="outlined"
-                type="number"
-                label="XP"
-                value={currentXP}
-
-                onChange={(event) => {
-                    xpBounds(event, levelRules);
-                }}
-            />
+            <InputNumber>
+            </InputNumber>
+            <InputNumber>
+            </InputNumber>
         </Fragment>
     )
 }
