@@ -15,8 +15,6 @@ import { Layout, Row, Col } from 'antd'
 import { SideBar } from './SideBar'
 import { SpellTable } from './SpellTable'
 import { CharacterProfile } from './CharacterProfile'
-// import { VirtualSpellTable } from './VirtualSpellTable'
-
 
 export const UIShell = () => {
     

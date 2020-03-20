@@ -5,13 +5,16 @@ import { Card, Row, Col, Upload, Icon, Cascader, Table, Input, Button, InputNumb
 
 import { NameInput } from './CharacterProfile/NameInput'
 
-import { ClassSelection } from './CharacterProfile/ClassSelection'
+// import { ClassSelection } from './CharacterProfile/ClassSelection'
+
+import { XPMonitor } from './CharacterProfile/XPMonitor'
+
 
 export const CharacterProfile = () => {
 
     return (
         <Card>
-            <Upload
+            {/* <Upload
                 name="avatar"
                 listType="picture-card"
             >
@@ -21,7 +24,9 @@ export const CharacterProfile = () => {
                         <div className="ant-upload-text">Upload</div>
                     </div>
                 }
-            </Upload>
+            </Upload> */}
+
+            <XPMonitor/>
 
             <NameInput />
             
@@ -43,20 +48,7 @@ export const CharacterProfile = () => {
 
             </Input.Group> */}
 
-            {/* <Table
-                bordered
-                size="small"
-                columns={[
-                    { title: "Level", dataIndex: "classLevel" },
-                    { title: "Class", dataIndex: "class" },
-                    { title: "Sub-Class", dataIndex: "subclass" }
-                ]}
-                size="small"
-            >
-
-            </Table> */}
-
-            <ClassSelection/>
+            {/* <ClassSelection/> */}
 
         </Card>
     )

@@ -4,7 +4,7 @@
 
 > A Dungeon and Dragons solution built for **lightning-quick character creation** and **in-game referencing**.
 
-One to two paragraph statement about your product and what it does.
+<!-- One to two paragraph statement about your product and what it does. -->
 
 [![](https://github.com/dbader/readme-template/raw/master/header.png)](https://github.com/dbader/readme-template/blob/master/header.png)
 
