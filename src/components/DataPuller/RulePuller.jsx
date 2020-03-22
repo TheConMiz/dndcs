@@ -45,6 +45,7 @@ const pullData = (dbPath) => {
         .select({
             level: "lvl.level",
             xp: "lvl.xp",
+            proficiencyBonus: "lvl.proficiencyBonus",
         })
 
         .orderBy("lvl.level", "asc");

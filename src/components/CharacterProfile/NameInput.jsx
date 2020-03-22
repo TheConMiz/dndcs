@@ -17,6 +17,7 @@ export const NameInput = () => {
         <Input
             placeholder="Character Name"
             value={charName}
+            style={{width: '200px'}}
             onChange={(event) => dispatch({ type: UPDATE_CHAR_NAME, payload: event.target.value })}
         />
     )

@@ -37,7 +37,7 @@ export const XPMonitor = () => {
                     align="middle"
                 >
                     <Col span={24}>
-                        <Typography.Title>
+                        <Typography.Title level={2}>
                             {
                                 levels.length !== 0 ? findCurrentLevel(currentXP, levels).level : ""
                             }

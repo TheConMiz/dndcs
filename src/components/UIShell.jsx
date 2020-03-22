@@ -15,6 +15,7 @@ import { Layout, Row, Col } from 'antd'
 import { SideBar } from './SideBar'
 import { SpellTable } from './SpellTable'
 import { CharacterProfile } from './CharacterProfile'
+import { AbilityScoreShell } from './AbilityScoreShell'
 
 export const UIShell = () => {
     
@@ -37,12 +38,21 @@ export const UIShell = () => {
                 <Layout.Content>
                     <Row
                         type="flex"
+                        justify="center"
+                        align="middle"
+                    >
+                        <AbilityScoreShell />
+                    </Row>
+                    <Row
+                        type="flex"
                         justify="space-evenly"
                     >
                         {/**
                          * Placeholder Columns, to be used later
                          */}
-                        <Col span={8}/>
+                        <Col span={8}>
+                            
+                        </Col>
                         <Col span={8}/>
                         
                         <Col span={8}>
