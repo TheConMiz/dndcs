@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 
-import { Card, Row, Col, Upload, Icon, Cascader, Table, Input, Button, InputNumber, Drawer, Collapse } from 'antd'
+import { Table } from 'antd'
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -37,7 +37,7 @@ export const ClassSelection = () => {
 
     const dispatch = useDispatch()
 
-    const [openMenu, setOpenMenu] = useState(false)
+    // const [openMenu, setOpenMenu] = useState(false)
     
     let classList = useSelector(state => state.app.classes)
 
@@ -45,7 +45,10 @@ export const ClassSelection = () => {
 
     return (
         <Fragment>
-            <Button
+            <Table>
+                
+            </Table>
+            {/* <Button
                 type="primary"
                 onClick={() => setOpenMenu(true)}
             >
@@ -67,7 +70,7 @@ export const ClassSelection = () => {
                     showSearch={{ filter }}
                 />
    
-            </Drawer>
+            </Drawer> */}
         </Fragment>
         
     )

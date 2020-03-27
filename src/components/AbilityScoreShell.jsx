@@ -1,37 +1,35 @@
-import React, {Fragment} from 'react'
+import React, { Fragment } from 'react'
 import { ScoreCard } from './AbilityScoreCards/ScoreCard'
 import { useSelector } from 'react-redux'
 import { Row, Col, Card } from 'antd'
 
 
 export const AbilityScoreShell = () => {
-    
+
     const abilityScores = useSelector(state => state.rules.abilityScores)
 
     return (
         <Fragment>
             <Card
                 size="small"
+                style={{ width: '550px'}}
             >
                 <Row
-                    type="flex"
-
+                    gutter={[8, 8]}
+                    align="middle"
+                    justify="center"
                 >
-                    <Col
-                        span={abilityScores.length !== 0 ? 24 / abilityScores.length : 1}
-                    >
-                        {abilityScores.map(abilityScore => {
-                            return (
+                    {abilityScores.map(abilityScore => {
+                        return (
+                            <Col span={4}>
                                 <ScoreCard
                                     data={abilityScore}
                                 />
-                            )
-                        })}
-                    </Col>
+                            </Col>
+                        )
+                    })}
                 </Row>
             </Card>
-            
-
         </Fragment>
     )
 }

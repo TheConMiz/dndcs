@@ -7,7 +7,7 @@
  * Components from 3rd-party Libraries
  */
 import React from 'react'
-import { Layout, Row, Col } from 'antd'
+import { Layout, Row, Col, Carousel } from 'antd'
 
 /**
  * Self-generated components
@@ -18,7 +18,7 @@ import { CharacterProfile } from './CharacterProfile'
 import { AbilityScoreShell } from './AbilityScoreShell'
 
 export const UIShell = () => {
-    
+
     return (
         <Layout
             style={{ height: '100vh', userSelect: 'none' }}
@@ -41,7 +41,9 @@ export const UIShell = () => {
                         justify="center"
                         align="middle"
                     >
-                        <AbilityScoreShell />
+                        <Col span={16}>
+                            <AbilityScoreShell />
+                        </Col>
                     </Row>
                     <Row
                         type="flex"
@@ -51,12 +53,12 @@ export const UIShell = () => {
                          * Placeholder Columns, to be used later
                          */}
                         <Col span={8}>
-                            
+
                         </Col>
-                        <Col span={8}/>
-                        
+                        <Col span={8} />
+
                         <Col span={8}>
-                            <CharacterProfile/>
+                            <CharacterProfile />
                         </Col>
                     </Row>
 
@@ -68,11 +70,11 @@ export const UIShell = () => {
                          * Empty Columns used for spacing
                          */}
                         <Col span={1} />
-                        
+
                         <Col span={22}>
                             <SpellTable />
                         </Col>
-                        
+
                         <Col span={1} />
                     </Row>
                 </Layout.Content>

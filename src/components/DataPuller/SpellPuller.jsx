@@ -95,6 +95,10 @@ const pullData = (dbPath) => {
     //     })
 
     //     .orderBy(["fDesc.spellID", "fDesc.lineID"], "asc");
+
+    /**
+     * TODO: Spell School
+     */
     
     dbQuery = fullDescQuery;
 
@@ -113,6 +117,31 @@ const pullData = (dbPath) => {
         dispatch({ type: UPDATE_SPELLS, payload: tempSpells })
 
     })
+
+    let spellClassMapQuery = knex({
+        spellClassMap: "Spell-Map-Class"
+    })
+        .select({
+            spellID: "spellClassMap.spellID",
+            classID: "spellClassMap.classID",
+        })
+        .orderBy("spellClassMap.spellID", "asc");
+    
+    dbQuery = spellClassMapQuery
+
+    dbQuery.then((rows) => {
+        tempSpells.map((item) => {
+            let classes = rows.filter(row => row.spellID === item.id).map((mapItem) => {
+                return mapItem.classID
+            })
+
+            item.classMap = classes
+        })
+
+        dispatch({ type: UPDATE_SPELLS, payload: tempSpells })
+
+    })
+
 }
 
 export default function SpellPuller(props) {

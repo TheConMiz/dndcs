@@ -1,22 +1,28 @@
 import React, { Fragment } from 'react'
-import { Card, Typography, Tooltip, Divider } from 'antd'
+import { Card, Typography, Popover, Tooltip } from 'antd'
 
 export const ScoreCard = (props) => {
     return (
         <Fragment>
-            <Card
-                style={{ width: '100px', textAlign: "center", }}
-                title={props.data.abbr}
-                size="small"
-                hoverable
-                actions={[<Typography>+1</Typography>]}
+            <Tooltip
+                placement="bottom"
+                title={<Typography.Text type="warning">{props.data.name}</Typography.Text>}
             >
-                <Typography.Title
-                    level={2}
+                <Card
+                    style={{ width: '80px', textAlign: "center", }}
+                    title={props.data.abbr}
+                    size="small"
+                    hoverable
+                    actions={[<Typography>12</Typography>]}
                 >
-                    12
+                    <Typography.Title
+                        level={2}
+                    >
+                        +1
                 </Typography.Title>
-            </Card>
+                </Card>
+            </Tooltip>
+
         </Fragment>
     )
 }
