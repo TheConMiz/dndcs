@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { UPDATE_SPELLS } from './../../actions/appActions';
 
@@ -62,8 +62,6 @@ const pullData = (dbPath) => {
 
         .orderBy("sp.name", "asc");
     
-    
-    
     let dbQuery = spellQuery;
     dbQuery.then((rows) => {
         tempSpells = rows;
@@ -100,7 +98,7 @@ const pullData = (dbPath) => {
      * TODO: Spell School
      */
     
-    dbQuery = fullDescQuery;
+    dbQuery = fullDescQuery
 
     /**
      * Inclusion of Full descriptions
@@ -113,9 +111,6 @@ const pullData = (dbPath) => {
 
             item.fullDesc = descriptions
         })
-
-        dispatch({ type: UPDATE_SPELLS, payload: tempSpells })
-
     })
 
     let spellClassMapQuery = knex({
@@ -137,9 +132,28 @@ const pullData = (dbPath) => {
 
             item.classMap = classes
         })
+    })
 
+    let spellSourceQuery = knex({
+        spellSource: "Spell-Source"
+    })
+        .select({
+            spellID: "spellSource.spellID",
+            sourceID: "spellSource.sourceID",
+        })
+        .orderBy("spellSource.spellID", "asc");
+    
+    dbQuery = spellSourceQuery
+
+    dbQuery.then((rows) => {
+        tempSpells.map((item) => {
+            let sources = rows.filter(row => row.spellID === item.id).map((mapItem) => {
+                return mapItem.sourceID
+            })
+
+            item.sources = sources
+        })
         dispatch({ type: UPDATE_SPELLS, payload: tempSpells })
-
     })
 
 }

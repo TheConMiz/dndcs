@@ -9,7 +9,7 @@
  * Components from 3rd-party Libraries
  */
 import React, { Fragment, useState } from 'react'
-import { Button, Modal, Select, Typography } from 'antd'
+import { Button, Modal, Select, Typography, Dropdown, Menu, Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 /**
@@ -21,6 +21,18 @@ import { getSpellLevels, sortSpells } from '../../functions/spellUtility'
  * Redux actions
  */
 import { UPDATE_CHAR_KNOWN_SPELLS } from '../../actions/characterActions'
+
+const Options = () => (
+    <Menu
+        onSelect={() => {
+            console.log("l")
+        }}
+    >
+        <Menu.Item key="1">Select from ALL Spells</Menu.Item>
+        <Menu.Item key="2">Dump 'em all</Menu.Item>
+    </Menu>
+)
+
 
 export const Generator = () => {
 
@@ -48,14 +60,20 @@ export const Generator = () => {
 
     return (
         <Fragment>
-            <Button
-                type={knownSpells.length === 0 ? "primary" : "danger"}
-                onClick={() => {
-                    setvisible(true)
-                }}
-            >
-                {knownSpells.length === 0 ? "Generate" : "Re-Generate"}
-            </Button>
+
+            <Dropdown overlay={Options}>
+                <Button
+                    type={knownSpells.length === 0 ? "default" : "danger"}
+                    onClick={() => {
+                        setvisible(true)
+                    }}
+                >
+                    {knownSpells.length === 0 ? "Generate" : "Re-Generate"}
+
+                    <Icon type="down"/>
+
+                </Button>
+            </Dropdown>
 
             <Modal
                 closable={false}
