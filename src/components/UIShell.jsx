@@ -23,8 +23,9 @@ export const UIShell = () => {
         <Layout
             style={{ height: '100vh', userSelect: 'none' }}
         >
-
-            <Layout.Sider
+            {/* TODO: SideBar */}
+            
+            {/* <Layout.Sider
                 theme="dark"
                 collapsed={true}
             >
@@ -32,7 +33,7 @@ export const UIShell = () => {
                     style={{ height: '30px', margin: '15px', background: '#4d7' }}
                 />
                 <SideBar />
-            </Layout.Sider>
+            </Layout.Sider> */}
 
             <Layout>
                 <Layout.Content>
@@ -52,9 +53,8 @@ export const UIShell = () => {
                         {/**
                          * Placeholder Columns, to be used later
                          */}
-                        <Col span={8}>
+                        <Col span={8}/>
 
-                        </Col>
                         <Col span={8} />
 
                         <Col span={8}>

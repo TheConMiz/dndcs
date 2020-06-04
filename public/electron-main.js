@@ -1,23 +1,26 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow } = require("electron");
+
+const electron = require("electron");
+
+const {ipcMain} = require("electron")
 
 let win;
 
-const electron = require('electron');
 
 let screenSize;
 
-let path = require("path");
+let path = require("path")
 
-let url = require("url");
+let url = require("url")
 
-const isDev = require('electron-is-dev');
+const isDev = require('electron-is-dev')
 
-const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer');
+// const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer');
 
 function createWindow() {
-    //TODO: Variable screen size, so calibrate after getting comments
 
     console.log("createWindow() works")
+    
     screenSize = electron.screen.getPrimaryDisplay().size;
 
     win = new BrowserWindow({
@@ -26,16 +29,17 @@ function createWindow() {
         show: false,
         webPreferences: {
             nodeIntegration: true,
-            nodeIntegrationInWorker: true
+            nodeIntegrationInWorker: true,
+            enableRemoteModule: true
         }
     });
 
     if (isDev) {
         win.webContents.openDevTools();
  
-        installExtension(REDUX_DEVTOOLS)
-            .then((name) => console.log(`Added Extension:  ${name}`))
-            .catch((err) => console.log('An error occurred: ', err));
+        // installExtension(REDUX_DEVTOOLS)
+        //     .then((name) => console.log(`Added Extension:  ${name}`))
+        //     .catch((err) => console.log('An error occurred: ', err));
     }
     
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
@@ -47,6 +51,11 @@ function createWindow() {
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {
+
+        // Extract required information from database
+
+        // ipcMain.
+
         // Maximize the window prior to showing it
         win.maximize();
         // Show the prepared window

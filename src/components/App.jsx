@@ -2,18 +2,17 @@
  * Top-level App component
  */
 
+const { ipcRenderer } = require('electron')
+
 import React, { Fragment } from 'react'
 
-import { DataPuller } from './DataPuller'
-
 import { UIShell } from './UIShell'
+
 
 export const App = () => {
     return (
         <Fragment>
-            
-            <DataPuller />
-            
+
             <UIShell />
         
         </Fragment>
