@@ -9,7 +9,7 @@
  * Components from 3rd-party Libraries
  */
 import React, { Fragment, useState } from 'react'
-import { Button, Modal, Select, Typography, Dropdown, Menu, Icon } from 'antd'
+import { Button, Modal, Select, Typography, Icon, Row, Col, Card, Drawer } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 /**
@@ -21,18 +21,6 @@ import { getSpellLevels, sortSpells } from '../../functions/spellUtility'
  * Redux actions
  */
 import { UPDATE_CHAR_KNOWN_SPELLS } from '../../actions/characterActions'
-
-const Options = () => (
-    <Menu
-        onSelect={() => {
-            console.log("l")
-        }}
-    >
-        <Menu.Item key="1">Select from ALL Spells</Menu.Item>
-        <Menu.Item key="2">Dump 'em all</Menu.Item>
-    </Menu>
-)
-
 
 export const Generator = () => {
 
@@ -60,27 +48,40 @@ export const Generator = () => {
 
     return (
         <Fragment>
+            <Button
+                type={knownSpells.length === 0 ? "default" : "danger"}
+                onClick={() => {
+                    setvisible(true)
+                }}
+            >
+                {knownSpells.length === 0 ? "Generate" : "Re-Generate"}
 
-            <Dropdown overlay={Options}>
-                <Button
-                    type={knownSpells.length === 0 ? "default" : "danger"}
-                    onClick={() => {
-                        setvisible(true)
-                    }}
-                >
-                    {knownSpells.length === 0 ? "Generate" : "Re-Generate"}
+                <Icon type="down" />
 
-                    <Icon type="down"/>
+            </Button>
 
-                </Button>
-            </Dropdown>
-
-            <Modal
+            {/* <Drawer
                 closable={false}
                 destroyOnClose={true}
                 centered={true}
                 mask={true}
                 maskClosable={false}
+                visible={visible}
+                placement="left"
+                // onCancel={}
+                // onOk={}
+                title="Generate Spell Table"
+
+            >
+
+            </Drawer> */}
+
+            <Modal
+                closable={true}
+                destroyOnClose={true}
+                centered={true}
+                mask={true}
+                maskClosable={true}
                 visible={visible}
                 onCancel={() => {
                     /**
@@ -130,31 +131,22 @@ export const Generator = () => {
                                  * On re-opening the Modal, this line ensures that previously-selected spells remain selected
                                  */
                                 defaultValue={tempKnownSpells.length === 0 ? tempKnownSpells : tempKnownSpells.filter(spell => spell.level === level.key).map(spell => spell.name)}
-                                
-                                // TODO: Custom spell searching
-                                // filterOption={(input, option) => {
-                                //     console.log(option.props.data)
-                                //     return (
-                                //         option.props.data.name.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                //     )
-                                // }}
-                                // optionFilterProp="props.data.name"
-                                
+
                                 /**
                                  * Level 0 spells are called Cantrips, and this line handles generation of placeholder text in this case 
                                  */
                                 placeholder={
                                     level.key === 0 ? "Cantrips" : "Level " + level.key + " Spell(s)"
                                 }
-                                
+
                                 /**
                                  * Selected spells are stored in a local state variable
                                  */
                                 onSelect={(item, instance) => {
                                     let finalKnownSpells = tempKnownSpells.slice()
-                                    
+
                                     finalKnownSpells.push(instance.props.data)
-                                    
+
                                     setTempKnownSpells(finalKnownSpells)
                                 }}
                                 /**
@@ -162,7 +154,7 @@ export const Generator = () => {
                                  */
                                 onDeselect={(item, instance) => {
                                     let finalKnownSpells = tempKnownSpells.slice().filter(spell => spell.id !== instance.props.data.id)
-                                    
+
                                     setTempKnownSpells(finalKnownSpells)
                                 }}
 
@@ -186,7 +178,7 @@ export const Generator = () => {
                                         </Select.Option>
                                     )
                                 })}
-                            </Select>     
+                            </Select>
                         )
                     })
                 }

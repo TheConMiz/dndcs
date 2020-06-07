@@ -9,7 +9,6 @@ export const getSpellLevels = (spells) => {
         temp.push(
             Object.assign({}, {}, {
                 key: spell.level,
-                // tab: spell.level === 0 ? "Cantrips" : "Level " + spell.level
             })
         )
 
