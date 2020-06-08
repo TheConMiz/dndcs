@@ -1,9 +1,11 @@
-export const UPDATE_CHAR_NAME = "UPDATE_CHAR_NAME";
-export const UPDATE_CHAR_XP = "UPDATE_CHAR_XP";
-export const UPDATE_CHAR_KNOWN_SPELLS = "UPDATE_CHAR_KNOWN_SPELLS";
-export const UPDATE_CHAR_MAX_PREPARED_SPELLS = "UPDATE_CHAR_MAX_PREPARED_SPELLS";
+export const UPDATE_CHAR_NAME = "UPDATE_CHAR_NAME"
+export const UPDATE_CHAR_XP = "UPDATE_CHAR_XP"
+export const UPDATE_CHAR_KNOWN_SPELLS = "UPDATE_CHAR_KNOWN_SPELLS"
+export const UPDATE_CHAR_MAX_PREPARED_SPELLS = "UPDATE_CHAR_MAX_PREPARED_SPELLS"
 
-export function updateCharName(newName) {
+export const UPDATE_CHAR_ABILITY_SCORES = "UPDATE_CHAR_ABILITY_SCORES"
+
+export const updateCharName = (newName) => {
     return {
         type: UPDATE_CHAR_NAME,
         payload: {
@@ -12,7 +14,7 @@ export function updateCharName(newName) {
     }
 }
 
-export function updateCharXP(newXP) {
+export const updateCharXP = (newXP) => {
     return {
         type: UPDATE_CHAR_XP,
         payload: {
@@ -35,6 +37,15 @@ export function updateMaxPreparedSpells(newMaxPreparedSpells) {
         type: UPDATE_CHAR_MAX_PREPARED_SPELLS,
         payload: {
             maxPreparedSpells: newMaxPreparedSpells
+        }
+    }
+}
+
+export function updateAbilityScores(newAbilityScores) {
+    return {
+        type: UPDATE_CHAR_ABILITY_SCORES,
+        payload: {
+            abilityScores: newAbilityScores
         }
     }
 }

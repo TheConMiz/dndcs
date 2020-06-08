@@ -3,6 +3,7 @@ import {
     UPDATE_CHAR_XP,
     UPDATE_CHAR_KNOWN_SPELLS,
     UPDATE_CHAR_MAX_PREPARED_SPELLS,
+    UPDATE_CHAR_ABILITY_SCORES
 } from './../actions/characterActions';
 
 export default function characterReducer(state = {}, action) {
@@ -28,6 +29,11 @@ export default function characterReducer(state = {}, action) {
             return Object.assign({}, state, {
                 maxPreparedSpells: action.payload
             });
+        
+        case UPDATE_CHAR_ABILITY_SCORES:
+            return Object.assign({}, state, {
+                abilityScores: action.payload
+            })
         
         default:
             return state;

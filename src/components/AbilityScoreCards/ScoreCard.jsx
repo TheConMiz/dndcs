@@ -1,18 +1,28 @@
 import React, { Fragment } from 'react'
 import { Card, Typography, Tooltip, Input } from 'antd'
+import { minAbilityScore, maxAbilityScore, defaultOnFail } from './../../constants/constants'
+
+import { generateAbilityScoreModifier, stringifyAbilityScoreModifier } from './../../functions/abilityScoreUtility'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { minAbilityScore, maxAbilityScore } from './../../constants/constants'
-
+import { UPDATE_CHAR_ABILITY_SCORES } from './../../actions/characterActions'
 
 export const ScoreCard = (props) => {
+
+    let charAbilityScores = useSelector(state => state.character.abilityScores)
+
+    const dispatch = useDispatch()
 
     return (
         <Fragment>
             <Tooltip
                 placement="bottom"
-                title={<Typography.Text type="warning">{props.data.name}</Typography.Text>}
+                title={
+                    <Typography.Text type="warning">
+                        {props.data.name}
+                    </Typography.Text>
+                }
             >
                 <Card
                     style={{ width: '80px', textAlign: "center", }}
@@ -25,16 +35,30 @@ export const ScoreCard = (props) => {
                                 size="large"
                                 style={{ textAlign: "center" }}
                                 type="number"
-                                onChange={(event) => {
-                                    console.log(event.target.value)
+                                value={
+                                    charAbilityScores.length > 0 ?
+                                        charAbilityScores.find((item) => item.id === props.data.id).value
+                                        :
+                                        defaultOnFail
+                                }
+
+                                onChange={(event) => {  
+                                    // To create a deep copy of Array, parse the stringified version of it
+                                    let temp = JSON.parse(JSON.stringify(charAbilityScores))
 
                                     if (event.target.value > maxAbilityScore) {
-                                        // return maxAbilityScore
+                                        temp.find((item) => item.id === props.charData.id).value = parseInt(maxAbilityScore)
                                     }
 
-                                    if (event.target.value < minAbilityScore) {
-                                        // return minAbilityScore
+                                    else if (event.target.value < minAbilityScore) {
+                                        temp.find((item) => item.id === props.charData.id).value = parseInt(minAbilityScore)
                                     }
+
+                                    else{
+                                        temp.find((item) => item.id === props.charData.id).value = parseInt(event.target.value)
+                                    }                            
+
+                                    dispatch({ type: UPDATE_CHAR_ABILITY_SCORES, payload: temp })
                                 }}
                             />
                         ]
@@ -43,7 +67,17 @@ export const ScoreCard = (props) => {
                     <Typography.Title
                         level={2}
                     >
-                        +1
+                        {
+                            charAbilityScores.length > 0 ? 
+                                (
+                                    stringifyAbilityScoreModifier(
+                                        generateAbilityScoreModifier(
+                                            parseInt(charAbilityScores.find((item) => item.id === props.data.id).value))
+                                    )
+                                )
+                                :
+                                defaultOnFail
+                        }
                 </Typography.Title>
                 </Card>
             </Tooltip>

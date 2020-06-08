@@ -16,12 +16,14 @@ import { SideBar } from './SideBar'
 import { SpellTable } from './SpellTable'
 import { CharacterProfile } from './CharacterProfile'
 import { AbilityScoreShell } from './AbilityScoreShell'
+import { XPMonitor } from './CharacterProfile/XPMonitor'
+
 
 export const UIShell = () => {
 
     return (
         <Layout
-            style={{ height: '100vh', userSelect: 'none' }}
+            style={{ height: '100vmax', userSelect: 'none' }}
         >
             {/* TODO: SideBar */}
             
@@ -37,45 +39,42 @@ export const UIShell = () => {
 
             <Layout>
                 <Layout.Content>
+
                     <Row
                         type="flex"
-                        justify="center"
+                        justify="space-between"
                         align="middle"
                     >
-                        <Col span={16}>
+                        <Col span={1} />
+
+                        <Col span={6}>
                             <AbilityScoreShell />
                         </Col>
-                    </Row>
-                    <Row
-                        type="flex"
-                        justify="space-evenly"
-                    >
-                        {/**
-                         * Placeholder Columns, to be used later
-                         */}
-                        <Col span={8}/>
-
-                        <Col span={8} />
 
                         <Col span={8}>
-                            <CharacterProfile />
+                            
                         </Col>
+
+                        <Col span={6}>
+                            <XPMonitor />
+                        </Col>
+
+                        <Col span={1}/>
+
                     </Row>
 
                     <Row
                         type="flex"
                         justify="center"
                     >
-                        {/**
-                         * Empty Columns used for spacing
-                         */}
-                        <Col span={1} />
+                        <Col span={1}/>
 
                         <Col span={22}>
                             <SpellTable />
                         </Col>
 
                         <Col span={1} />
+
                     </Row>
                 </Layout.Content>
             </Layout>
