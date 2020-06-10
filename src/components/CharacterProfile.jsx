@@ -23,29 +23,6 @@ export const CharacterProfile = () => {
                 </Col>
             </Row>
 
-            
-
-            
-            {/* <Cascader
-                allowClear={true}
-                placeholder="Character Race"
-            />
-
-            <Cascader
-                allowClear={true}
-                showSearch={true}
-                placeholder="Character Background"
-            /> */}
-
-            {/* <Input.Group>
-                <InputNumber
-                    placeholder="XP"
-                />
-
-            </Input.Group> */}
-
-            {/* <ClassSelection/> */}
-
         </Card>
     )
 }

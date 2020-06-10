@@ -39,19 +39,6 @@ export const AbilityScoreShell = () => {
                         )
                     })}
                 </Row>
-
-                <Row
-                    align="middle"
-                    justify="center"
-                >
-
-                    {/* <Button
-                        disabled={!changed}
-                        type="primary"
-                    >
-                        Confirm
-                    </Button> */}
-                </Row>
             </Card>
         </Fragment>
     )

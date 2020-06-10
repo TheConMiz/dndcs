@@ -59,6 +59,7 @@ export const XPMonitor = () => {
                         >
                             <InputNumber
                                 style={{ borderTopRightRadius: '0px', borderBottomRightRadius: '0px' }}
+                                
                                 value={xpIncrement}
 
                                 min={typeof(maxLevel) === "undefined" ? 0 : 0 - maxLevel.xp}
