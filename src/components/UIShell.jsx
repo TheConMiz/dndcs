@@ -7,7 +7,7 @@
  * Components from 3rd-party Libraries
  */
 import React from 'react'
-import { Layout, Row, Col, Carousel } from 'antd'
+import { Layout, Row, Col } from 'antd'
 
 /**
  * Self-generated components
@@ -17,6 +17,7 @@ import { SpellTable } from './SpellTable'
 import { CharacterProfile } from './CharacterProfile'
 import { AbilityScoreShell } from './AbilityScoreShell'
 import { XPMonitor } from './CharacterProfile/XPMonitor'
+import { SaveCharacter } from './SaveCharacter'
 
 
 export const UIShell = () => {
@@ -52,7 +53,6 @@ export const UIShell = () => {
                         </Col>
 
                         <Col span={8}>
-                            
                         </Col>
 
                         <Col span={6}>
@@ -75,6 +75,10 @@ export const UIShell = () => {
 
                         <Col span={1} />
 
+                    </Row>
+
+                    <Row>
+                        <SaveCharacter />
                     </Row>
                 </Layout.Content>
             </Layout>
