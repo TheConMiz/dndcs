@@ -1,43 +1,65 @@
 import React, { Fragment } from 'react'
-import { Typography, Divider } from 'antd'
+import { Typography, Divider, Tabs } from 'antd'
 
 
 export const Description = (props) => {
     return (
-        <Fragment>
+        <Fragment
+            style={{
+                position: "absolute",
+                height: "100%",
+                width: "100%",
+                right: 0,
+                top: 0,
+            }}
+        >
 
-            <Divider>
-                Full Description
-            </Divider>
-            
-            {
-                props.fullDesc.map((desc) => {
-                    return (
-                        <Fragment>
+            <Tabs>
+                <Tabs.TabPane
+                    tab="Full Description"
+                    key="1"
+                >
+                    {
+                        props.fullDesc.map((desc) => {
+                            return (
+                                <Fragment>
+                                    <Typography.Text>
+                                        {desc}
+                                    </Typography.Text>
+                                    <br />
+                                </Fragment>
+                            )
+                        })
+                    }
+
+                </Tabs.TabPane>
+
+                {
+                    typeof (props.highLevelDesc) !== "object" ?
+                        <Tabs.TabPane
+                            tab="At Higher Levels"
+                            key="2"
+                        >
                             <Typography.Text>
-                                {desc}
+                                {props.highLevelDesc}
                             </Typography.Text>
-                            <br />
-                        </Fragment>
+                        </Tabs.TabPane>
 
-                    )
-                })
-            }
+                        :
 
-            {
-                typeof (props.highLevelDesc) !== "object" ?
-                    <Fragment>
-                        <Divider>
-                            At Higher Levels
-                        </Divider>
+                        ""
+                }
 
-                        <Typography.Text>
-                            {props.highLevelDesc}
-                        </Typography.Text>   
-                    </Fragment>
-                :
-                    ""
-            }
+                <Tabs.TabPane>
+
+
+                </Tabs.TabPane>
+            </Tabs>
+
+
+            
+
+
 
         </Fragment>
     )

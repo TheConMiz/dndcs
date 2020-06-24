@@ -24,21 +24,37 @@ export const UIShell = () => {
 
     return (
         <Layout
-            style={{ height: '100vmax', userSelect: 'none' }}
+            style={
+                {
+                    height: '100vmax',
+                    userSelect: 'none',
+                }}
         >
             {/* TODO: SideBar */}
             
-            {/* <Layout.Sider
+            <Layout.Sider
                 theme="dark"
                 collapsed={true}
+                style={{
+                    position: "fixed",
+                    height: "100vh",
+                }}
             >
                 <div
                     style={{ height: '30px', margin: '15px', background: '#4d7' }}
                 />
-                <SideBar />
-            </Layout.Sider> */}
 
-            <Layout>
+                <div
+                    style={{height: '80vh', }}
+                />
+
+                <SideBar />
+
+            </Layout.Sider>
+
+            <Layout
+                style={{ marginLeft: 100 }}
+            >
                 <Layout.Content>
 
                     <Row
@@ -46,20 +62,18 @@ export const UIShell = () => {
                         justify="space-between"
                         align="middle"
                     >
-                        <Col span={1} />
 
-                        <Col span={6}>
+                        <Col span={7}>
                             <AbilityScoreShell />
                         </Col>
 
                         <Col span={8}>
                         </Col>
 
-                        <Col span={6}>
+                        <Col span={7}>
                             <XPMonitor />
                         </Col>
 
-                        <Col span={1}/>
 
                     </Row>
 
@@ -67,19 +81,18 @@ export const UIShell = () => {
                         type="flex"
                         justify="center"
                     >
-                        <Col span={1}/>
 
-                        <Col span={22}>
+                        <Col span={24}>
                             <SpellTable />
                         </Col>
 
-                        <Col span={1} />
 
                     </Row>
 
-                    <Row>
-                        <SaveCharacter />
-                    </Row>
+                    {/* <Row> */}
+                        {/* <SaveCharacter /> */}
+                    {/* </Row> */}
+                    
                 </Layout.Content>
             </Layout>
         </Layout>

@@ -156,6 +156,29 @@ const pullData = (dbPath) => {
         dispatch({ type: UPDATE_SPELLS, payload: tempSpells })
     })
 
+    let spellComponentQuery = knex({
+        spellComponent: "Spell-Component"
+    })
+        .select({
+            spellID: "spellComponent.spellID",
+            componentID: "spellComponent.componentID",
+        })
+        .orderBy("spellComponent.spellID", "asc");
+
+    dbQuery = spellComponentQuery
+
+    dbQuery.then((rows) => {
+
+        tempSpells.map((item) => {
+            let components = rows.filter(row => row.spellID === item.id).map((mapItem) => {
+                return mapItem.componentID
+            })
+
+            item.components = components
+        })
+        dispatch({ type: UPDATE_SPELLS, payload: tempSpells })
+    })
+
 }
 
 export default function SpellPuller(props) {

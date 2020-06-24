@@ -18,7 +18,7 @@ import { Generator } from './SpellTable/Generator'
 /**
  * Self-generated utility functions
  */
-import { getSaveFilters } from './../functions/spellUtility'
+import { getSaveFilters, getMagicSchoolFilters } from './../functions/spellUtility'
 import { getSpellTableColumns } from './SpellTable/Columns'
 
 export const SpellTable = () => {
@@ -27,12 +27,14 @@ export const SpellTable = () => {
      * Access spells and ability scores from Redux store
      */
     const spells = useSelector(state => state.character.knownSpells)
-    const abilityScores = useSelector(state => state.rules.abilityScores)
+
+    const rules = useSelector(state => state.rules)
+
 
     /**
      * Access columns from 
      */
-    const columns = getSpellTableColumns(abilityScores, getSaveFilters)
+    const columns = getSpellTableColumns(getSaveFilters, getMagicSchoolFilters, rules)
         
     return (
         <Fragment>
@@ -41,7 +43,9 @@ export const SpellTable = () => {
                 style={{width: '100%', minWidth: '700px'}}
                 extra={
                     <Fragment>
+
                         <Generator/>
+                    
                     </Fragment>
                 }
             >               

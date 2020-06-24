@@ -116,9 +116,7 @@ const pullData = (dbPath) => {
         })
 
         .orderBy("src.name", "asc");
-    
-    
-    
+        
     let dbQuery = abilityScoreQuery;
     dbQuery.then((rows) => {
         dispatch({ type: UPDATE_RULE_ABILITY_SCORE, payload: rows });

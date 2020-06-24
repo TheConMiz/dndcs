@@ -36,6 +36,22 @@ export const getSaveFilters = (abilityScores) => {
     return filters
 }
 
+export const getMagicSchoolFilters = (magicSchools) => {
+    
+    let filters = []
+
+    magicSchools.map(item => {
+        let temp = Object.assign({}, {
+            text: item.abbr,
+            value: item.id
+        })
+
+        filters.push(temp)
+    })
+
+    return filters
+}
+
 export const sortSpells = (spells) => {
     let sortedSpells = spells.slice().sort((first, second) => {
 

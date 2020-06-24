@@ -3,7 +3,7 @@
  */
 import React, { Fragment, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { InputNumber, Button, Typography, Card, Row, Col, Input, Divider } from 'antd'
+import { InputNumber, Button, Typography, Card, Row, Col, Input, Divider, Popover } from 'antd'
 
 
 import { UPDATE_CHAR_XP } from '../../actions/characterActions'
@@ -24,6 +24,14 @@ export const XPMonitor = () => {
 
     const nextLevel = findNextLevel(currentXP, levels)
 
+    const goNextLevel = () => {
+        let finalXP = currentXP + xpIncrement
+
+        dispatch({ type: UPDATE_CHAR_XP, payload: finalXP })
+
+        setxpIncrement(0)
+    }
+
     return (
         <Fragment>
             <Card
@@ -37,12 +45,17 @@ export const XPMonitor = () => {
                     align="middle"
                 >
                     <Col span={24}>
-                        <Typography.Title level={2}>
+
+                        <Typography.Title
+                            level={2}
+                        >
                             {
                                 levels.length !== 0 ? findCurrentLevel(currentXP, levels).level : ""
                             }
                         </Typography.Title>
+                        
                     </Col>
+
                     <Divider>
                         {currentXP} / {typeof(nextLevel) === "undefined" ? 0 : nextLevel.xp}
                     </Divider>
@@ -85,11 +98,7 @@ export const XPMonitor = () => {
                                 type="primary"
                                 style={{borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px'}}
                                 onClick={() => {
-                                    let finalXP = currentXP + xpIncrement
-
-                                    dispatch({ type: UPDATE_CHAR_XP, payload: finalXP })
-
-                                    setxpIncrement(0)
+                                    goNextLevel()
                                 }}
                             >
                                 Add

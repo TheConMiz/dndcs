@@ -12,6 +12,7 @@
  * Components from 3rd-party Libraries
  */
 import React from 'react'
+
 import { Typography, Popover, Checkbox } from 'antd'
 
 /**
@@ -19,7 +20,9 @@ import { Typography, Popover, Checkbox } from 'antd'
  */
 import { Description } from './Description'
 
-export const getSpellTableColumns = (abilityScores, getSaveFilters) => {
+
+
+export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, rules) => {
 
     let columns = [
         {
@@ -55,17 +58,19 @@ export const getSpellTableColumns = (abilityScores, getSaveFilters) => {
              */
             dataIndex: "shortDesc",
             title: "Description",
-            width: '35%',
+            width: '25%',
             render: (content, item) => {
                 return (
                     <Popover
                         trigger="hover"
                         arrowPointAtCenter={true}
                         placement="right"
+                        color="volcano"
+                        destroyTooltipOnHide={true}
                         overlayStyle={{
-                            maxWidth: '400px',
-                            maxHeight: '250px',
-                            overflowY: 'auto',
+                            width: '400px',
+                            height: '250px',
+                            position: "relative",
                         }}
                         content={
                             <Description
@@ -105,6 +110,8 @@ export const getSpellTableColumns = (abilityScores, getSaveFilters) => {
         {
             /**
              * Confirm whether spell requires Concentration
+             * - Checked for concentration spells, and unchecked for non-concentration spells
+             * 
              */
             dataIndex: "concentration",
             title: "Conc.",
@@ -184,8 +191,8 @@ export const getSpellTableColumns = (abilityScores, getSaveFilters) => {
                         type="warning"
                     >
                         {
-                            abilityScores.filter(aScore => aScore.id === item.save).length !== 0 ?
-                                abilityScores.filter(aScore => aScore.id === item.save)[0].abbr
+                            rules.abilityScores.filter(aScore => aScore.id === item.save).length !== 0 ?
+                                rules.abilityScores.filter(aScore => aScore.id === item.save)[0].abbr
                             :
                                 ""
                         }
@@ -196,7 +203,7 @@ export const getSpellTableColumns = (abilityScores, getSaveFilters) => {
             /**
              * Filter by each available ability score
              */
-            filters: getSaveFilters(abilityScores),
+            filters: getSaveFilters(rules.abilityScores),
             onFilter: (content, item) => item.save === content 
         },
 
@@ -207,6 +214,15 @@ export const getSpellTableColumns = (abilityScores, getSaveFilters) => {
             dataIndex: "components",
             title: "Comp.",
             width: '6%',
+            render: (content, item) => {
+
+                return (
+                    <Typography.Text
+                    >
+                        
+                    </Typography.Text>
+                )
+            }
         },
 
         {
@@ -216,6 +232,36 @@ export const getSpellTableColumns = (abilityScores, getSaveFilters) => {
             dataIndex: "duration",
             title: "Duration",
             width: '10%',
+        },
+        {
+            /**
+             * Displays spell school
+             */
+            dataIndex: "school",
+            title: "School",
+            width: '5%',
+            render: (content, item) => {
+                
+                let temp = rules.magicSchools.filter(school => school.id === item.school).length !== 0 ?
+                    rules.magicSchools.filter(school => school.id === item.school)[0].abbr
+                    
+                    : 
+                    
+                    ""
+
+                console.log(temp)
+
+                return (
+                    <Typography.Text>
+                        {temp}
+                    </Typography.Text>
+                )
+            },
+            
+            filters: getMagicSchoolFilters(rules.magicSchools),
+            
+            onFilter: (content, item) => item.school === content
+
         },
     ]
 

@@ -33,7 +33,7 @@ export const findNextLevel = (currentXP, levels) => {
 
     let maxLevel = findMaxLevel(levels)
 
-    console.log(currentLevel, maxLevel)
+    // console.log(currentLevel, maxLevel)
 
     let nextLevel
 
