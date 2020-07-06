@@ -17,7 +17,7 @@ import { SpellTable } from './SpellTable'
 import { CharacterProfile } from './CharacterProfile'
 import { AbilityScoreShell } from './AbilityScoreShell'
 import { XPMonitor } from './CharacterProfile/XPMonitor'
-import { SaveCharacter } from './SaveCharacter'
+
 
 
 export const UIShell = () => {
@@ -45,7 +45,7 @@ export const UIShell = () => {
                 />
 
                 <div
-                    style={{height: '80vh', }}
+                    style={{height: '82vh', }}
                 />
 
                 <SideBar />
@@ -68,6 +68,7 @@ export const UIShell = () => {
                         </Col>
 
                         <Col span={8}>
+                            {/* <CharacterProfile/> */}
                         </Col>
 
                         <Col span={7}>
@@ -88,10 +89,6 @@ export const UIShell = () => {
 
 
                     </Row>
-
-                    {/* <Row> */}
-                        {/* <SaveCharacter /> */}
-                    {/* </Row> */}
                     
                 </Layout.Content>
             </Layout>

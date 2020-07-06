@@ -4,7 +4,8 @@ import {Input } from 'antd'
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import {UPDATE_CHAR_NAME} from '../../actions/characterActions';
+import { UPDATE_CHAR_NAME } from '../../actions/characterActions'
+
 
 export const NameInput = () => {
 

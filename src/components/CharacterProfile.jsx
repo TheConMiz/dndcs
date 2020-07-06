@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 
-
 import { Card, Row, Col } from 'antd'
 
-import { NameInput } from './CharacterProfile/NameInput'
-
-
+import { NameInput } from './CharacterProfile'
 
 export const CharacterProfile = () => {
 
@@ -13,13 +10,9 @@ export const CharacterProfile = () => {
         <Card>
 
             <Row>
-                <Col>
-                    
-                </Col>
 
                 <Col>
                     <NameInput />
-
                 </Col>
             </Row>
 

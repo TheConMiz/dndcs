@@ -7,7 +7,7 @@
  * Components from 3rd-party Libraries
  */
 import React, { Fragment } from 'react'
-import { Table, Card } from 'antd'
+import { Table, Card, Collapse } from 'antd'
 import { useSelector } from 'react-redux'
 
 /**
@@ -38,7 +38,35 @@ export const SpellTable = () => {
         
     return (
         <Fragment>
-            <Card
+            <Collapse
+                activeKey={1}
+            >
+                <Collapse.Panel
+                    key={1}
+                    header="Spell Table"
+                    style={{ width: '100%', minWidth: '700px' }}
+
+                    extra={
+                        <Fragment>
+
+                            <Generator />
+
+                        </Fragment>
+                    }
+                >
+                    <Table
+                        style={{ width: '100%', overflow: 'auto' }}
+                        size="middle"
+                        dataSource={spells}
+                        columns={columns}
+                        pagination={false}
+                        scroll={{ y: 500 }}
+                    />
+                </Collapse.Panel>
+            </Collapse>
+
+
+            {/* <Card
                 title="Spell Sheet"
                 style={{width: '100%', minWidth: '700px'}}
                 extra={
@@ -57,7 +85,7 @@ export const SpellTable = () => {
                     pagination={false}
                     scroll={{y: 500}}
                 />
-            </Card>
+            </Card> */}
         </Fragment>
     )
 }

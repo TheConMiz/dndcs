@@ -1,6 +1,7 @@
 import {
     UPDATE_SPELLS,
     UPDATE_CLASSES,
+    UPDATE_STATE_SETTINGS_MENU
 } from './../actions/appActions';
 
 export default function appReducer(state = [], action) {
@@ -15,6 +16,11 @@ export default function appReducer(state = [], action) {
         case UPDATE_CLASSES:
             return Object.assign({}, state, {
                 classes: action.payload
+            });
+        
+        case UPDATE_STATE_SETTINGS_MENU:
+            return Object.assign({}, state, {
+                settingsOpen: action.payload
             });
         
         default:

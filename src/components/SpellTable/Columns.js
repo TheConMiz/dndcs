@@ -12,7 +12,6 @@
  * Components from 3rd-party Libraries
  */
 import React from 'react'
-
 import { Typography, Popover, Checkbox } from 'antd'
 
 /**
@@ -20,9 +19,7 @@ import { Typography, Popover, Checkbox } from 'antd'
  */
 import { Description } from './Description'
 
-
-
-export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, rules) => {
+export const getSpellTableColumns = (getSaveFilters, getMagicSchoolFilters, rules) => {
 
     let columns = [
         {
@@ -58,7 +55,7 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
              */
             dataIndex: "shortDesc",
             title: "Description",
-            width: '25%',
+            width: '30%',
             render: (content, item) => {
                 return (
                     <Popover
@@ -95,7 +92,7 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
              */
             dataIndex: "range",
             title: "Range",
-            width: '7%',
+            width: '8%',
         },
 
         {
@@ -115,7 +112,7 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
              */
             dataIndex: "concentration",
             title: "Conc.",
-            width: '8%',
+            width: '6%',
             render: (content, item) => {
                 return (
                     <Checkbox
@@ -150,7 +147,7 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
              */
             dataIndex: "ritual",
             title: "Ritual",
-            width: '8%',
+            width: '6%',
             render: (content, item) => {
                 return (
                     <Checkbox
@@ -194,6 +191,7 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
                             rules.abilityScores.filter(aScore => aScore.id === item.save).length !== 0 ?
                                 rules.abilityScores.filter(aScore => aScore.id === item.save)[0].abbr
                             :
+                            
                                 ""
                         }
                     </Typography.Text>
@@ -215,11 +213,22 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
             title: "Comp.",
             width: '6%',
             render: (content, item) => {
+                let tempComponents = item.components.slice(0)
+
+                let finalComponents = tempComponents.map(item => rules.spellComponents.filter(school => school.id === item).length !== 0 ? 
+                    rules.spellComponents.filter(school => school.id === item)[0].abbr
+                    
+                    :
+
+                    ""
+                )
 
                 return (
                     <Typography.Text
                     >
-                        
+                        {
+                            finalComponents.join(", ")
+                        }
                     </Typography.Text>
                 )
             }
@@ -231,7 +240,7 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
              */
             dataIndex: "duration",
             title: "Duration",
-            width: '10%',
+            width: '8%',
         },
         {
             /**
@@ -239,7 +248,7 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
              */
             dataIndex: "school",
             title: "School",
-            width: '5%',
+            width: '6%',
             render: (content, item) => {
                 
                 let temp = rules.magicSchools.filter(school => school.id === item.school).length !== 0 ?
@@ -249,7 +258,7 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
                     
                     ""
 
-                console.log(temp)
+                // console.log(temp)
 
                 return (
                     <Typography.Text>
@@ -262,6 +271,21 @@ export const getSpellTableColumns = (   getSaveFilters, getMagicSchoolFilters, r
             
             onFilter: (content, item) => item.school === content
 
+        },
+        {
+            /**
+             * Displays spell source information
+             */
+            dataIndex: "sources",
+            title: "Src.",
+            width: '6%',
+            render: (content, item) => {
+                return (
+                    <Typography.Text>
+                        {item.sources.join(", ")}
+                    </Typography.Text>
+                )
+            }
         },
     ]
 

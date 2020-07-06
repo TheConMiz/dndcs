@@ -18,6 +18,7 @@ export const ScoreCard = (props) => {
         <Fragment>
             <Tooltip
                 placement="bottom"
+                destroyTooltipOnHide={true}
                 title={
                     <Typography.Text type="warning">
                         {props.data.name}
