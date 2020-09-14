@@ -17,9 +17,9 @@ export const App = () => {
             <DataPuller />
 
             <CharacterInit/>
-            
+
             <UIShell />
-        
+
         </Fragment>
     );
 }
