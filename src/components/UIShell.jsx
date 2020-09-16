@@ -7,7 +7,7 @@
  * Components from 3rd-party Libraries
  */
 import React from 'react'
-import { Layout, Row, Col } from 'antd'
+import { Layout, Row, Col, Card } from 'antd'
 
 /**
  * Self-generated components
@@ -17,6 +17,7 @@ import { SpellTable } from './SpellTable'
 import { CharacterProfile } from './CharacterProfile'
 import { AbilityScoreShell } from './AbilityScoreShell'
 import { XPMonitor } from './CharacterProfile/XPMonitor'
+import {NameInput} from "./CharacterProfile/NameInput"
 
 
 
@@ -30,9 +31,10 @@ export const UIShell = () => {
                     userSelect: 'none',
                 }}
         >
+
             {/* TODO: SideBar */}
             
-            <Layout.Sider
+            {/* <Layout.Sider
                 theme="dark"
                 collapsed={true}
                 style={{
@@ -50,30 +52,41 @@ export const UIShell = () => {
 
                 <SideBar />
 
-            </Layout.Sider>
+            </Layout.Sider> */}
 
             <Layout
                 style={{ marginLeft: 100 }}
             >
                 <Layout.Content>
 
+                    
+                    <Card>
+                        {/**
+                         * Character Profile
+                         * - Name
+                         * - Race
+                         * - Background
+                         * - Class
+                         */}
+                        <NameInput />
+                    </Card>
                     <Row
                         type="flex"
                         justify="space-between"
                         align="middle"
                     >
 
-                        <Col span={7}>
+                        {/* <Col span={7}>
                             <AbilityScoreShell />
                         </Col>
 
                         <Col span={8}>
-                            {/* <CharacterProfile/> */}
+                            <CharacterProfile/>
                         </Col>
 
                         <Col span={7}>
                             <XPMonitor />
-                        </Col>
+                        </Col> */}
 
 
                     </Row>

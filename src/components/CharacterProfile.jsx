@@ -8,14 +8,6 @@ export const CharacterProfile = () => {
 
     return (
         <Card>
-
-            <Row>
-
-                <Col>
-                    <NameInput />
-                </Col>
-            </Row>
-
         </Card>
     )
 }
