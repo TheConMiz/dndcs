@@ -41,6 +41,18 @@ export const App = () => {
 
             <ThemeProvider theme={theme}>
                 
+                <div>
+                    Sidebar
+                </div>
+
+                <div>
+                    Body
+                </div>
+
+                <div>
+                    Footer
+                </div>
+
                 <CssBaseline />
                 
             </ThemeProvider>

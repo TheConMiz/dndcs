@@ -7,7 +7,7 @@
   "scripts": {
     "start": "(@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./devToolsClear.ps1) & (electron .)",
     "postinstall": "electron-builder install-app-deps",
-    "dev": "webpack && webpack-dev-server",
+    "dev": "webpack && webpack serve",
     "test-build": "webpack && electron-builder --dir",
     "dist": "webpack && electron-builder",
     "release": "webpack && electron-builder build --win --publish always"
@@ -75,21 +75,21 @@
     "css-loader": "^5.0.1",
     "electron": "^11.1.0",
     "electron-builder": "^22.9.1",
+    "electron-is-dev": "^1.2.0",
     "html-webpack-plugin": "^4.5.0",
     "react": "^17.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.11.0",
-    "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-cli": "^4.2.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "electron-devtools-installer": "^3.1.1",
-    "lodash": "^4.17.20",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
-    "react-select": "^3.1.1",
+    "react-table": "^7.6.2",
     "redux": "^4.0.5",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }

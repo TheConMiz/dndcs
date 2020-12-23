@@ -9,7 +9,9 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import characterReducer from './reducers/characterReducer';
+
 import appReducer from './reducers/appReducer';
+
 import rulesReducer from './reducers/rulesReducer';
 
 // Database Path variables
