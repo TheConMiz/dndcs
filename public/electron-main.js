@@ -6,13 +6,11 @@ let win;
 
 let screenSize;
 
-let path = require("path")
+let path = require("path");
 
-let url = require("url")
+let url = require("url");
 
-const isDev = require('electron-is-dev')
-
-// const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer')
+const isDev = require('electron-is-dev');
 
 function createWindow() {
 
@@ -31,13 +29,13 @@ function createWindow() {
         }
     });
 
-    // if (isDev) {
-    //     win.webContents.openDevTools();
+    if (isDev) {
+        win.webContents.openDevTools();
  
-    //     // installExtension(REDUX_DEVTOOLS)
-    //     //     .then((name) => console.log(`Added Extension:  ${name}`))
-    //     //     .catch((err) => console.log('An error occurred: ', err));
-    // }
+        installExtension(REDUX_DEVTOOLS)
+            .then((name) => console.log(`Added Extension:  ${name}`))
+            .catch((err) => console.log('An error occurred: ', err));
+    }
     
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
         pathname: path.join(__dirname, 'index.html'),

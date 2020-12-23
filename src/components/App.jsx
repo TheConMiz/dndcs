@@ -4,23 +4,47 @@
 
 import React, { Fragment } from 'react'
 
-import { UIShell } from './UIShell'
+import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles'
 
-import { DataPuller } from './DataPuller'
+import { CssBaseline, Card } from '@material-ui/core';
 
-import { CharacterInit } from './CharacterInit'
+const theme = createMuiTheme({
+    palette: {
+        type: "dark",
+    },
+});
 
+const useStyles = makeStyles({
+    root: {
+        width: 275,
+        height: 300,
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
+});
 
 export const App = () => {
+
+    const classes = useStyles();
+
     return (
         <Fragment>
 
-            <DataPuller />
-
-            <CharacterInit/>
-
-            <UIShell />
-
+            <ThemeProvider theme={theme}>
+                
+                <CssBaseline />
+                
+            </ThemeProvider>
+            
         </Fragment>
     );
 }
