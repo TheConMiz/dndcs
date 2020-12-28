@@ -16,18 +16,8 @@ import rulesReducer from './reducers/rulesReducer';
 
 // Database Path variables
 const path = window.require('path');
+
 let dbPath;
-const isDev = window.require('electron-is-dev');
-
-if (isDev) {
-    console.log("DEV MODE");
-    dbPath = path.resolve('./public/data/database/DnDCS.db');
-}
-
-else {
-    console.log("PROD MODE");
-    dbPath = path.resolve('./resources/app.asar.unpacked/public/data/database/DnDCS.db');
-}
 
 /**
  * React Redux Segment
@@ -43,7 +33,7 @@ const store = createStore(
     allReducers,
 
     {
-        character: {
+        user: {
             name: "",
             race: {},
             classes: [],
@@ -56,21 +46,28 @@ const store = createStore(
             maxKnownSpells: 0,
             abilityScores: []
         },
-        app: {
-            dbPath: dbPath,
-            spells: [],
-            classes: [],
-            subClasses: [],
-            settingsOpen: false,
+        
+        character: {
+            
         },
-        rules: {
-            abilityScores: [],
-            conditions: [],
-            damageTypes: [],
-            spellComponents: [],
-            magicSchools: [],
-            levels: [],
-            sources: [],  
+
+        app: {
+
+            settingsMenu: false,
+        },
+
+        assets: {
+            // abilityScore: [],
+            // condition: [],
+            // damageType: [],
+            // spellComponent: [],
+            // magicSchool: [],
+            // level: [],
+            // source: [],            
+            spell: [],
+            classe: [],
+            subClass: [],
+
         }
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

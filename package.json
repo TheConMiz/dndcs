@@ -1,7 +1,7 @@
 {
   "name": "dndcs",
   "productName": "DnDCS",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A Character sheet solution for Dungeons & Dragons, built using Electron, React and SQLite3",
   "main": "./public/electron-main.js",
   "scripts": {
@@ -73,18 +73,18 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
     "css-loader": "^5.0.1",
-    "electron": "^11.1.0",
+    "electron": "^11.1.1",
     "electron-builder": "^22.9.1",
+    "electron-devtools-installer": "^3.1.1",
     "electron-is-dev": "^1.2.0",
     "html-webpack-plugin": "^4.5.0",
     "react": "^17.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.11.0",
-    "webpack-cli": "^4.2.0"
+    "webpack-cli": "^4.3.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
-    "electron-devtools-installer": "^3.1.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-table": "^7.6.2",
