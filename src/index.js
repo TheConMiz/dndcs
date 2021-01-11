@@ -4,84 +4,44 @@ import { render } from 'react-dom'
 
 import { App } from './components/App'
 
-import { createStore, combineReducers } from 'redux';
+import { createSlice, configureStore, combineReducers } from '@reduxjs/toolkit'
 
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
 
-import characterReducer from './reducers/characterReducer';
+// import { appReducer } from './reducers/appReducer'
 
-import appReducer from './reducers/appReducer';
+// import { characterReducer } from './reducers/characterReducer'
 
-import rulesReducer from './reducers/rulesReducer';
+import { Store } from './constants/Constants'
 
-// Database Path variables
-const path = window.require('path');
 
-let dbPath;
+
 
 /**
- * React Redux Segment
+ * * Redux Store setup
  */
 
-const allReducers = combineReducers({
-    character: characterReducer,
-    app: appReducer,
-    rules: rulesReducer
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState: 0,
+    reducers: {
+        increment: state => state + 1,
+        decrement: state => state - 1
+    }
 })
 
-const store = createStore(
-    allReducers,
-
-    {
-        user: {
-            name: "",
-            race: {},
-            classes: [],
-            background: {},
-            xp: 0,
-            level: 0,
-            knownSpells: [],
-            equipment: [],
-            maxPreparedSpells: 0,
-            maxKnownSpells: 0,
-            abilityScores: []
-        },
-        
-        character: {
-            
-        },
-
-        app: {
-
-            settingsMenu: false,
-        },
-
-        assets: {
-            // abilityScore: [],
-            // condition: [],
-            // damageType: [],
-            // spellComponent: [],
-            // magicSchool: [],
-            // level: [],
-            // source: [],            
-            spell: [],
-            classe: [],
-            subClass: [],
-
-        }
-    },
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+let store = configureStore({
+    reducer: counterSlice.reducer,
+})
 
 /**
- * End of React Redux Segment
+ * * End of Redux Store Setup
  */
 
+
 render(
-    
     <Provider store={store}>
         <App/>
     </Provider> 
-    
     , document.getElementById('root')
 );

@@ -8,6 +8,9 @@ import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/sty
 
 import { CssBaseline, Card } from '@material-ui/core';
 
+import { ContextMenu } from './ContextMenu';
+
+
 const theme = createMuiTheme({
     palette: {
         type: "dark",
@@ -40,20 +43,11 @@ export const App = () => {
         <Fragment>
 
             <ThemeProvider theme={theme}>
-                
-                <div>
-                    Sidebarsss
-                </div>s
-
-                <div>
-                    Bodys
-                </div>
-
-                <div>
-                    Footerssss
-                </div>
 
                 <CssBaseline />
+
+                {/* <ContextMenu/> */}
+                sdsdss
                 
             </ThemeProvider>
             

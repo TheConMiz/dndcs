@@ -1,10 +1,10 @@
-const { app, BrowserWindow, session } = require("electron");
-
-const electron = require("electron");
+const { app, BrowserWindow, ipcMain, screen } = require("electron");
 
 const path = require("path");
 
 const isDev = require('electron-is-dev');
+
+// import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer')
 
@@ -18,28 +18,25 @@ function createWindow() {
 
     console.log("createWindow() works")
     
-    screenSize = electron.screen.getPrimaryDisplay().size
+    screenSize = screen.getPrimaryDisplay().size
 
     win = new BrowserWindow({
-        width: screenSize.width * 0.8,
-        height: screenSize.height * 0.8,
+        width: screenSize.width,
+        height: screenSize.height,
         show: false,
         webPreferences: {
             nodeIntegration: true,
             nodeIntegrationInWorker: true,
+            // contextIsolation: true,
             enableRemoteModule: true,
-            // preload: path.join(__dirname, "preload.js")
         }
     });
 
     if (isDev) {
         
-        win.webContents.openDevTools()
-
-        installExtension(REDUX_DEVTOOLS)
+        installExtension(REDUX_DEVTOOLS)    
             .then((name) => console.log(`Added Extension:  ${name}`))
-            .catch((err) => console.log('An error occurred: ', err))
-
+            .catch((err) => console.log('An error occurred: ', err));
     }
     
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
@@ -56,6 +53,7 @@ function createWindow() {
         win.maximize();
         // Show the prepared window
         win.show();
+        win.webContents.openDevTools();
     });
 
     //TODO: Top menu bar visibility set to false when packaging
@@ -69,9 +67,7 @@ function createWindow() {
 
 // When everything has been initialised, create the required windows
 app.whenReady().then(() => {
-
     createWindow()
-
 })
 
 app.on("activate", () => {
