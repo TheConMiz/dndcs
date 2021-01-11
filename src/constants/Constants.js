@@ -1,13 +1,13 @@
-export const Store = {
+const InitialStore = {
     app: {
         settingsMenu: false,
     },
 
     character: {
         name: "",
-        race: {},
+        race: [],
         classes: [],
-        background: {},
+        background: [],
         xp: 0,
         level: 0,
         knownSpells: [],
@@ -21,3 +21,6 @@ export const Store = {
         
     },
 }
+
+
+export { InitialStore }

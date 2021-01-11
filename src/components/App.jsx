@@ -6,9 +6,16 @@ import React, { Fragment } from 'react'
 
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles'
 
-import { CssBaseline, Card } from '@material-ui/core';
+import { CssBaseline, Button, Card } from '@material-ui/core';
 
-import { ContextMenu } from './ContextMenu';
+import { useSelector, useDispatch } from 'react-redux'
+
+import { appSlice } from './../slices/Slices'
+
+const { actions } = appSlice
+
+const { toggleSettings } = actions
+
 
 
 const theme = createMuiTheme({
@@ -39,6 +46,12 @@ export const App = () => {
 
     const classes = useStyles();
 
+    const dispatch = useDispatch();
+
+    let settingsMenu = useSelector(state => state.app.settingsMenu)
+
+    console.log(settingsMenu)
+
     return (
         <Fragment>
 
@@ -46,8 +59,14 @@ export const App = () => {
 
                 <CssBaseline />
 
-                {/* <ContextMenu/> */}
-                sdsdss
+                <Button
+                    onClick={() => {
+                        dispatch(toggleSettings(!settingsMenu))
+                    }}
+                >
+                    Test Store : {settingsMenu.toString()}
+                </Button>
+
                 
             </ThemeProvider>
             

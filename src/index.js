@@ -8,31 +8,18 @@ import { createSlice, configureStore, combineReducers } from '@reduxjs/toolkit'
 
 import { Provider } from 'react-redux'
 
-// import { appReducer } from './reducers/appReducer'
-
-// import { characterReducer } from './reducers/characterReducer'
-
-import { Store } from './constants/Constants'
-
-
-
+import { appSlice } from './slices/Slices'
 
 /**
  * * Redux Store setup
  */
 
-const counterSlice = createSlice({
-    name: 'counter',
-    initialState: 0,
-    reducers: {
-        increment: state => state + 1,
-        decrement: state => state - 1
-    }
+const store = configureStore({
+
+    reducer: appSlice.reducer
+
 })
 
-let store = configureStore({
-    reducer: counterSlice.reducer,
-})
 
 /**
  * * End of Redux Store Setup
