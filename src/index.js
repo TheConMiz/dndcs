@@ -2,13 +2,13 @@ import React from 'react'
 
 import { render } from 'react-dom'
 
-import { App } from './components/App'
+import { App } from './components/App';
 
-import { createSlice, configureStore, combineReducers } from '@reduxjs/toolkit'
+import { createSlice, configureStore, combineReducers } from '@reduxjs/toolkit';
 
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
-import { appSlice } from './slices/Slices'
+import { appSlice } from './slices/Slices';
 
 /**
  * * Redux Store setup
@@ -18,7 +18,7 @@ const store = configureStore({
 
     reducer: appSlice.reducer
 
-})
+});
 
 
 /**

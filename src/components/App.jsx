@@ -2,19 +2,19 @@
  * Top-level App component
  */
 
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
 
-import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles'
+import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
 
-import { CssBaseline, Button, Card } from '@material-ui/core';
+import { CssBaseline, Button, Paper } from '@material-ui/core';
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 
-import { appSlice } from './../slices/Slices'
+import { appSlice } from './../slices/Slices';
 
-const { actions } = appSlice
+const { actions } = appSlice;
 
-const { toggleSettings } = actions
+const { toggleSettings } = actions;
 
 
 
@@ -25,20 +25,9 @@ const theme = createMuiTheme({
 });
 
 const useStyles = makeStyles({
-    root: {
+    paper: {
         width: 275,
         height: 300,
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
     },
 });
 
@@ -48,9 +37,7 @@ export const App = () => {
 
     const dispatch = useDispatch();
 
-    let settingsMenu = useSelector(state => state.app.settingsMenu)
-
-    console.log(settingsMenu)
+    let settingsMenu = useSelector(state => state.app.settingsMenu);
 
     return (
         <Fragment>
@@ -66,6 +53,8 @@ export const App = () => {
                 >
                     Test Store : {settingsMenu.toString()}
                 </Button>
+
+
 
                 
             </ThemeProvider>
