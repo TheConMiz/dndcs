@@ -1,0 +1,17 @@
+index,name,type,typical_speakers/0,script,url,typical_speakers/1
+1,Common,Standard,Humans,Common,http://www.dnd5eapi.co/api/languages/1,
+2,Dwarvish,Standard,Dwarves,Dwarvish,http://www.dnd5eapi.co/api/languages/2,
+3,Elvish,Standard,Elves,Elvish,http://www.dnd5eapi.co/api/languages/3,
+4,Giant,Standard,Ogres,Dwarvish,http://www.dnd5eapi.co/api/languages/4,Giants
+5,Gnomish,Standard,Gnomes,Dwarvish,http://www.dnd5eapi.co/api/languages/5,
+6,Goblin,Standard,Goblinoids,Dwarvish,http://www.dnd5eapi.co/api/languages/6,
+7,Halfling,Standard,Halflings,Common,http://www.dnd5eapi.co/api/languages/7,
+8,Orc,Standard,Orcs,Dwarvish,http://www.dnd5eapi.co/api/languages/8,
+9,Abyssal,Exotic,Demons,Infernal,http://www.dnd5eapi.co/api/languages/9,
+10,Celestial,Exotic,Celestials,Celestial,http://www.dnd5eapi.co/api/languages/10,
+11,Draconic,Exotic,Dragons,Draconic,http://www.dnd5eapi.co/api/languages/11,Dragonborn
+12,Deep Speech,Exotic,Aboleths,none,http://www.dnd5eapi.co/api/languages/12,Cloakers
+13,Infernal,Exotic,Devils,Infernal,http://www.dnd5eapi.co/api/languages/13,
+14,Primordial,Exotic,Elementals,Dwarvish,http://www.dnd5eapi.co/api/languages/14,
+15,Sylvan,Exotic,Fey creatures,Elvish,http://www.dnd5eapi.co/api/languages/15,
+16,Undercommon,Exotic,Underdark traders,Elvish,http://www.dnd5eapi.co/api/languages/16,
