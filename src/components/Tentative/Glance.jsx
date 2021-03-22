@@ -6,7 +6,7 @@ export const Glance = () => {
     return (
         <Fragment>
             <Paper
-                className={classes.paper}
+                // className={classes.paper}
                 variant="outlined"
             >
 
