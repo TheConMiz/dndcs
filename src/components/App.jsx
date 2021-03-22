@@ -1,6 +1,10 @@
 import React from "react"
-import { Layout, Breadcrumb } from 'antd';
+
+import { Layout } from 'antd';
+
 import { SideBar } from "./SideBar";
+
+import { SpellTable } from "./SpellTable";
 
 
 const { Header, Content, Footer } = Layout;
@@ -31,7 +35,7 @@ export const App = () => {
                 
                 <Content style={{ margin: '0 16px' }}>
                     
-                    
+                    <SpellTable></SpellTable>
             
                 </Content>
 
