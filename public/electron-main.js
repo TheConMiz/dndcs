@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen } = require("electron");
+const { app, BrowserWindow, screen } = require("electron");
 
 const path = require("path");
 
@@ -48,7 +48,6 @@ function createWindow() {
 
     // Wait until everything has been rendered before showing the app window
     win.once("ready-to-show", () => {
-
         // Maximize the window prior to showing it
         win.maximize();
         // Show the prepared window

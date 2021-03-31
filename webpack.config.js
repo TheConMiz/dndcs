@@ -11,6 +11,7 @@ const paths = {
 module.exports = {
     mode: 'production',
     entry: path.join(paths.src, 'index.js'),
+    target: "electron-main",
     output: {
         path: paths.dist,
         filename: "bundle.js"

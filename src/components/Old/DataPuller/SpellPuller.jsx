@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 import { useDispatch } from 'react-redux';
 
-import { UPDATE_SPELLS } from './../../actions/appActions';
+import { UPDATE_SPELLS } from './../../../actions/appActions';
 
 
 const pullData = (dbPath) => {

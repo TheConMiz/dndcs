@@ -1,15 +1,12 @@
 import React from 'react'
 
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Divider } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
-
-// const { SubMenu } = Menu;
-
 
 export const SideBar = () => {
 
@@ -32,6 +29,7 @@ export const SideBar = () => {
             
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                 
+
                 <Menu.Item key="1" icon={<PieChartOutlined />}>
                     Option 1
                 </Menu.Item>

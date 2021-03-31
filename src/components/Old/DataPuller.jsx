@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import SpellPuller from './DataPuller/SpellPuller'
-import RulePuller from './DataPuller/RulePuller'
-import { ClassPuller } from './DataPuller/ClassPuller'
+// import RulePuller from './DataPuller/RulePuller'
+// import { ClassPuller } from './DataPuller/ClassPuller'
 
 
 export const DataPuller = () => {
@@ -15,13 +15,13 @@ export const DataPuller = () => {
                 dbPath={dbPath}
             />
 
-            <RulePuller
+            {/* <RulePuller
                 dbPath={dbPath}
             />
 
             <ClassPuller
                 dbPath={dbPath}
-            />
+            /> */}
         </Fragment>
     );
 }
