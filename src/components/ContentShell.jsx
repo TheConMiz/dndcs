@@ -1,17 +1,23 @@
 import React, { Fragment } from 'react'
+
 import { Card } from 'antd';
-import { SpellTable } from "./SpellTable";
+
+
+import Combat from "./Tentative/Combat";
+
+import Health from "./Tentative/Health";
+
+import Traits from "./Tentative/Traits";
+
 
 const ContentShell = () => {
     return (
 
         <Fragment>
-            <div id="row1"
+            <div
                 style={{
                     display: "flex",
                     flexDirection: "row",
-
-
                 }}
             >
 
@@ -25,15 +31,7 @@ const ContentShell = () => {
 
                 </Card>
 
-                <Card
-                    style={{
-                        width: "40%",
-                        height: "300px"
-                    }}
-                >
-                    Health
-
-                </Card>
+                <Health></Health>
 
                 <div
                     style={{
@@ -65,7 +63,7 @@ const ContentShell = () => {
 
             </div>
             
-            <div id="row2">
+            <div>
                 <Card
                     style={{
                         width: "100%",
@@ -77,9 +75,14 @@ const ContentShell = () => {
                 </Card>
             </div>
 
-            <div id="row3"
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row"
+                }}
             >
-                <SpellTable></SpellTable>
+                <Combat></Combat>
+                <Traits></Traits>
             </div>
 
         </Fragment>
