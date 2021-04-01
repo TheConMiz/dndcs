@@ -4,9 +4,10 @@ import { Layout } from 'antd';
 
 import { SideBar } from "./SideBar";
 
-import { SpellTable } from "./SpellTable";
+import ContentShell from "./ContentShell"
 
-import { useSelector } from 'react-redux';
+
+// import { useSelector } from 'react-redux';
 
 
 // import { DataPuller } from "./Old/DataPuller";
@@ -16,9 +17,9 @@ const { Header, Content, Footer } = Layout;
 
 export const App = () => {
 
-    const dbPath = useSelector(state => state.app.dbPath);
+    // const dbPath = useSelector(state => state.app.dbPath);
 
-    console.log(dbPath)
+    // console.log(dbPath)
 
     return (
         
@@ -45,9 +46,7 @@ export const App = () => {
                 </Header>
                 
                 <Content style={{ margin: '0 16px' }}>
-                    
-                    <SpellTable></SpellTable>
-            
+                    <ContentShell/>
                 </Content>
 
                 <Footer
