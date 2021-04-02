@@ -8,25 +8,27 @@
  */
 import React, { Fragment } from 'react'
 import { Table, Card, Button } from 'antd'
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 /**
  * Self-generated components
  */
-// import { Generator } from './Old/SpellTable/Generator'
+// import { Generator } from './SpellTable/Generator'
 
 /**
  * Self-generated utility functions
  */
-// import { getSaveFilters, getMagicSchoolFilters } from './../functions/spellUtility'
-// import { getSpellTableColumns } from './Old/SpellTable/Columns'
+// import { getSaveFilters, getMagicSchoolFilters } from './../../functions/spellUtility'
+// import { getSpellTableColumns } from './SpellTable/Columns'
 
 export const SpellTable = () => {
 
     /**
      * Access spells and ability scores from Redux store
      */
-    // const spells = useSelector(state => state.character.knownSpells)
+    const spells = useSelector(state => state.character.knownSpells)
+
+    console.log(spells)
 
     // const rules = useSelector(state => state.rules)
 
@@ -45,7 +47,7 @@ export const SpellTable = () => {
     //             extra={
     //                 <Fragment>
 
-    //                     {/* <Generator/> */}
+    //                     <Generator/>
 
     //                     <Button>
     //                         Generate
@@ -57,8 +59,8 @@ export const SpellTable = () => {
     //             <Table
     //                 style={{ width: '100%', overflow: 'auto', minWidth: "700px" }}
     //                 size="middle"
-    //                 // dataSource={spells}
-    //                 // columns={columns}
+    //                 dataSource={spells}
+    //                 columns={columns}
     //                 pagination={false}
     //                 scroll={{y: 500}}
     //             />
@@ -67,13 +69,28 @@ export const SpellTable = () => {
     // )
 
     return (
-        <Table
-            style={{ width: '100%', overflow: 'auto', minWidth: "700px" }}
-            size="middle"
-            // dataSource={spells}
-            // columns={columns}
-            pagination={false}
-            scroll={{y: 500}}
-        />
+        <Fragment>
+            {/* <Generator></Generator> */}
+            
+            <Table
+                style={{ width: '100%', overflow: 'auto', minWidth: "700px" }}
+                size="middle"
+                dataSource={spells}
+                // columns={columns}
+                pagination={false}
+                scroll={{y: 500}}
+            >
+                {
+                    // spells.map((spell) => {
+                    //     return (
+                    //         <p key={spell.name}>
+                    //             {spell.name}
+                    //         </p>
+                    //     )
+                    // })
+                }
+            </Table>
+        </Fragment>
+
     );
 }

@@ -14,8 +14,11 @@ import rulesReducer from './reducers/rulesReducer';
 
 // Database Path variables
 const path = window.require('path');
+
 let dbPath;
-// const isDev = window.require('electron-is-dev');
+
+// const isDev = require('electron-is-dev');
+
 
 // if (isDev) {
 //     console.log("DEV MODE");
@@ -28,8 +31,6 @@ let dbPath;
 // }
 
 dbPath = path.resolve('./public/data/database/DnDCS.db');
-
-
 
 
 /**
@@ -45,35 +46,38 @@ dbPath = path.resolve('./public/data/database/DnDCS.db');
 const store = createStore(
     allReducers,
     {
-        character: {
-            name: "",
-            race: {},
-            classes: [],
-            background: {},
-            xp: 0,
-            level: 0,
+        characters: [],
+        
+        // character: {
+        //     name: "",
+        //     race: {},
+        //     classes: [],
+        //     background: {},
+        //     xp: 0,
+        //     level: 0,
             knownSpells: [],
-            equipment: [],
-            maxPreparedSpells: 0,
-            maxKnownSpells: 0,
-            abilityScores: []
-        },
+        //     equipment: [],
+        //     maxPreparedSpells: 0,
+        //     maxKnownSpells: 0,
+        //     abilityScores: []
+        // },
         app: {
             dbPath: dbPath,
             spells: [],
-            classes: [],
-            subClasses: [],
-            settingsOpen: false,
+            // classes: [],
+            // subClasses: [],
+            // settingsOpen: false,
         },
-        rules: {
-            abilityScores: [],
-            conditions: [],
-            damageTypes: [],
-            spellComponents: [],
-            magicSchools: [],
-            levels: [],
-            sources: [],  
-        }
+        data: {},
+        // rules: {
+        //     abilityScores: [],
+        //     conditions: [],
+        //     damageTypes: [],
+        //     spellComponents: [],
+        //     magicSchools: [],
+        //     levels: [],
+        //     sources: [],  
+        // }
     },
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

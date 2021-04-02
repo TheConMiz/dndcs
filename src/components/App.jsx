@@ -7,25 +7,20 @@ import { SideBar } from "./SideBar";
 import ContentShell from "./ContentShell"
 
 
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-
-// import { DataPuller } from "./Old/DataPuller";
+import { DataPuller } from "./Old/DataPuller";
 
 const { Header, Content, Footer } = Layout;
 
 
 export const App = () => {
 
-    // const dbPath = useSelector(state => state.app.dbPath);
-
-    // console.log(dbPath)
-
     return (
         
         <Layout style={{ minHeight: '100vh' }}>
 
-            {/* <DataPuller/> */}
+            <DataPuller/>
             
             <SideBar></SideBar>
             

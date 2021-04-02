@@ -4,8 +4,6 @@ const path = require("path");
 
 const isDev = require('electron-is-dev');
 
-// import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
-
 const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer')
 
 let url = require("url");
@@ -27,7 +25,6 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true,
             nodeIntegrationInWorker: true,
-            // contextIsolation: true,
             enableRemoteModule: true,
         }
     });
@@ -52,6 +49,7 @@ function createWindow() {
         win.maximize();
         // Show the prepared window
         win.show();
+
         win.webContents.openDevTools();
     });
 
