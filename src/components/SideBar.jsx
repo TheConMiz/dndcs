@@ -1,14 +1,31 @@
 import React from 'react'
 
-import { Layout, Menu, Divider } from 'antd';
+import { Layout, Menu } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
 } from '@ant-design/icons';
 
+
+import { CHARACTER } from "./../constants/Constants"
+
+
+
 const { Sider } = Layout;
 
 export const SideBar = () => {
+
+    let characterList = []
+
+    for (let i = 0; i < 5; ++i){
+        const char1 = JSON.parse(JSON.stringify(CHARACTER))
+        
+        char1.name = "Bill" + i
+
+        characterList.push(char1)
+
+    }
+
 
     return (
     
@@ -28,15 +45,18 @@ export const SideBar = () => {
             />
             
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                
+            
 
-                <Menu.Item key="1" icon={<PieChartOutlined />}>
-                    Option 1
-                </Menu.Item>
-                
-                <Menu.Item key="2" icon={<DesktopOutlined />}>
-                    Option 2
-                </Menu.Item>
+                {
+                    characterList.map((item) => {
+                        return (
+
+                            <Menu.Item key={item.name} icon={<PieChartOutlined />}>
+                                {item.name}
+                            </Menu.Item>
+                        );
+                    })
+                }
 
             </Menu>
 

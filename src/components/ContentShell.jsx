@@ -9,6 +9,9 @@ import Health from "./Tentative/Health";
 
 import Traits from "./Tentative/Traits";
 
+import CharacterInfo from "./Tentative/CharacterInfo";
+
+
 
 const ContentShell = () => {
     return (
@@ -20,16 +23,7 @@ const ContentShell = () => {
                     flexDirection: "row",
                 }}
             >
-
-                <Card
-                    style={{
-                        width: "30%",
-                        height: "300px"
-                    }}
-                >
-                    Character Information
-
-                </Card>
+                <CharacterInfo></CharacterInfo>
 
                 <Health></Health>
 
