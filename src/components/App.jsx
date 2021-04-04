@@ -8,7 +8,8 @@ import { UIShell } from './UIShell'
 
 import { DataPuller } from './DataPuller'
 
-import {CharacterInit} from './CharacterInit'
+import { CharacterInit } from './CharacterInit'
+
 
 export const App = () => {
     return (

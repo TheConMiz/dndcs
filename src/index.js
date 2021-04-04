@@ -15,17 +15,22 @@ import rulesReducer from './reducers/rulesReducer';
 // Database Path variables
 const path = window.require('path');
 let dbPath;
-const isDev = window.require('electron-is-dev');
 
-if (isDev) {
-    console.log("DEV MODE");
-    dbPath = path.resolve('./public/data/database/DnDCS.db');
-}
+//! Electron-is-dev doesn't work as required, so just remember to manually switch database path when packaging
+// const isDev = window.require('electron-is-dev');
 
-else {
-    console.log("PROD MODE");
-    dbPath = path.resolve('./resources/app.asar.unpacked/public/data/database/DnDCS.db');
-}
+// if (isDev) {
+//     console.log("DEV MODE");
+//     dbPath = path.resolve('./public/data/database/DnDCS.db');
+// }
+
+// else {
+//     console.log("PROD MODE");
+//     dbPath = path.resolve('./resources/app.asar.unpacked/public/data/database/DnDCS.db');
+// }
+
+dbPath = path.resolve('./public/data/database/DnDCS.db');
+
 
 /**
  * React Redux Segment
