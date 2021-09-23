@@ -29,12 +29,7 @@ function createWindow() {
         }
     });
 
-    if (isDev) {
-        
-        installExtension(REDUX_DEVTOOLS)    
-            .then((name) => console.log(`Added Extension:  ${name}`))
-            .catch((err) => console.log('An error occurred: ', err));
-    }
+
     
     win.loadURL(isDev ? 'http://localhost:8080' : url.format({
         pathname: path.join(__dirname, 'index.html'),
@@ -65,6 +60,13 @@ function createWindow() {
 // When everything has been initialised, create the required windows
 app.whenReady().then(() => {
     createWindow()
+
+    if (isDev) {
+        
+        installExtension(REDUX_DEVTOOLS)    
+            .then((name) => console.log(`Added Extension:  ${name}`))
+            .catch((err) => console.log('An error occurred: ', err));
+    }
 })
 
 app.on("activate", () => {

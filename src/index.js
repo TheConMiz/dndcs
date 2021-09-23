@@ -49,17 +49,17 @@ const store = createStore(
         characters: [],
         
         // character: {
-        //     name: "",
-        //     race: {},
-        //     classes: [],
-        //     background: {},
-        //     xp: 0,
-        //     level: 0,
-            knownSpells: [],
-        //     equipment: [],
-        //     maxPreparedSpells: 0,
-        //     maxKnownSpells: 0,
-        //     abilityScores: []
+        // //     name: "",
+        // //     race: {},
+        // //     classes: [],
+        // //     background: {},
+        // //     xp: 0,
+        // //     level: 0,
+        //     knownSpells: [],
+        // //     equipment: [],
+        // //     maxPreparedSpells: 0,
+        // //     maxKnownSpells: 0,
+        // //     abilityScores: []
         // },
         app: {
             dbPath: dbPath,
@@ -79,7 +79,7 @@ const store = createStore(
         //     sources: [],  
         // }
     },
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 

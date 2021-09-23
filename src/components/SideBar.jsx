@@ -1,10 +1,8 @@
 import React from 'react'
 
 import { Layout, Menu } from 'antd';
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-} from '@ant-design/icons';
+import { PieChartOutlined, } from '@ant-design/icons';
+
 
 
 import { CHARACTER } from "./../constants/Constants"

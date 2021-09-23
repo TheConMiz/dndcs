@@ -16,11 +16,13 @@ const { Header, Content, Footer } = Layout;
 
 export const App = () => {
 
+    const dbPath = useSelector(state => state.app.dbPath)
+
     return (
         
         <Layout style={{ minHeight: '100vh' }}>
 
-            <DataPuller/>
+            {/* <DataPuller/> */}
             
             <SideBar></SideBar>
             
@@ -49,7 +51,7 @@ export const App = () => {
                         textAlign: 'center'
                     }}
                 >
-                    To-Do: 
+                    Current DB Path: {dbPath}
                      
                 </Footer>
         
